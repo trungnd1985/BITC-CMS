@@ -2344,6 +2344,8 @@
     <Content Include="Areas\Admin\assets\plugins\uniform\images\Thumbs.db" />
     <Content Include="Areas\Admin\assets\plugins\uniform\README.textile" />
     <Content Include="Areas\Admin\Views\Shared\_Sidebar.cshtml" />
+    <Content Include="appSettings.config" />
+    <Content Include="connectiongStrings.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
