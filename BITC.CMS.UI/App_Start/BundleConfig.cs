@@ -51,6 +51,19 @@ namespace BITC.CMS.UI
                 .Include("~/Areas/Admin/assets/plugins/uniform/jquery.uniform.min.js")
                 );
 
+
+            bundles.Add(new StyleBundle("~/kendoui/css")
+                .Include("~/Content/kendo/2014.1.318/kendo.common.min.css")
+                .Include("~/Content/kendo/2014.1.318/kendo.dataviz.min.css")
+                .Include("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css")
+                .Include("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css"));
+
+            bundles.Add(new ScriptBundle("~/kendoui/js")
+                .Include("~/Scripts/kendo/2014.1.318/kendo.all.min.js")
+                .Include("~/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js")
+                .Include("~/Scripts/kendo/2014.1.318/kendo.modernizr.custom.js")
+                );
+
             BundleTable.EnableOptimizations = true;
         }
     }

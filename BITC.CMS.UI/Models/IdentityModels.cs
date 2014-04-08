@@ -10,7 +10,7 @@ namespace BITC.CMS.UI.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("DefaultConnection", false)
         {
         }
     }

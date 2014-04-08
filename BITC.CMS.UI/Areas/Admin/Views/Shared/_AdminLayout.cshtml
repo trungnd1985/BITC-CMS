@@ -24,12 +24,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <meta name="MobileOptimized" content="320">
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     @Styles.Render("~/Admin/css/global")
+    @Styles.Render("~/kendoui/css")
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
     @RenderSection("PageStyleSheet", false)
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME STYLES -->
-    @Styles.Render("~/Admin/css/theme")
+    @Styles.Render("~/Admin/css/theme")    
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
@@ -449,6 +450,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <script src="/Areas/Admin/assets/plugins/excanvas.min.js"></script>
     <![endif]-->
     @Scripts.Render("~/Admin/js/global")
+    @Scripts.Render("~/kendoui/js")
     <!-- END CORE PLUGINS -->
     <!-- BEGIN: Page level plugins -->
     @RenderSection("Script", false)
