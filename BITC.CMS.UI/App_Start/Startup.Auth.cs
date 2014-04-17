@@ -32,7 +32,7 @@ namespace BITC.CMS.UI
             //   appId: "",
             //   appSecret: "");
 
-            app.UseGoogleAuthentication();
+            app.UseGoogleAuthentication("586542811784-qeg19pc6jq97d8gphajg37905e524qjs.apps.googleusercontent.com", "664NrvMSFoFph4kFJ2gUcWB4");
         }
     }
 }

@@ -1,20 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BITC.Library.Data
 {
-    public partial class DataProvider : IQueryProvider
+    public partial class DataProvider
     {
         #region Declaration
 
+        private static DataProvider _provider;
+
         private const string DEFAULT_CONNECTION_NAME = "DefaultConnection";
         SqlConnection _conn = null;
+
+        #endregion
+
+        #region Constructor
+
+        private static DataProvider()
+        {
+
+        }
 
         #endregion
 
@@ -43,6 +50,20 @@ namespace BITC.Library.Data
 
                 return _conn;
             }
+        }
+
+        #endregion
+
+        #region Singleton
+
+        public static DataProvider GetInstance()
+        {
+            if (_provider == null)
+            {
+                _provider = new DataProvider();
+            }
+
+            return _provider;
         }
 
         #endregion
@@ -171,28 +192,5 @@ namespace BITC.Library.Data
         }
 
         #endregion
-
-        public IQueryable<TElement> CreateQuery<TElement>(System.Linq.Expressions.Expression expression)
-        {
-            return new DataContext<TElement>(this, expression);
-        }
-
-        public IQueryable CreateQuery(System.Linq.Expressions.Expression expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TResult Execute<TResult>(System.Linq.Expressions.Expression expression)
-        {
-            bool IsEnumerable = (typeof(TResult).Name == "IEnumerable`1");
-
-            return (TResult)DataContext.Execute(expression, IsEnumerable);
-        }
-
-        public object Execute(System.Linq.Expressions.Expression expression)
-        {
-            return DataProvider(expression, false);
-        }
-
     }
 }
