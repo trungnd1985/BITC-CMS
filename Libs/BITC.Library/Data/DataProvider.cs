@@ -18,7 +18,7 @@ namespace BITC.Library.Data
 
         #region Constructor
 
-        private static DataProvider()
+        private DataProvider()
         {
 
         }
