@@ -1,4 +1,5 @@
 ﻿using BITC.CMS.UI.Migrations;
+using BITC.Web.Library.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace BITC.CMS.UI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new BitcRazorViewEngine());
         }
     }
 }

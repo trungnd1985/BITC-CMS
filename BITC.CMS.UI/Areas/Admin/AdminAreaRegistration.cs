@@ -18,6 +18,7 @@ namespace BITC.CMS.UI.Areas.Admin
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
                 new { action = "Index", controller = "Dashboard", id = UrlParameter.Optional }
+                , namespaces: new[] { "BITC.CMS.UI.Areas.Admin.Controllers" }
             );
         }
     }

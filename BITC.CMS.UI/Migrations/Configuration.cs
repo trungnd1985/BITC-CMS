@@ -10,7 +10,6 @@ namespace BITC.CMS.UI.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "BITC.CMS.UI.Models.ApplicationDbContext";
         }
 
