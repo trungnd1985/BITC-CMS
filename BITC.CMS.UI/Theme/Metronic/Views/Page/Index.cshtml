@@ -1,0 +1,12 @@
+﻿@model BITC.CMS.Data.Page
+@{
+
+}
+@if (String.IsNullOrEmpty(Model.Template))
+{
+    @Model.Body
+}
+else
+{
+    @Html.Partial(Model.Template)
+}
