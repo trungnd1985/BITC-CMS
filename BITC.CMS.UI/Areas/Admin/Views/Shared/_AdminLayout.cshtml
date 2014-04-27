@@ -32,6 +32,17 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <!-- BEGIN THEME STYLES -->
     @Styles.Render("~/Admin/css/theme")
     <!-- END THEME STYLES -->
+
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="/Areas/Admin/assets/plugins/respond.min.js"></script>
+    <script src="/Areas/Admin/assets/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    @Scripts.Render("~/Admin/js/global")
+    @Scripts.Render("~/kendoui/js")
+    <!-- END CORE PLUGINS -->
+
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body class="page-header-fixed page-sidebar-closed">
@@ -443,15 +454,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         </div>
     </div>
     <!-- END FOOTER -->
-    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-    <!-- BEGIN CORE PLUGINS -->
-    <!--[if lt IE 9]>
-    <script src="/Areas/Admin/assets/plugins/respond.min.js"></script>
-    <script src="/Areas/Admin/assets/plugins/excanvas.min.js"></script>
-    <![endif]-->
-    @Scripts.Render("~/Admin/js/global")
-    @Scripts.Render("~/kendoui/js")
-    <!-- END CORE PLUGINS -->
     <!-- BEGIN: Page level plugins -->
     @RenderSection("Script", false)
     <!-- The main application script -->

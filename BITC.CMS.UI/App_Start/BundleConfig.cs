@@ -53,10 +53,10 @@ namespace BITC.CMS.UI
 
 
             bundles.Add(new StyleBundle("~/kendoui/css")
-                .Include("~/Content/kendo/2014.1.318/kendo.common.min.css")
-                .Include("~/Content/kendo/2014.1.318/kendo.dataviz.min.css")
-                .Include("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css")
-                .Include("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css"));
+                .Include("~/Content/kendo/2014.1.318/kendo.common.min.css", new CssRewriteUrlTransform())
+                .Include("~/Content/kendo/2014.1.318/kendo.dataviz.min.css", new CssRewriteUrlTransform())
+                .Include("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css", new CssRewriteUrlTransform())
+                .Include("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css", new CssRewriteUrlTransform()));
 
             bundles.Add(new ScriptBundle("~/kendoui/js")
                 .Include("~/Scripts/kendo/2014.1.318/kendo.all.min.js")

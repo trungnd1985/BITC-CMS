@@ -15,7 +15,7 @@ namespace BITC.CMS.UI
 
             routes.MapRoute(
                 name: "Page",
-                url: "Page/{url}",
+                url: "{url}",
                 defaults: new { controller = "Page", action = "Index", url = UrlParameter.Optional },
                 namespaces: new[] { "BITC.CMS.UI.Controllers" }
             );

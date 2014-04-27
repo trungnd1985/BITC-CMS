@@ -26,14 +26,26 @@ namespace BITC.CMS.Repository
             throw new NotImplementedException();
         }
 
-        public void Delete(Page _entity)
+        public int Delete(Page _entity)
         {
-            throw new NotImplementedException();
+            _dataContext.Pages.Remove(_entity);
+            return _dataContext.SaveChanges();
         }
 
         public Page SingleOrDefault(System.Linq.Expressions.Expression<Func<Page, bool>> predicate)
         {
             return _dataContext.Pages.SingleOrDefault(predicate);
+        }
+
+
+        public IQueryable<Page> Query()
+        {
+            return _dataContext.Pages.AsQueryable();
+        }
+
+        public IQueryable<Page> Query(System.Linq.Expressions.Expression<Func<Page, bool>> predicate)
+        {
+            return _dataContext.Pages.Where(predicate);
         }
     }
 }

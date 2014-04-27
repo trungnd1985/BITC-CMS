@@ -11,8 +11,10 @@ namespace BITC.CMS.Repository
     public interface IRepository<T>
     {
         T SingleOrDefault(Expression<Func<T, bool>> predicate);
+        IQueryable<T> Query();
+        IQueryable<T> Query(Expression<Func<T, bool>> predicate);
         void Insert(T _entity);
         void Update(T _entity);
-        void Delete(T _entity);
+        int Delete(T _entity);
     }
 }
