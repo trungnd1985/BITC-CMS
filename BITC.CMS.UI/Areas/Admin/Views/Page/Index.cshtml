@@ -1,0 +1,46 @@
+﻿@*@model BITC.CMS.UI.Areas.Admin.Models.Page.PageListModel*@
+@using Kendo.Mvc.UI
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption"><i class="fa fa-cogs"></i>Responsive Flip Scroll Tables</div>
+            <div class="tools">
+                <a href="javascript:;" class="collapse"></a>
+                <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                <a href="javascript:;" class="reload"></a>
+                <a href="javascript:;" class="remove"></a>
+            </div>
+        </div>
+        <div class="portlet-body flip-scroll">
+            @(Html.Kendo().Grid<BITC.CMS.Data.Page>()
+                    .Name("grdPage")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.PageTitle);
+                        columns.Bound(p => p.Url);
+                        columns.Bound(p => p.CreatedBy);
+                        columns.Bound(p => p.CreatedDate).Format("{0:dd/MM/yyyy}");
+                        columns.Command(action =>
+                        {
+                            action.Custom("Edit");
+                            action.Destroy();
+                        });
+                    })
+                    .Pageable()
+                    .Sortable()
+                    .DataSource(source => source.Ajax()
+                        .Model(model =>
+                        {
+                            model.Id(p => p.PageID);
+                            model.Field(p => p.PageID).Editable(false);
+                        })
+                        .Read(read => read.Action("LoadAllPages", "Page"))
+                        .Destroy(destroy => destroy.Action("Delete", "Page")))
+            )
+        </div>
+    </div>
+</div>
