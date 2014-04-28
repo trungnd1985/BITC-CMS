@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
+using Kendo.Mvc;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
@@ -34,8 +35,8 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
                 var _repo = _unitOfWork.GetRepository<Page>();
                 DataSourceResult _result = _repo.Query()
                     .Where(request.Filters)
-                    .Sort(request.Sorts)                    
-                    .Page(request.Page, request.PageSize)
+                    .Sort(request.Sorts.Count > 0 ? request.Sorts : new List<SortDescriptor>() { new SortDescriptor("PageTitle", System.ComponentModel.ListSortDirection.Ascending) })
+                    .Page(request.Page - 1, request.PageSize)
                     .ToDataSourceResult(request);
                 return Json(_result);
             }

@@ -195,7 +195,6 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PageController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
-    <Compile Include="Areas\Admin\Models\Page\PageListModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -3741,6 +3740,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\assets\plugins\jquery-file-upload\server\php\files\thumbnail\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Setting\" />
   </ItemGroup>
   <ItemGroup>
