@@ -1,4 +1,5 @@
 ﻿using BITC.CMS.Data;
+using BITC.CMS.Data.Model;
 using BITC.CMS.Repository;
 using BITC.Library.Data;
 using BITC.Web.Library.Mvc;

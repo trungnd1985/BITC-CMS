@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="db29784220a847a7892b44da6622dee5" Name="Diagram1">
         <EntityTypeShape EntityType="BITC.CMS.Data.Model.Page" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BITC.CMS.Data.Model.SiteMap" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

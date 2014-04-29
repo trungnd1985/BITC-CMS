@@ -1,4 +1,5 @@
 ﻿using BITC.CMS.Data;
+using BITC.CMS.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,10 @@ namespace BITC.CMS.Repository
             _dataContext = context;
         }
 
-        public void Insert(Page _entity)
+        public int Insert(Page _entity)
         {
-            throw new NotImplementedException();
+            _dataContext.Pages.Add(_entity);
+            return _dataContext.SaveChanges();
         }
 
         public void Update(Page _entity)

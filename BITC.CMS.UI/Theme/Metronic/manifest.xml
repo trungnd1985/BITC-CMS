@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Theme name="Metronic">
+  <Templates>
+    <Template name="Home" path="_Home"/>
+    <!--<Template name="" path=""/>-->
+  </Templates>
+</Theme>

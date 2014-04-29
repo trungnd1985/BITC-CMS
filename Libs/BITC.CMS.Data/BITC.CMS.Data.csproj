@@ -48,44 +48,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BITCEntities.Context.cs">
+    <Compile Include="Model\BITCEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BITCEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="BITCEntities.cs">
+    <Compile Include="Model\BITCEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BITCEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="BITCEntities.Designer.cs">
+    <Compile Include="Model\BITCEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BITCEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="IEntity.cs" />
-    <Compile Include="Page.cs">
+    <Compile Include="Model\Page.cs">
       <DependentUpon>BITCEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\SiteMap.cs">
+      <DependentUpon>BITCEntities.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="BITCEntities.edmx">
+    <EntityDeploy Include="Model\BITCEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BITCEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="BITCEntities.Context.tt">
+    <None Include="Model\BITCEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BITCEntities.edmx</DependentUpon>
       <LastGenOutput>BITCEntities.Context.cs</LastGenOutput>
     </None>
-    <None Include="BITCEntities.edmx.diagram">
+    <None Include="Model\BITCEntities.edmx.diagram">
       <DependentUpon>BITCEntities.edmx</DependentUpon>
     </None>
-    <None Include="BITCEntities.tt">
+    <None Include="Model\BITCEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BITCEntities.edmx</DependentUpon>
       <LastGenOutput>BITCEntities.cs</LastGenOutput>

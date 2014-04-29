@@ -43,6 +43,7 @@ namespace BITC.CMS.UI
             bundles.Add(new ScriptBundle("~/Admin/js/global")
                 .Include("~/Areas/Admin/assets/plugins/jquery-1.10.2.min.js")
                 .Include("~/Areas/Admin/assets/plugins/jquery-migrate-1.2.1.min.js")
+                .Include("~/Scripts/jquery.validate*")
                 .Include("~/Areas/Admin/assets/plugins/bootstrap/js/bootstrap.min.js")
                 .Include("~/Areas/Admin/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js")
                 .Include("~/Areas/Admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js")

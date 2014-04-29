@@ -73,11 +73,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CultureHelper.cs" />
     <Compile Include="Mvc\BitcController.cs" />
     <Compile Include="Mvc\BitcCssRewriteUrlTransform.cs" />
     <Compile Include="Mvc\BitcRazorViewEngine.cs" />
     <Compile Include="PageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BITC.Library\BITC.Library.csproj">

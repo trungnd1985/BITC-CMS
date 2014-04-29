@@ -13,7 +13,7 @@ namespace BITC.Web.Library.Mvc
         public BitcRazorViewEngine()
             : base()
         {
-            string _theme = GetTheme();
+            string _theme = Utility.GetTheme();
 
             AreaViewLocationFormats = new[]
             {
@@ -79,18 +79,6 @@ namespace BITC.Web.Library.Mvc
                 "cshtml",
                 "vbhtml",
             };
-        }
-
-        private string GetTheme()
-        {
-            var _th = System.Configuration.ConfigurationManager.AppSettings["Theme"];
-
-            if (_th != null)
-            {
-                return _th.ToString();
-            }
-
-            return "Default";
         }
 
         //protected override IView CreatePartialView(ControllerContext controllerContext, string partialPath)

@@ -10,12 +10,19 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc;
 using BITC.CMS.UI.Areas.Admin.Models;
+using BITC.CMS.Data.Model;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
     [Authorize]
     public class PageController : BitcController
     {
+        #region Declaration
+
+        //private UnitOfWork _unitOfWork = null;
+
+        #endregion
+
         #region Action
 
         public ActionResult Index()
@@ -26,13 +33,30 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            return View("Details", new BITC.CMS.Data.Page());
+            return View("Details", new BITC.CMS.Data.Model.Page());
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Page model)
         {
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                using (var _unitOfWork = new UnitOfWork())
+                {
+                    var _repo = _unitOfWork.GetRepository<Page>();
+                    if (_repo.Insert(model) > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View("Details", model);
+                    }
+                }
+            }
+
+            return View("Details", model);
         }
 
         public ActionResult Edit(int id)

@@ -7,24 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BITC.CMS.Data
+namespace BITC.CMS.Data.Model
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class BITCEntities : DbContext
     {
         public BITCEntities()
             : base("name=BITCEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Page> Pages { get; set; }
+        public virtual DbSet<SiteMap> SiteMaps { get; set; }
     }
 }

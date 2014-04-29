@@ -3507,6 +3507,7 @@
     <Content Include="Theme\Metronic\assets\scripts\contact-us.js" />
     <Content Include="Theme\Metronic\assets\scripts\index.js" />
     <Content Include="Theme\Metronic\assets\scripts\portfolio.js" />
+    <Content Include="Theme\Metronic\manifest.xml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3640,7 +3641,6 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
-    <Content Include="Views\Page\Index.cshtml" />
     <Content Include="Theme\Default\Views\Page\Index.cshtml" />
     <Content Include="Theme\Default\Views\Shared\_Layout.cshtml" />
     <Content Include="Theme\Default\Views\Shared\_LoginPartial.cshtml" />
