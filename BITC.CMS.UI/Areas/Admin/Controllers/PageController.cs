@@ -9,9 +9,11 @@ using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc;
+using BITC.CMS.UI.Areas.Admin.Models;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
+    [Authorize]
     public class PageController : BitcController
     {
         #region Action
@@ -19,6 +21,18 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+
+        public ActionResult Create()
+        {
+            return View("Details", new BITC.CMS.Data.Page());
+        }
+
+        [HttpPost]
+        public ActionResult Create(Page model)
+        {
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)

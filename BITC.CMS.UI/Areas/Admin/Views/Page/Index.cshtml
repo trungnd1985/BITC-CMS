@@ -1,22 +1,10 @@
-﻿@*@model BITC.CMS.UI.Areas.Admin.Models.Page.PageListModel*@
-@using Kendo.Mvc.UI
+﻿@using Kendo.Mvc.UI
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="col-md-12">
-    <div class="portlet box blue">
-        <div class="portlet-title">
-            <div class="caption"><i class="fa fa-cogs"></i>Responsive Flip Scroll Tables</div>
-            <div class="tools">
-                <a href="javascript:;" class="collapse"></a>
-                <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                <a href="javascript:;" class="reload"></a>
-                <a href="javascript:;" class="remove"></a>
-            </div>
-        </div>
-        <div class="portlet-body flip-scroll">
-            @(Html.Kendo().Grid<BITC.CMS.Data.Page>()
+    @(Html.Kendo().Grid<BITC.CMS.Data.Page>()
                     .Name("grdPage")
                     .Columns(columns =>
                     {
@@ -30,6 +18,11 @@
                             action.Destroy();
                         });
                     })
+                    .ToolBar(toolbar =>
+                    {
+                        //toolbar.Custom().Action("Create", "Page");
+                        //toolbar.Save();
+                    })
                     .Pageable()
                     .Sortable()
                     .DataSource(source => source.Ajax()
@@ -40,7 +33,5 @@
                         })
                         .Read(read => read.Action("LoadAllPages", "Page"))
                         .Destroy(destroy => destroy.Action("Delete", "Page")))
-            )
-        </div>
-    </div>
+    )
 </div>

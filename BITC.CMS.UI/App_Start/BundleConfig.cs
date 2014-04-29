@@ -64,7 +64,7 @@ namespace BITC.CMS.UI
                 .Include("~/Scripts/kendo/2014.1.318/kendo.modernizr.custom.js")
                 );
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
