@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using BITC.Web.Library;
+using System.Web.Mvc;
 
 namespace BITC.CMS.UI.Areas.Admin
 {
@@ -16,8 +17,8 @@ namespace BITC.CMS.UI.Areas.Admin
         {
             context.MapRoute(
                 "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new { action = "Index", controller = "Dashboard", id = UrlParameter.Optional }
+                "Admin/{culture}/{controller}/{action}/{id}",
+                new { action = "Index", controller = "Dashboard", id = UrlParameter.Optional, culture = CultureHelper.GetDefaultCulture() }
                 , namespaces: new[] { "BITC.CMS.UI.Areas.Admin.Controllers" }
             );
         }
