@@ -5,6 +5,49 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BITC.CMS.Data.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BlogEntriesInTag">
+          <Key>
+            <PropertyRef Name="BlogEntryID" />
+            <PropertyRef Name="BlogTagID" />
+          </Key>
+          <Property Name="BlogEntryID" Type="int" Nullable="false" />
+          <Property Name="BlogTagID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlogEntry">
+          <Key>
+            <PropertyRef Name="BlogEntryID" />
+          </Key>
+          <Property Name="BlogEntryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Culture" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AllowComment" Type="bit" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="BlogTag">
+          <Key>
+            <PropertyRef Name="BlogTagID" />
+          </Key>
+          <Property Name="BlogTagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Slug" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModuleName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+          <Property Name="IsSystem" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Page">
           <Key>
             <PropertyRef Name="PageID" />
@@ -24,6 +67,70 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="PortfolioID" />
+          </Key>
+          <Property Name="PortfolioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortfolioName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Culture" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+          <Property Name="IsFeatured" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
+        <EntityType Name="PortfolioCategory">
+          <Key>
+            <PropertyRef Name="PortfolioCategoryID" />
+          </Key>
+          <Property Name="PortfolioCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortfolioCategoryName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Culture" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="PortfolioImage">
+          <Key>
+            <PropertyRef Name="PortfolioImageID" />
+          </Key>
+          <Property Name="PortfolioImageID" Type="int" Nullable="false" />
+          <Property Name="PortfolioID" Type="int" Nullable="false" />
+          <Property Name="PortfolioImagePath" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="PortfoliosInCategory">
+          <Key>
+            <PropertyRef Name="PortfolioID" />
+            <PropertyRef Name="PortfolioCategoryID" />
+          </Key>
+          <Property Name="PortfolioID" Type="int" Nullable="false" />
+          <Property Name="PortfolioCategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="SettingID" />
+          </Key>
+          <Property Name="SettingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleID" Type="uniqueidentifier" />
+          <Property Name="SettingKey" Type="varchar" MaxLength="50" />
+          <Property Name="SettingValue" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="SiteMap">
           <Key>
             <PropertyRef Name="SiteMapID" />
@@ -38,9 +145,126 @@
           <Property Name="HierarchyID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Culture" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <Association Name="FK_BlogEntriesInTag_BlogEntry">
+          <End Role="BlogEntry" Type="Self.BlogEntry" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BlogEntriesInTag" Type="Self.BlogEntriesInTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogEntry">
+              <PropertyRef Name="BlogEntryID" />
+            </Principal>
+            <Dependent Role="BlogEntriesInTag">
+              <PropertyRef Name="BlogEntryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogEntriesInTag_BlogTag">
+          <End Role="BlogTag" Type="Self.BlogTag" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BlogEntriesInTag" Type="Self.BlogEntriesInTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogTag">
+              <PropertyRef Name="BlogTagID" />
+            </Principal>
+            <Dependent Role="BlogEntriesInTag">
+              <PropertyRef Name="BlogTagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfolioImage_Portfolio">
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PortfolioImage" Type="Self.PortfolioImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="PortfolioID" />
+            </Principal>
+            <Dependent Role="PortfolioImage">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfoliosInCategory_Portfolio">
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PortfoliosInCategory" Type="Self.PortfoliosInCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="PortfolioID" />
+            </Principal>
+            <Dependent Role="PortfoliosInCategory">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfoliosInCategory_PortfolioCategory">
+          <End Role="PortfolioCategory" Type="Self.PortfolioCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PortfoliosInCategory" Type="Self.PortfoliosInCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PortfolioCategory">
+              <PropertyRef Name="PortfolioCategoryID" />
+            </Principal>
+            <Dependent Role="PortfoliosInCategory">
+              <PropertyRef Name="PortfolioCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Setting_Module">
+          <End Role="Module" Type="Self.Module" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Setting" Type="Self.Setting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="Setting">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BITCCMSDataModelStoreContainer">
+          <EntitySet Name="BlogEntriesInTag" EntityType="Self.BlogEntriesInTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogEntry" EntityType="Self.BlogEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogTag" EntityType="Self.BlogTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Page" EntityType="Self.Page" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Portfolio" EntityType="Self.Portfolio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortfolioCategory" EntityType="Self.PortfolioCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortfolioImage" EntityType="Self.PortfolioImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortfoliosInCategory" EntityType="Self.PortfoliosInCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SiteMap" EntityType="Self.SiteMap" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BlogEntriesInTag_BlogEntry" Association="Self.FK_BlogEntriesInTag_BlogEntry">
+            <End Role="BlogEntry" EntitySet="BlogEntry" />
+            <End Role="BlogEntriesInTag" EntitySet="BlogEntriesInTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogEntriesInTag_BlogTag" Association="Self.FK_BlogEntriesInTag_BlogTag">
+            <End Role="BlogTag" EntitySet="BlogTag" />
+            <End Role="BlogEntriesInTag" EntitySet="BlogEntriesInTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfolioImage_Portfolio" Association="Self.FK_PortfolioImage_Portfolio">
+            <End Role="Portfolio" EntitySet="Portfolio" />
+            <End Role="PortfolioImage" EntitySet="PortfolioImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfoliosInCategory_Portfolio" Association="Self.FK_PortfoliosInCategory_Portfolio">
+            <End Role="Portfolio" EntitySet="Portfolio" />
+            <End Role="PortfoliosInCategory" EntitySet="PortfoliosInCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfoliosInCategory_PortfolioCategory" Association="Self.FK_PortfoliosInCategory_PortfolioCategory">
+            <End Role="PortfolioCategory" EntitySet="PortfolioCategory" />
+            <End Role="PortfoliosInCategory" EntitySet="PortfoliosInCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Setting_Module" Association="Self.FK_Setting_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Setting" EntitySet="Setting" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -68,6 +292,29 @@
         <EntityContainer Name="BITCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Pages" EntityType="Self.Page" />
           <EntitySet Name="SiteMaps" EntityType="BITC.CMS.Data.Model.SiteMap" />
+          <EntitySet Name="BlogEntries" EntityType="BITC.CMS.Data.Model.BlogEntry" />
+          <EntitySet Name="BlogTags" EntityType="BITC.CMS.Data.Model.BlogTag" />
+          <EntitySet Name="Portfolios" EntityType="BITC.CMS.Data.Model.Portfolio" />
+          <EntitySet Name="PortfolioCategories" EntityType="BITC.CMS.Data.Model.PortfolioCategory" />
+          <EntitySet Name="PortfolioImages" EntityType="BITC.CMS.Data.Model.PortfolioImage" />
+          <AssociationSet Name="FK_PortfolioImage_Portfolio" Association="BITC.CMS.Data.Model.FK_PortfolioImage_Portfolio">
+            <End Role="Portfolio" EntitySet="Portfolios" />
+            <End Role="PortfolioImage" EntitySet="PortfolioImages" />
+          </AssociationSet>
+          <AssociationSet Name="BlogEntriesInTag" Association="BITC.CMS.Data.Model.BlogEntriesInTag">
+            <End Role="BlogEntry" EntitySet="BlogEntries" />
+            <End Role="BlogTag" EntitySet="BlogTags" />
+          </AssociationSet>
+          <AssociationSet Name="PortfoliosInCategory" Association="BITC.CMS.Data.Model.PortfoliosInCategory">
+            <End Role="Portfolio" EntitySet="Portfolios" />
+            <End Role="PortfolioCategory" EntitySet="PortfolioCategories" />
+          </AssociationSet>
+          <EntitySet Name="Modules" EntityType="BITC.CMS.Data.Model.Module" />
+          <EntitySet Name="Settings" EntityType="BITC.CMS.Data.Model.Setting" />
+          <AssociationSet Name="FK_Setting_Module" Association="BITC.CMS.Data.Model.FK_Setting_Module">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="Setting" EntitySet="Settings" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="SiteMap">
           <Key>
@@ -83,6 +330,141 @@
           <Property Name="HierarchyID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Culture" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="BlogEntry">
+          <Key>
+            <PropertyRef Name="BlogEntryID" />
+          </Key>
+          <Property Name="BlogEntryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Culture" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AllowComment" Type="Boolean" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BlogTags" Relationship="BITC.CMS.Data.Model.BlogEntriesInTag" FromRole="BlogEntry" ToRole="BlogTag" />
+        </EntityType>
+        <EntityType Name="BlogTag">
+          <Key>
+            <PropertyRef Name="BlogTagID" />
+          </Key>
+          <Property Name="BlogTagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Slug" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BlogEntries" Relationship="BITC.CMS.Data.Model.BlogEntriesInTag" FromRole="BlogTag" ToRole="BlogEntry" />
+        </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="PortfolioID" />
+          </Key>
+          <Property Name="PortfolioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortfolioName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Culture" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+          <Property Name="IsFeatured" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" />
+          <NavigationProperty Name="PortfolioImages" Relationship="BITC.CMS.Data.Model.FK_PortfolioImage_Portfolio" FromRole="Portfolio" ToRole="PortfolioImage" />
+          <NavigationProperty Name="PortfolioCategories" Relationship="BITC.CMS.Data.Model.PortfoliosInCategory" FromRole="Portfolio" ToRole="PortfolioCategory" />
+        </EntityType>
+        <EntityType Name="PortfolioCategory">
+          <Key>
+            <PropertyRef Name="PortfolioCategoryID" />
+          </Key>
+          <Property Name="PortfolioCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortfolioCategoryName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Culture" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Portfolios" Relationship="BITC.CMS.Data.Model.PortfoliosInCategory" FromRole="PortfolioCategory" ToRole="Portfolio" />
+        </EntityType>
+        <EntityType Name="PortfolioImage">
+          <Key>
+            <PropertyRef Name="PortfolioImageID" />
+          </Key>
+          <Property Name="PortfolioImageID" Type="Int32" Nullable="false" />
+          <Property Name="PortfolioID" Type="Int32" Nullable="false" />
+          <Property Name="PortfolioImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Portfolio" Relationship="BITC.CMS.Data.Model.FK_PortfolioImage_Portfolio" FromRole="PortfolioImage" ToRole="Portfolio" />
+        </EntityType>
+        <Association Name="FK_PortfolioImage_Portfolio">
+          <End Type="BITC.CMS.Data.Model.Portfolio" Role="Portfolio" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="BITC.CMS.Data.Model.PortfolioImage" Role="PortfolioImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="PortfolioID" />
+            </Principal>
+            <Dependent Role="PortfolioImage">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BlogEntriesInTag">
+          <End Type="BITC.CMS.Data.Model.BlogEntry" Role="BlogEntry" Multiplicity="*" />
+          <End Type="BITC.CMS.Data.Model.BlogTag" Role="BlogTag" Multiplicity="*" />
+        </Association>
+        <Association Name="PortfoliosInCategory">
+          <End Type="BITC.CMS.Data.Model.Portfolio" Role="Portfolio" Multiplicity="*" />
+          <End Type="BITC.CMS.Data.Model.PortfolioCategory" Role="PortfolioCategory" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="Guid" Nullable="false" />
+          <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+          <Property Name="IsSystem" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Settings" Relationship="BITC.CMS.Data.Model.FK_Setting_Module" FromRole="Module" ToRole="Setting" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="SettingID" />
+          </Key>
+          <Property Name="SettingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleID" Type="Guid" />
+          <Property Name="SettingKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SettingValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Module" Relationship="BITC.CMS.Data.Model.FK_Setting_Module" FromRole="Setting" ToRole="Module" />
+        </EntityType>
+        <Association Name="FK_Setting_Module">
+          <End Type="BITC.CMS.Data.Model.Module" Role="Module" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="BITC.CMS.Data.Model.Setting" Role="Setting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="Setting">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -121,6 +503,120 @@
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="SiteMapID" ColumnName="SiteMapID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogEntries">
+            <EntityTypeMapping TypeName="BITC.CMS.Data.Model.BlogEntry">
+              <MappingFragment StoreEntitySet="BlogEntry">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+                <ScalarProperty Name="AllowComment" ColumnName="AllowComment" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BlogEntryID" ColumnName="BlogEntryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogTags">
+            <EntityTypeMapping TypeName="BITC.CMS.Data.Model.BlogTag">
+              <MappingFragment StoreEntitySet="BlogTag">
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="BlogTagID" ColumnName="BlogTagID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Portfolios">
+            <EntityTypeMapping TypeName="BITC.CMS.Data.Model.Portfolio">
+              <MappingFragment StoreEntitySet="Portfolio">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PortfolioName" ColumnName="PortfolioName" />
+                <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortfolioCategories">
+            <EntityTypeMapping TypeName="BITC.CMS.Data.Model.PortfolioCategory">
+              <MappingFragment StoreEntitySet="PortfolioCategory">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PortfolioCategoryName" ColumnName="PortfolioCategoryName" />
+                <ScalarProperty Name="PortfolioCategoryID" ColumnName="PortfolioCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortfolioImages">
+            <EntityTypeMapping TypeName="BITC.CMS.Data.Model.PortfolioImage">
+              <MappingFragment StoreEntitySet="PortfolioImage">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PortfolioImagePath" ColumnName="PortfolioImagePath" />
+                <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
+                <ScalarProperty Name="PortfolioImageID" ColumnName="PortfolioImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BlogEntriesInTag" TypeName="BITC.CMS.Data.Model.BlogEntriesInTag" StoreEntitySet="BlogEntriesInTag">
+            <EndProperty Name="BlogTag">
+              <ScalarProperty Name="BlogTagID" ColumnName="BlogTagID" />
+            </EndProperty>
+            <EndProperty Name="BlogEntry">
+              <ScalarProperty Name="BlogEntryID" ColumnName="BlogEntryID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PortfoliosInCategory" TypeName="BITC.CMS.Data.Model.PortfoliosInCategory" StoreEntitySet="PortfoliosInCategory">
+            <EndProperty Name="PortfolioCategory">
+              <ScalarProperty Name="PortfolioCategoryID" ColumnName="PortfolioCategoryID" />
+            </EndProperty>
+            <EndProperty Name="Portfolio">
+              <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="BITC.CMS.Data.Model.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsSystem" ColumnName="IsSystem" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="BITC.CMS.Data.Model.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingKey" ColumnName="SettingKey" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="SettingID" ColumnName="SettingID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

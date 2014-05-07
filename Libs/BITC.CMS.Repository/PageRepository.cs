@@ -23,13 +23,35 @@ namespace BITC.CMS.Repository
             return _dataContext.SaveChanges();
         }
 
-        public void Update(Page _entity)
+        public int Update(Page _entity)
         {
-            throw new NotImplementedException();
+            var oldEntity = _dataContext.Pages.FirstOrDefault(i => i.PageID == _entity.PageID);
+
+            //_dataContext.Entry(_entity).State = System.Data.Entity.EntityState.Modified;
+            if (oldEntity != null)
+            {
+                oldEntity.PageTitle = _entity.PageTitle;
+                oldEntity.Description = _entity.Description;
+                oldEntity.Body = _entity.Body;
+                oldEntity.Keywords = _entity.Keywords;
+                oldEntity.ModifiedBy = _entity.ModifiedBy;
+                oldEntity.ModifiedDate = DateTime.Now;
+                oldEntity.SortOrder = _entity.SortOrder;
+                oldEntity.Template = _entity.Template;
+                oldEntity.Url = _entity.Url;
+                oldEntity.Inactive = _entity.Inactive;
+            }
+            else
+            {
+                _dataContext.Pages.Add(_entity);
+            }
+
+            return _dataContext.SaveChanges();
         }
 
         public int Delete(Page _entity)
         {
+            _dataContext.Entry<Page>(_entity).State = System.Data.Entity.EntityState.Deleted;
             _dataContext.Pages.Remove(_entity);
             return _dataContext.SaveChanges();
         }

@@ -21,6 +21,7 @@ namespace BITC.CMS.UI
             
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new BitcRazorViewEngine());
+            ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
         }
     }
 }

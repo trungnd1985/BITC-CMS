@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BITC.Web.Library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,15 +16,15 @@ namespace BITC.CMS.UI
 
             routes.MapRoute(
                 name: "Page",
-                url: "{url}",
-                defaults: new { controller = "Page", action = "Index", url = UrlParameter.Optional },
+                url: "{culture}/{url}",
+                defaults: new { controller = "Page", action = "Index", url = UrlParameter.Optional, culture = CultureHelper.GetDefaultCulture() },
                 namespaces: new[] { "BITC.CMS.UI.Controllers" }
             );
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{culture}/{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, culture = CultureHelper.GetDefaultCulture() }
             );
 
 

@@ -192,8 +192,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PortfolioController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Models\PageDetailModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -213,6 +215,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\language.xml" />
     <Content Include="Areas\Admin\assets\css\animate.css" />
     <Content Include="Areas\Admin\assets\css\custom.css" />
     <Content Include="Areas\Admin\assets\css\pages\about-us.css" />
@@ -585,6 +588,7 @@
     <Content Include="Areas\Admin\assets\img\pages\img4.png" />
     <Content Include="Areas\Admin\assets\img\photo1.jpg" />
     <Content Include="Areas\Admin\assets\img\photo2.jpg" />
+    <Content Include="Areas\Admin\assets\img\plus_square_black.png" />
     <Content Include="Areas\Admin\assets\img\portlet-collapse-icon-white.png" />
     <Content Include="Areas\Admin\assets\img\portlet-collapse-icon.png" />
     <Content Include="Areas\Admin\assets\img\portlet-config-icon-white.png" />
@@ -2585,6 +2589,16 @@
     <Content Include="Content\kendo\2014.1.318\images\kendoui.woff" />
     <Content Include="Areas\Admin\Views\Page\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Page\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Textarea.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Checkbox.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TemplateDropDownList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Html.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TagEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\Portfolio\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Portfolio\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\_PortfolioImages.cshtml" />
+    <Content Include="Areas\Admin\Views\Portfolio\PortfolioImageDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Portfolio\Setting.cshtml" />
     <None Include="Properties\PublishProfiles\BITC CMS.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -3508,7 +3522,9 @@
     <Content Include="Theme\Metronic\assets\scripts\index.js" />
     <Content Include="Theme\Metronic\assets\scripts\portfolio.js" />
     <Content Include="Theme\Metronic\manifest.xml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -3738,10 +3754,13 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\EntityDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TextBox.cshtml" />
+    <Content Include="Theme\Metronic\Views\Shared\_Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\assets\plugins\jquery-file-upload\server\php\files\thumbnail\" />
+    <Folder Include="Areas\Admin\Views\Blog\" />
     <Folder Include="Areas\Admin\Views\Setting\" />
     <Folder Include="Content\Admin\" />
   </ItemGroup>
@@ -3757,6 +3776,10 @@
     <ProjectReference Include="..\Libs\BITC.CMS.Repository\BITC.CMS.Repository.csproj">
       <Project>{1be62a60-720d-464e-97d6-9874263df572}</Project>
       <Name>BITC.CMS.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libs\BITC.CMS.Resource\BITC.CMS.Resource.vbproj">
+      <Project>{02e7fb5c-d52d-460e-bfb8-36fd4b9577a7}</Project>
+      <Name>BITC.CMS.Resource</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libs\BITC.Library\BITC.Library.csproj">
       <Project>{d31c8417-6ccf-48b2-8538-a97a04a5b15c}</Project>

@@ -1,0 +1,26 @@
+﻿@model BITC.CMS.Data.Model.PortfolioImage
+
+<div class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.PortfolioImagePath, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @(Html.Kendo().Upload()
+                        .Name("PortfolioImage")
+                        .Multiple(false)
+                        .Async(async => async.AutoUpload(true).Save("UploadPortfolioImage", "Portfolio").Remove("RemovePortfolioImage", "Portfolio"))
+                        .Events(events =>
+                        {
+                            events.Select("");
+                        })
+                )
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+</div>

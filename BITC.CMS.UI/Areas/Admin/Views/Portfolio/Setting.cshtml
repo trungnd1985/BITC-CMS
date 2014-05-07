@@ -1,0 +1,53 @@
+﻿
+<div class="modal fade" id="SettingDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">@BITC.CMS.Resource.CommonResource.Setting</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="PageSize"></label>
+                            <div class="col-md-9">
+                                @Html.Kendo().IntegerTextBox().Name("PageSize").Min(10)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="txtDescription">@BITC.CMS.Resource.PortfolioResource.UploadPath</label>
+                            <div class="col-md-9">
+                                <input class="form-control" id="txtDescription" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="SaveSetting">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+
+    $(document).on("click", "#SaveSetting", function (e) {
+        var _setting = {
+            SettingKey: "",
+        };
+
+        $.ajax({
+            url: '@Url.Action("Setting")',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(),
+            success: function (msg) {
+                window.location.reload();
+            }
+        })
+    });
+</script>

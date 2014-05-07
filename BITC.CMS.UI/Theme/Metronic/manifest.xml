@@ -2,6 +2,6 @@
 <Theme name="Metronic">
   <Templates>
     <Template name="Home" path="_Home"/>
-    <!--<Template name="" path=""/>-->
+    <Template name="Contact" path="_Contact"/>
   </Templates>
 </Theme>

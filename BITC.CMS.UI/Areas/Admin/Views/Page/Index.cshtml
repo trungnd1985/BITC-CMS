@@ -4,34 +4,34 @@
 }
 
 <div class="col-md-12">
+    @*<span class="glyphicon glyphicon-remove" ></span>*@
     @(Html.Kendo().Grid<BITC.CMS.Data.Model.Page>()
                     .Name("grdPage")
                     .Columns(columns =>
                     {
-                        columns.Bound(p => p.PageTitle);
+                        columns.Bound(p => p.PageTitle).ClientTemplate(BITC.Web.Library.Utility.GenerateClientTemplateHyperLink("PageTitle", "Edit", "Page", "PageID", "Admin"));
                         columns.Bound(p => p.Url);
                         columns.Bound(p => p.CreatedBy);
                         columns.Bound(p => p.CreatedDate).Format("{0:dd/MM/yyyy}");
-                        columns.Command(action =>
-                        {
-                            action.Custom("Edit");
-                            action.Destroy();
-                        });
+                        columns.Template(a => a.PageID).ClientTemplate("<a class='k-button' href='" + BITC.Web.Library.Utility.GenerateClientTemplateUrl("Edit", "Page", "PageID", "Admin") + "'><span class='glyphicon glyphicon-pencil'></span></a><a class='k-button k-button-icontext k-grid-delete'><span class='glyphicon glyphicon-remove'></span></a>").Width(155);
+                        columns.Command(command => command.Destroy()).Visible(false);
+
                     })
-                    .ToolBar(toolbar =>
-                    {
-                        //toolbar.Custom().Action("Create", "Page");
-                        //toolbar.Save();
-                    })
-                    .Pageable()
-                    .Sortable()
-                    .DataSource(source => source.Ajax()
-                        .Model(model =>
-                        {
-                            model.Id(p => p.PageID);
-                            model.Field(p => p.PageID).Editable(false);
-                        })
-                        .Read(read => read.Action("LoadAllPages", "Page"))
-                        .Destroy(destroy => destroy.Action("Delete", "Page")))
+                    .ToolBar(toolbar => toolbar.Template(@<text><a class="btn btn-default" href="@Url.Action("Create","Page")">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a></text>))
+                                    .Pageable()
+                                    .Sortable()
+                                    .DataSource(source => source.Ajax()
+                                        .Model(model =>
+                                        {
+                                            model.Id(p => p.PageID);
+                                            model.Field(p => p.PageID).Editable(false);
+                                        })
+                                        .Sort(sort => sort.Add("SortOrder"))
+                                        .Create(create => create.Action("Create", "Page"))
+                                        .Read(read => read.Action("LoadAllPages", "Page"))
+                                        .Update(update => update.Action("Update", "Page"))
+                                        .Destroy(destroy => destroy.Action("Delete", "Page")))
     )
 </div>

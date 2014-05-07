@@ -27,5 +27,12 @@ namespace BITC.CMS.Data.Model
     
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<SiteMap> SiteMaps { get; set; }
+        public virtual DbSet<BlogEntry> BlogEntries { get; set; }
+        public virtual DbSet<BlogTag> BlogTags { get; set; }
+        public virtual DbSet<Portfolio> Portfolios { get; set; }
+        public virtual DbSet<PortfolioCategory> PortfolioCategories { get; set; }
+        public virtual DbSet<PortfolioImage> PortfolioImages { get; set; }
+        public virtual DbSet<Module> Modules { get; set; }
+        public virtual DbSet<Setting> Settings { get; set; }
     }
 }

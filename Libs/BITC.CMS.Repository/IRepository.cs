@@ -14,7 +14,7 @@ namespace BITC.CMS.Repository
         IQueryable<T> Query();
         IQueryable<T> Query(Expression<Func<T, bool>> predicate);
         int Insert(T _entity);
-        void Update(T _entity);
+        int Update(T _entity);
         int Delete(T _entity);
     }
 }

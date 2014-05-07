@@ -7,6 +7,17 @@
       <Diagram DiagramId="db29784220a847a7892b44da6622dee5" Name="Diagram1">
         <EntityTypeShape EntityType="BITC.CMS.Data.Model.Page" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BITC.CMS.Data.Model.SiteMap" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BITC.CMS.Data.Model.BlogEntry" Width="1.5" PointX="8.375" PointY="1" />
+        <EntityTypeShape EntityType="BITC.CMS.Data.Model.BlogTag" Width="1.5" PointX="10.625" PointY="1.75" />
+        <EntityTypeShape EntityType="BITC.CMS.Data.Model.Portfolio" Width="1.5" PointX="3.375" PointY="6.625" />
+        <EntityTypeShape EntityType="BITC.CMS.Data.Model.PortfolioCategory" Width="1.5" PointX="5.625" PointY="8.875" />
+        <EntityTypeShape EntityType="BITC.CMS.Data.Model.PortfolioImage" Width="1.5" PointX="5.625" PointY="5.125" />
+        <AssociationConnector Association="BITC.CMS.Data.Model.FK_PortfolioImage_Portfolio" />
+        <AssociationConnector Association="BITC.CMS.Data.Model.BlogEntriesInTag" />
+        <AssociationConnector Association="BITC.CMS.Data.Model.PortfoliosInCategory" />
+        <EntityTypeShape EntityType="BITC.CMS.Data.Model.Module" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BITC.CMS.Data.Model.Setting" Width="1.5" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="BITC.CMS.Data.Model.FK_Setting_Module" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

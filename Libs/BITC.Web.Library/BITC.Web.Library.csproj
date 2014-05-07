@@ -74,14 +74,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CultureHelper.cs" />
+    <Compile Include="DataAnnotation\TemplateRenderAttribute.cs" />
+    <Compile Include="Mvc\AjaxOnlyAttribute.cs" />
     <Compile Include="Mvc\BitcController.cs" />
     <Compile Include="Mvc\BitcCssRewriteUrlTransform.cs" />
     <Compile Include="Mvc\BitcRazorViewEngine.cs" />
+    <Compile Include="Mvc\MvcExtension.cs" />
     <Compile Include="PageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BITC.CMS.Data\BITC.CMS.Data.csproj">
+      <Project>{a9e33dc5-07d1-4cad-a931-7a3b99aa0c0d}</Project>
+      <Name>BITC.CMS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BITC.CMS.Repository\BITC.CMS.Repository.csproj">
+      <Project>{1be62a60-720d-464e-97d6-9874263df572}</Project>
+      <Name>BITC.CMS.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BITC.Library\BITC.Library.csproj">
       <Project>{d31c8417-6ccf-48b2-8538-a97a04a5b15c}</Project>
       <Name>BITC.Library</Name>

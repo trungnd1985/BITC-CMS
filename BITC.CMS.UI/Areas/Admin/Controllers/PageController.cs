@@ -1,16 +1,12 @@
-﻿using BITC.CMS.Data;
+﻿using BITC.CMS.Data.Model;
 using BITC.CMS.Repository;
+using BITC.Web.Library;
 using BITC.Web.Library.Mvc;
+using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Kendo.Mvc.Extensions;
-using Kendo.Mvc;
-using BITC.CMS.UI.Areas.Admin.Models;
-using BITC.CMS.Data.Model;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
@@ -45,6 +41,12 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
                 using (var _unitOfWork = new UnitOfWork())
                 {
                     var _repo = _unitOfWork.GetRepository<Page>();
+
+                    model.CreatedBy = HttpContext.User.Identity.Name;
+                    model.CreatedDate = DateTime.Now;
+                    model.ModifiedBy = HttpContext.User.Identity.Name;
+                    model.ModifiedDate = DateTime.Now;
+
                     if (_repo.Insert(model) > 0)
                     {
                         return RedirectToAction("Index");
@@ -61,7 +63,41 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            using (var _unitOfWork = new UnitOfWork())
+            {
+                var _repo = _unitOfWork.GetRepository<Page>();
+                var _entity = _repo.SingleOrDefault(i => i.PageID == id);
+
+                return View("Details", _entity);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Page model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.PageID = id;
+                using (var _unitOfWork = new UnitOfWork())
+                {
+                    var _repo = _unitOfWork.GetRepository<Page>();
+
+                    model.ModifiedDate = DateTime.Now;
+                    model.ModifiedBy = HttpContext.User.Identity.Name;
+
+                    if (_repo.Update(model) > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View("Details", model);
+                    }
+                }
+            }
+
+            return View("Details", model);
         }
 
         #region AJAX
@@ -71,9 +107,10 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
             using (var _unitOfWork = new UnitOfWork())
             {
                 var _repo = _unitOfWork.GetRepository<Page>();
-                DataSourceResult _result = _repo.Query()
+                var _culture = CultureHelper.GetCurrentCulture();
+                DataSourceResult _result = _repo.Query(i => i.Culture == _culture)
                     .Where(request.Filters)
-                    .Sort(request.Sorts.Count > 0 ? request.Sorts : new List<SortDescriptor>() { new SortDescriptor("PageTitle", System.ComponentModel.ListSortDirection.Ascending) })
+                    .Sort(request.Sorts)
                     .Page(request.Page - 1, request.PageSize)
                     .ToDataSourceResult(request);
                 return Json(_result);
