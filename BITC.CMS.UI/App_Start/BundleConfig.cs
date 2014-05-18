@@ -49,7 +49,10 @@ namespace BITC.CMS.UI
                 .Include("~/Areas/Admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js")
                 .Include("~/Areas/Admin/assets/plugins/jquery.blockui.min.js")
                 .Include("~/Areas/Admin/assets/plugins/jquery.cookie.min.js")
-                .Include("~/Areas/Admin/assets/plugins/uniform/jquery.uniform.min.js")
+                .Include("~/Areas/Admin/assets/plugins/jquery-image-loader-min.js")
+                .Include("~/Areas/Admin/assets/plugins/ckeditor/ckeditor.js")
+                //.Include("~/Areas/Admin/assets/plugins/ckeditor/adapters/jquery.js")                
+                .Include("~/Areas/Admin/assets/scripts/media-controller.js")
                 );
 
 

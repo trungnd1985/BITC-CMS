@@ -76,6 +76,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\AspNetRole.cs">
+      <DependentUpon>BITCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AspNetUser.cs">
+      <DependentUpon>BITCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AspNetUserClaim.cs">
+      <DependentUpon>BITCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AspNetUserLogin.cs">
+      <DependentUpon>BITCEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\BITCEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -98,6 +110,12 @@
     <Compile Include="Model\BlogTag.cs">
       <DependentUpon>BITCEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\C__MigrationHistory.cs">
+      <DependentUpon>BITCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Medium.cs">
+      <DependentUpon>BITCEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Module.cs">
       <DependentUpon>BITCEntities.tt</DependentUpon>
     </Compile>
@@ -110,10 +128,10 @@
     <Compile Include="Model\PortfolioCategory.cs">
       <DependentUpon>BITCEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\PortfolioImage.cs">
+    <Compile Include="Model\Setting.cs">
       <DependentUpon>BITCEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Setting.cs">
+    <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>BITCEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Page.cs" />

@@ -1,72 +1,43 @@
-﻿@model ICollection<BITC.CMS.Data.Model.PortfolioImage>
+﻿@model string
+@{
+    string[] arrImage = null;
+    if (!string.IsNullOrEmpty(Model))
+    {
+        arrImage = Model.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+    }
+}
+
+@Html.HiddenFor(m => m)
 
 <ul class="image-list">
-    <li>
-        <a href="javascript:void(0);" class="image-plus-button" data-toggle="modal" data-target="#PortfolioImageDialog"></a>
-    </li>
+
+    @if (arrImage != null)
+    {
+        foreach (var item in arrImage)
+        {
+            <li class="portfolio-image"><img src="@item" class='img-responsive img-thumbnail' /><a class="btn btn-default portfolio-image-remove"><span class="glyphicon glyphicon-remove"></span></a></li>
+        }
+    }
 </ul>
 
-<div class="modal fade" id="PortfolioImageDialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="control-label col-md-3" for="PortfolioImage">Upload</label>
-                            <div class="col-md-9">
-                                @(Html.Kendo().Upload()
-                                    .Name("PortfolioImage")
-                                    .Multiple(false)
-                                    .Async(async => async.AutoUpload(true).Save("UploadPortfolioImage", "Portfolio").Remove("RemovePortfolioImage", "Portfolio"))
-                                    .Events(events =>
-                                    {
-                                        events.Select("PortfolioImage_onSelect");
-                                    })
-                                )
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3" for="txtDescription">@BITC.CMS.Resource.CommonResource.Description</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control" id="txtDescription"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btnSaveChange">Save changes</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+@(Html.Kendo().Upload()
+            .Name("PortfolioImage")
+            .Async(async => async.AutoUpload(true).Save("UploadPortfolioImage", "Portfolio").Remove("RemovePortfolioImage", "Portfolio"))
+            .Events(events =>
+            {
+                events.Select("PortfolioImage_onSelect");
+                events.Success("PortfolioImage_onCSuccess");
+            })
+)
 
 <script>
-    $(document).on("click", "#btnSaveChange", function (e) {
-        var _img = {
-            PortfolioImagePath: "",
-            Description: $("#txtDescription").val()
-        };
-
-        $.ajax({
-            url: '@Url.Action("SavePortfolioImage","Portfolio")',
-            dataType: 'json',
-            contentType: 'application/json',
-            type: 'POST',
-            data: JSON.stringify(_img),
-            success: function (msg) {
-                $("#PortfolioImageDialog").modal('hide');
-            }
-        })
-    });
 
     function PortfolioImage_onSelect(e) {
 
+    }
+
+    function PortfolioImage_onCSuccess(e) {
+        $("#PortfolioImages").val($("#PortfolioImages").val() + ";" + e.files[0].name);
+        $(".image-list").append("<li class='portfolio-image'><img class='portfolio-image' src='/@ViewBag.Settings["PORTFOLIO_IMAGE_FOLDER"]/" + e.files[0].name + "?width=280&height=210' class='img-responsive img-thumbnail' /><a class='btn btn-default portfolio-image-remove'><span class='glyphicon glyphicon-remove'></span></a></li>");
     }
 </script>

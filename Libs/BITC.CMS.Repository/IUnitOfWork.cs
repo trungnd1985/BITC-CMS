@@ -8,7 +8,7 @@ namespace BITC.CMS.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
-        void SaveChange();
+        int SaveChange();
         IRepository<T> GetRepository<T>();
         void Dispose(bool disposing);
     }

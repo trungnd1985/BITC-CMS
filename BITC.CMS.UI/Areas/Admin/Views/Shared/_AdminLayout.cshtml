@@ -19,8 +19,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <title>BITC CMS - @ViewBag.Title</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+    <meta content="trungnd1985@gmail.com" name="author" />
     <meta name="MobileOptimized" content="320">
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     @Styles.Render("~/Admin/css/global")
@@ -39,9 +38,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <script src="/Areas/Admin/assets/plugins/excanvas.min.js"></script>
     <![endif]-->
     @Scripts.Render("~/Admin/js/global")
+    <script src='@Url.Content("~/Areas/Admin/assets/plugins/ckeditor/adapters/jquery.js")'></script>
     @Scripts.Render("~/kendoui/js")
     <!-- END CORE PLUGINS -->
-
+    <script>
+        CULTURE = "@BITC.Web.Library.CultureHelper.GetCurrentCulture()"
+        UPLOADCARE_PUBLIC_KEY = '@System.Web.Configuration.WebConfigurationManager.AppSettings["UploadcareKey"]';
+    </script>
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body class="page-header-fixed page-sidebar-closed">

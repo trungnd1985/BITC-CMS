@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
@@ -17,9 +18,45 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
     {
         #region Declaration
 
-        //private UnitOfWork _unitOfWork = null;
-
         private const string SESSION_KEY_PORTFOLIO_IMAGES = "PortfolioImages";
+        private const string UPLOAD_PATH = "~/Upload";
+        private const string PORTFOLIO_IMAGE_FOLDER = "PORTFOLIO_IMAGE_FOLDER";
+
+        #endregion
+
+        #region Constructor
+
+        public PortfolioController()
+        {
+            ModuleID = Guid.Parse("1ACA1046-E50F-4FD8-8110-F05AAA280543");
+        }
+
+        #endregion
+
+        #region Method
+
+        private string[] GetFolderList()
+        {
+            var lst = new List<String>();
+
+            var uploadFolder = HttpContext.Server.MapPath(UPLOAD_PATH);
+
+            if (!Directory.Exists(uploadFolder))
+            {
+                Directory.CreateDirectory(uploadFolder);
+            }
+
+            var dirs = Directory.GetDirectories(uploadFolder);
+
+            lst.Add("Upload");
+
+            for (int i = 0; i < dirs.Length; i++)
+            {
+                lst.Add(dirs[i].Replace(uploadFolder, ""));
+            }
+
+            return lst.ToArray();
+        }
 
         #endregion
 
@@ -27,9 +64,10 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
+
+
             return View();
         }
-
 
         public ActionResult Create()
         {
@@ -51,8 +89,9 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
                     model.CreatedDate = DateTime.Now;
                     model.ModifiedBy = HttpContext.User.Identity.Name;
                     model.ModifiedDate = DateTime.Now;
+                    _repo.Insert(model);
 
-                    if (_repo.Insert(model) > 0)
+                    if (_unitOfWork.SaveChange() > 0)
                     {
                         return RedirectToAction("Index");
                     }
@@ -90,8 +129,9 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
                     model.ModifiedDate = DateTime.Now;
                     model.ModifiedBy = HttpContext.User.Identity.Name;
+                    _repo.Update(model);
 
-                    if (_repo.Update(model) > 0)
+                    if (_unitOfWork.SaveChange() > 0)
                     {
                         return RedirectToAction("Index");
                     }
@@ -108,6 +148,32 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         public ActionResult PortfolioImageDetail()
         {
             return View();
+        }
+
+        public override ActionResult Setting()
+        {
+            ViewBag.FolderList = GetFolderList();
+
+            return base.Setting();
+        }
+
+        [HttpPost]
+        public override ActionResult Setting(Setting[] _settings)
+        {
+            using (var _unitOfWork = new UnitOfWork())
+            {
+                var _repo = _unitOfWork.GetRepository<Setting>();
+
+                foreach (var item in _settings)
+                {
+                    item.ModuleID = ModuleID;
+                    _repo.Update(item);
+                }
+
+                _unitOfWork.SaveChange();
+            }
+
+            return Content("");
         }
 
         #region AJAX
@@ -140,35 +206,18 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
             return Json(new[] { _Portfolio }.ToDataSourceResult(request, ModelState));
         }
 
-        [AjaxOnly]
-        [HttpPost]
-        [ChildActionOnly]
-        public ActionResult SavePortfolioImage(PortfolioImage _img)
-        {
-            List<PortfolioImage> _lst = new List<PortfolioImage>();
-
-            if (Session[SESSION_KEY_PORTFOLIO_IMAGES] != null)
-            {
-                _lst = (List<PortfolioImage>)Session[SESSION_KEY_PORTFOLIO_IMAGES];
-            }
-            
-            _lst.Add(_img);
-
-            Session[SESSION_KEY_PORTFOLIO_IMAGES] = _lst;
-
-            return Json(_img);
-        }
-
         public ActionResult UploadPortfolioImage(IEnumerable<HttpPostedFileBase> PortfolioImage)
         {
             if (PortfolioImage != null)
             {
+                var folderUpload = Server.MapPath("~/" + ViewBag.Settings[PORTFOLIO_IMAGE_FOLDER]);
+
                 foreach (var file in PortfolioImage)
                 {
                     // Some browsers send file names with full path.
                     // We are only interested in the file name.
                     var fileName = Path.GetFileName(file.FileName);
-                    var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                    var physicalPath = Path.Combine(folderUpload, fileName);
 
                     // The files are not actually saved in this demo
                     file.SaveAs(physicalPath);

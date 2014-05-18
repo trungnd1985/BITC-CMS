@@ -1,4 +1,13 @@
 /* here you can put your own css to customize and override the theme */
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Segoe UI',sans-serif;
+    font-weight: 300 !important;
+}
+
 .field-validation-error {
     color: #B94A48;
 }
@@ -11,14 +20,36 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    margin-bottom: 15px;
 }
+
     .image-list li {
         display: inline-block;
     }
 
 .image-plus-button {
-    background-image: url('../img/plus_square_black.png');
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAD1BMVEX///8AAAAAAAAAAAAAAABRO2rwAAAABHRSTlMAZICgERg+xQAAAEFJREFUSMdjYKADYDTGAwSACphd8ACDUQW0UqAEBHgVgGJvVMEAK3BCz08qI1PBaHoYdAoIFiCjJS0tFRCsWGkOAE01eWJMcYCAAAAAAElFTkSuQmCC') /*../img/plus_square_black.png*/;
+    *background-image: url('../img/plus_square_black.png'); /* For IE 6 and 7 */
     width: 64px;
     height: 64px;
     display: block;
+}
+
+.portfolio-image-remove {
+    position: absolute;
+    margin-left: 10px;
+}
+
+.modal-lg {
+    width: 90%;
+}
+
+.selected {
+    border-color: #0362FD;
+    background-color: #0362FD;
+}
+
+.media-image {
+    margin-right: 15px;
+    cursor: pointer;
 }

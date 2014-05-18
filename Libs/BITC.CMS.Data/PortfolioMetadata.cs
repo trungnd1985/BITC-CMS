@@ -17,7 +17,7 @@ namespace BITC.CMS.Data.Model
             [MaxLength(255)]
             [UIHint("TextBox")]
             [Display(Name = "PortfolioName", ResourceType = typeof(PortfolioResource), Order = 0)]
-            public string PortfolioName { get; set; }            
+            public string PortfolioName { get; set; }
 
             [Display(Name = "Description", ResourceType = typeof(CommonResource), Order = 1)]
             [UIHint("Textarea")]
@@ -25,10 +25,10 @@ namespace BITC.CMS.Data.Model
 
             [Display(Name = "PortfolioImages", ResourceType = typeof(PortfolioResource), Order = 1)]
             [UIHint("_PortfolioImages")]
-            public ICollection<PortfolioImage> PortfolioImages { get; set; }
+            public string PortfolioImages { get; set; }
 
             [Display(Name = "Year", ResourceType = typeof(PortfolioResource), Order = 3)]
-            [UIHint("Integer")]            
+            [UIHint("Integer")]
             public int Year { get; set; }
 
             [Display(Name = "Location", ResourceType = typeof(PortfolioResource), Order = 2)]

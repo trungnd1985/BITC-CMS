@@ -26,9 +26,9 @@ namespace BITC.CMS.Repository
             _dataContext = new BITCEntities();
         }
 
-        public void SaveChange()
+        public int SaveChange()
         {
-            _dataContext.SaveChanges();
+            return _dataContext.SaveChanges();
         }
 
         public IRepository<T> GetRepository<T>()

@@ -31,8 +31,14 @@ namespace BITC.CMS.Data.Model
         public virtual DbSet<BlogTag> BlogTags { get; set; }
         public virtual DbSet<Portfolio> Portfolios { get; set; }
         public virtual DbSet<PortfolioCategory> PortfolioCategories { get; set; }
-        public virtual DbSet<PortfolioImage> PortfolioImages { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Medium> Media { get; set; }
     }
 }

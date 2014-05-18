@@ -31,17 +31,17 @@ namespace BITC.CMS.Repository
             throw new NotImplementedException();
         }
 
-        public int Insert(Portfolio _entity)
+        public void Insert(Portfolio _entity)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(Portfolio _entity)
+        public void Update(Portfolio _entity)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(Portfolio _entity)
+        public void Delete(Portfolio _entity)
         {
             throw new NotImplementedException();
         }

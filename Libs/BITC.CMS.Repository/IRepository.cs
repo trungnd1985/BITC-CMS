@@ -13,8 +13,8 @@ namespace BITC.CMS.Repository
         T SingleOrDefault(Expression<Func<T, bool>> predicate);
         IQueryable<T> Query();
         IQueryable<T> Query(Expression<Func<T, bool>> predicate);
-        int Insert(T _entity);
-        int Update(T _entity);
-        int Delete(T _entity);
+        void Insert(T _entity);
+        void Update(T _entity);
+        void Delete(T _entity);
     }
 }

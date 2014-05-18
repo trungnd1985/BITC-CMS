@@ -853,7 +853,7 @@ var App = function () {
         init: function () {
 
             //IMPORTANT!!!: Do not modify the core handlers call order.
-
+            $(".ck-editor").ckeditor();
             //core handlers
             handleInit(); // initialize core variables
             handleResponsiveOnResize(); // set and handle responsive    

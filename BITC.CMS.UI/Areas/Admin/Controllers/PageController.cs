@@ -47,7 +47,9 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
                     model.ModifiedBy = HttpContext.User.Identity.Name;
                     model.ModifiedDate = DateTime.Now;
 
-                    if (_repo.Insert(model) > 0)
+                    _repo.Insert(model);
+
+                    if (_unitOfWork.SaveChange() > 0)
                     {
                         return RedirectToAction("Index");
                     }
@@ -85,8 +87,9 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
                     model.ModifiedDate = DateTime.Now;
                     model.ModifiedBy = HttpContext.User.Identity.Name;
+                    _repo.Update(model);
 
-                    if (_repo.Update(model) > 0)
+                    if (_unitOfWork.SaveChange() > 0)
                     {
                         return RedirectToAction("Index");
                     }

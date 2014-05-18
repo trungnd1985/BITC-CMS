@@ -16,7 +16,6 @@ namespace BITC.CMS.Data.Model
     {
         public Portfolio()
         {
-            this.PortfolioImages = new HashSet<PortfolioImage>();
             this.PortfolioCategories = new HashSet<PortfolioCategory>();
         }
     
@@ -33,8 +32,8 @@ namespace BITC.CMS.Data.Model
         public string ModifiedBy { get; set; }
         public string Location { get; set; }
         public Nullable<int> Year { get; set; }
+        public string PortfolioImages { get; set; }
     
-        public virtual ICollection<PortfolioImage> PortfolioImages { get; set; }
         public virtual ICollection<PortfolioCategory> PortfolioCategories { get; set; }
     }
 }

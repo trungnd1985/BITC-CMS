@@ -17,6 +17,8 @@ namespace BITC.Web.Library
 
         private const string KEY_THEME = "Theme";
         private const string MANIFEST_PATH_FORMAT = "~/Theme/{0}/manifest.xml";
+        private const string MEDIA_FOLDER_KEY = "MediaFolder";
+        private const string DEFAULT_MEDIA_FOLDER = "~/Upload";
 
         #endregion
 
@@ -134,7 +136,34 @@ namespace BITC.Web.Library
                 Quicksort(elements, i, right);
             }
         }
- 
+
+        public static string GetMediaFolderPhysicalPath(HttpContextBase _context)
+        {
+            var _userName = _context.User.Identity.Name;
+
+            var _mediaFolderPath = DEFAULT_MEDIA_FOLDER + "/" + _userName;
+
+            if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[MEDIA_FOLDER_KEY]))
+            {
+                _mediaFolderPath = _context.Server.MapPath(WebConfigurationManager.AppSettings[MEDIA_FOLDER_KEY] + "/" + _userName);
+            }
+
+            return _mediaFolderPath;
+        }
+
+        public static string GetMediaFolder(HttpContextBase _context)
+        {
+            var _userName = _context.User.Identity.Name;
+
+            var _mediaFolderPath = DEFAULT_MEDIA_FOLDER + "/" + _userName;
+
+            if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[MEDIA_FOLDER_KEY]))
+            {
+                _mediaFolderPath = WebConfigurationManager.AppSettings[MEDIA_FOLDER_KEY] + "/" + _userName;
+            }
+
+            return _mediaFolderPath;
+        }
 
         #endregion
     }
