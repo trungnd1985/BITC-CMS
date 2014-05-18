@@ -21,7 +21,6 @@
         <EntityTypeShape EntityType="BITC.CMS.Data.Model.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="6" />
         <EntityTypeShape EntityType="BITC.CMS.Data.Model.AspNetUserLogin" Width="1.5" PointX="13.25" PointY="8.75" />
         <EntityTypeShape EntityType="BITC.CMS.Data.Model.AspNetUser" Width="1.5" PointX="11" PointY="6.375" />
-        <EntityTypeShape EntityType="BITC.CMS.Data.Model.sysdiagram" Width="1.5" PointX="0.75" PointY="11.75" />
         <AssociationConnector Association="BITC.CMS.Data.Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="BITC.CMS.Data.Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="BITC.CMS.Data.Model.AspNetUserRoles" />
