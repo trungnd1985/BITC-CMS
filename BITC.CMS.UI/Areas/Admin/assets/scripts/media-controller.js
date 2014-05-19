@@ -43,12 +43,16 @@ var media = function () {
             });
 
             $(document).on("click", ".media-image", function (e) {
-                if ($(this).is(".selected")) {
-                    $(this).removeClass("selected");
+                if (e.shiftKey) {
+                    if ($(this).is(".selected")) {
+                        $(this).removeClass("selected");
+                    } else {
+                        $(this).addClass("selected");
+                    }
                 } else {
+                    $(".media-image").removeClass("selected");
                     $(this).addClass("selected");
                 }
-
             });
         },
         uploadSuccess: function (e) {

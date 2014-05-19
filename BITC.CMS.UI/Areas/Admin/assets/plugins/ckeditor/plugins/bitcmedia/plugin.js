@@ -16,8 +16,8 @@ CKEDITOR.plugins.add('bitcmedia', {
                     dialogContent += "<div class='col-md-2'>";
                     dialogContent += "<div class='list-group'>";
                     dialogContent += "<a class='list-group-item active' id='lnkInsertMedia'>Insert media</a>";
-                    dialogContent += "<a class='list-group-item' id='lnkInsertYoutube'>Insert youtube</a>";
-                    dialogContent += "<a class='list-group-item' id='lnkInsertUrl'>Insert url</a>";
+                    //dialogContent += "<a class='list-group-item' id='lnkInsertYoutube'>Insert youtube</a>";
+                    //dialogContent += "<a class='list-group-item' id='lnkInsertUrl'>Insert url</a>";
                     dialogContent += "</div>";
                     dialogContent += "</div>";
                     dialogContent += "<div id='content-container' class='col-md-10'>";
