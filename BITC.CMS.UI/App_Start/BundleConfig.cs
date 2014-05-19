@@ -30,7 +30,8 @@ namespace BITC.CMS.UI
             bundles.Add(new StyleBundle("~/Admin/css/global")
                 .Include("~/Areas/Admin/assets/plugins/font-awesome/css/font-awesome.css", new CssRewriteUrlTransform())
                 .Include("~/Areas/Admin/assets/plugins/bootstrap/css/bootstrap.css", new CssRewriteUrlTransform())
-                .Include("~/Areas/Admin/assets/plugins/uniform/css/uniform.default.css", new CssRewriteUrlTransform()));
+                .Include("~/Areas/Admin/assets/plugins/uniform/css/uniform.default.css", new CssRewriteUrlTransform())
+                );
 
             bundles.Add(new StyleBundle("~/Admin/css/theme")
                 .Include("~/Areas/Admin/assets/css/style-metronic.css", new CssRewriteUrlTransform())
@@ -58,9 +59,10 @@ namespace BITC.CMS.UI
 
             bundles.Add(new StyleBundle("~/kendoui/css")
                 .Include("~/Content/kendo/2014.1.318/kendo.common.min.css", new CssRewriteUrlTransform())
-                .Include("~/Content/kendo/2014.1.318/kendo.dataviz.min.css", new CssRewriteUrlTransform())
+                //.Include("~/Content/kendo/2014.1.318/kendo.dataviz.min.css", new CssRewriteUrlTransform())
                 .Include("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css", new CssRewriteUrlTransform())
-                .Include("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css", new CssRewriteUrlTransform()));
+                //.Include("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css", new CssRewriteUrlTransform())
+                );
 
             bundles.Add(new ScriptBundle("~/kendoui/js")
                 .Include("~/Scripts/kendo/2014.1.318/kendo.all.min.js")

@@ -20,7 +20,14 @@
     <div class="form-group">
         @Html.Label(item.PropertyName, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.Editor(item.PropertyName)
+			@if(item.AdditionalValues.ContainsKey("Prefix")){
+				<div class="input-group">
+					<span class="input-group-addon">@item.AdditionalValues["Prefix"]</span>
+					@Html.Editor(item.PropertyName)
+				</div>
+			}else{
+				@Html.Editor(item.PropertyName)
+            }
             @if (item.GetValidators(ViewContext.Controller.ControllerContext).Count() > 0)
             {
                 @Html.ValidationMessage(item.PropertyName)

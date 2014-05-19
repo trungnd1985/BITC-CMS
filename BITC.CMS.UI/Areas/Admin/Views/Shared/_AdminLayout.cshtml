@@ -47,7 +47,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     </script>
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
-<body class="page-header-fixed page-sidebar-closed">
+<body class="page-header-fixed">
     <!-- BEGIN HEADER -->
     <div class="header navbar navbar-inverse navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
@@ -413,10 +413,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                 <div class="col-md-12">
                     <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                     <h3 class="page-title">
-                        Inbox <small>user inbox</small>
+                        @ViewBag.Title
                     </h3>
                     <ul class="page-breadcrumb breadcrumb">
-                        <li class="btn-group">
+                        @*<li class="btn-group">
                             <button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
                                 <span>Actions</span> <i class="fa fa-angle-down"></i>
                             </button>
@@ -426,10 +426,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <li><a href="#" data-toggle="modal" data-target="#SettingDialog"><span class="fa fa-cogs"></span>Setting</a></li>
                                 }
                             </ul>
-                        </li>
+                        </li>*@
                         <li>
                             <i class="fa fa-home"></i>
-                            <a href="index.html">Home</a>
+                            <a href='@Url.Action("Index","Dashboard")'>Home</a>
                             <i class="fa fa-angle-right"></i>
                         </li>
                         <li>

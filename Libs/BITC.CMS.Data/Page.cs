@@ -23,7 +23,8 @@ namespace BITC.CMS.Data.Model
 
             [MaxLength(500)]
             [UIHint("TextBox")]
-            [Display(Name = "Url", ResourceType = typeof(PageResource), Order = 1)]            
+            [Display(Name = "Url", ResourceType = typeof(PageResource), Order = 1)]        
+            [AdditionalMetadata("Prefix","http://domain.com/")]
             public string Url { get; set; }
 
             [Display(Name = "Template", ResourceType = typeof(PageResource), Order = 2)]

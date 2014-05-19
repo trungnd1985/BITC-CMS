@@ -36,6 +36,10 @@ CKEDITOR.plugins.add('bitcmedia', {
 
                 $("#bitc-media-dialog").modal("show");
 
+                $(document).on("hidden.bs.modal", "#bitc-media-dialog", function (e) {
+                    $(".media-image.selected").removeClass("selected");
+                });
+
                 $(document).on("click", "#btnInsertMedia", function (e) {
                     var arrSelected = $(".media-image.selected");
 
