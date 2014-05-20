@@ -1,11 +1,10 @@
-﻿@using Kendo.Mvc.UI
-@{
+﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "List of Page";
 }
 
 <div class="col-md-12">
-    @(Html.Kendo().Grid<BITC.CMS.Data.Model.Page>()
+    @(Html.Kendo().Grid<BITC.CMS.Data.Entity.Page>()
                     .Name("grdPage")
                     .Columns(columns =>
                     {

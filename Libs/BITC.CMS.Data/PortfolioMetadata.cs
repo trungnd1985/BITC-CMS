@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BITC.CMS.Data.Model
+namespace BITC.CMS.Data.Entity
 {
     [MetadataType(typeof(PortfolioMetadata))]
     public partial class Portfolio

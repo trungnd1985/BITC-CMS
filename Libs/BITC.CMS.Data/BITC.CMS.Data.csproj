@@ -30,11 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -43,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -76,93 +79,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\AspNetRole.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AspNetUser.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AspNetUserClaim.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AspNetUserLogin.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BITCEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BITCEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BITCEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BITCEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BITCEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="IEntity.cs" />
-    <Compile Include="Model\BlogEntry.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BlogTag.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\C__MigrationHistory.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Medium.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Module.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Page.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Portfolio.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PortfolioCategory.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Setting.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sysdiagram.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Entity\BlogEntry.cs" />
+    <Compile Include="Entity\BlogTag.cs" />
+    <Compile Include="Entity\Page.cs" />
+    <Compile Include="Mapping\BlogEntryMap.cs" />
+    <Compile Include="Mapping\BlogTagMap.cs" />
+    <Compile Include="Mapping\PageMap.cs" />
+    <Compile Include="Model\BITCContext.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PortfolioMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\SiteMap.cs">
-      <DependentUpon>BITCEntities.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Model\BITCEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BITCEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Model\BITCEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BITCEntities.edmx</DependentUpon>
-      <LastGenOutput>BITCEntities.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Model\BITCEntities.edmx.diagram">
-      <DependentUpon>BITCEntities.edmx</DependentUpon>
-    </None>
-    <None Include="Model\BITCEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BITCEntities.edmx</DependentUpon>
-      <LastGenOutput>BITCEntities.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -173,6 +103,10 @@
     <ProjectReference Include="..\BITC.CMS.Resource\BITC.CMS.Resource.vbproj">
       <Project>{02e7fb5c-d52d-460e-bfb8-36fd4b9577a7}</Project>
       <Name>BITC.CMS.Resource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BITC.Library\BITC.Library.csproj">
+      <Project>{d31c8417-6ccf-48b2-8538-a97a04a5b15c}</Project>
+      <Name>BITC.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

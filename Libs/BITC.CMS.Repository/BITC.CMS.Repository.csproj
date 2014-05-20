@@ -47,14 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRepository.cs" />
-    <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="MediumRepository.cs" />
-    <Compile Include="PageRepository.cs" />
-    <Compile Include="PortfolioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SettingRepository.cs" />
-    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BITC.CMS.Data\BITC.CMS.Data.csproj">

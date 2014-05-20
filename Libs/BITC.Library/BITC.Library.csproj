@@ -30,11 +30,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit">
+      <HintPath>..\..\packages\LINQKit.1.1.1\lib\net45\LinqKit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,13 +52,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\BaseEntity.cs" />
+    <Compile Include="Data\DataContext.cs" />
     <Compile Include="Data\DataProvider.cs" />
+    <Compile Include="Data\BaseEntity.cs" />
+    <Compile Include="Data\FakeDbContext.cs" />
+    <Compile Include="Data\FakeDbSet.cs" />
+    <Compile Include="Data\IDataContext.cs" />
+    <Compile Include="Data\IDataContextAsync.cs" />
+    <Compile Include="Data\IObjectState.cs" />
+    <Compile Include="Data\IQueryFluent.cs" />
+    <Compile Include="Data\IQueryObject.cs" />
+    <Compile Include="Data\QueryFluent.cs" />
+    <Compile Include="Data\QueryObject.cs" />
+    <Compile Include="Data\StateHelper.cs" />
+    <Compile Include="Pattern\IRepository.cs" />
+    <Compile Include="Pattern\IRepositoryAsync.cs" />
+    <Compile Include="Data\ObjectStateEnum.cs" />
     <Compile Include="Extension\DataExtension.cs" />
+    <Compile Include="Pattern\IUnitOfWork.cs" />
+    <Compile Include="Pattern\IUnitOfWorkAsync.cs" />
+    <Compile Include="Pattern\Repository.cs" />
+    <Compile Include="Pattern\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Linq\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

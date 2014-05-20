@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Tag";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    @(Html.Kendo().Grid<BITC.CMS.Data.Model.BlogTag>()
+                    .Name("grdBlogTag")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.TagName).ClientTemplate(BITC.Web.Library.Utility.GenerateClientTemplateHyperLink(title: "TagName", action: "Edit", controller: "Blog", key: "BlogTagID", areaName: "Admin"));
+                        columns.Template(a => a.BlogTagID).ClientTemplate("<a class='k-button' href='" + BITC.Web.Library.Utility.GenerateClientTemplateUrl("Edit", "Page", "PageID", "Admin") + "'><span class='glyphicon glyphicon-pencil'></span></a><a class='k-button k-button-icontext k-grid-delete'><span class='glyphicon glyphicon-remove'></span></a>").Width(155);
+                        columns.Command(command => command.Destroy()).Visible(false);
+
+                    })
+                    .ToolBar(toolbar => toolbar.Template(@<text><a class="btn btn-default" href="@Url.Action("Create","Page")">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a></text>))
+                                                    .Pageable()
+                                                    .Sortable()
+                                                    .DataSource(source => source.Ajax()
+                                                        .Model(model =>
+                                                        {
+                                                            model.Id(p => p.BlogTagID);
+                                                        })
+                                                        .Sort(sort => sort.Add("SortOrder"))
+                                                        .Create(create => create.Action("Create", "Page"))
+                                                        .Read(read => read.Action("LoadAllPages", "Page"))
+                                                        .Update(update => update.Action("Update", "Page"))
+                                                        .Destroy(destroy => destroy.Action("Delete", "Page")))
+    )
+</div>

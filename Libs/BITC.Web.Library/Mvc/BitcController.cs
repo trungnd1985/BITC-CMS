@@ -1,5 +1,4 @@
-﻿using BITC.CMS.Data.Model;
-using BITC.CMS.Repository;
+﻿using BITC.CMS.Data.Entity;
 using System;
 using System.Threading;
 using System.Web.Mvc;
@@ -24,13 +23,13 @@ namespace BITC.Web.Library.Mvc
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            using (var _unitOfWork = new UnitOfWork())
-            {
-                var _settingRepo = _unitOfWork.GetRepository<Setting>();
+            //using (var _unitOfWork = new UnitOfWork())
+            //{
+            //    var _settingRepo = _unitOfWork.GetRepository<Setting>();
 
-                ViewBag.Settings = _settingRepo.Query(i => i.ModuleID == ModuleID).ToDictionary(i => i.SettingKey, i => i.SettingValue);
+            //    ViewBag.Settings = _settingRepo.Query(i => i.ModuleID == ModuleID).ToDictionary(i => i.SettingKey, i => i.SettingValue);
 
-            }
+            //}
 
             base.OnActionExecuting(filterContext);
         }
@@ -72,16 +71,16 @@ namespace BITC.Web.Library.Mvc
 
         #region Action
 
-        public virtual ActionResult Setting()
-        {
-            return View();
-        }
+        //public virtual ActionResult Setting()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public virtual ActionResult Setting(Setting[] _settings)
-        {
-            throw new NotImplementedException();
-        }
+        //[HttpPost]
+        //public virtual ActionResult Setting(Setting[] _settings)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         protected override void Dispose(bool disposing)
         {

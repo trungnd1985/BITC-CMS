@@ -1,4 +1,4 @@
-﻿using BITC.CMS.Data.Model;
+﻿using BITC.CMS.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
