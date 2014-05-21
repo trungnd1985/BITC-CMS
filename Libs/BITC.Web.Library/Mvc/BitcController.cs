@@ -14,6 +14,15 @@ namespace BITC.Web.Library.Mvc
 
         #endregion
 
+        #region Constructor
+
+        public BitcController()
+        {
+
+        }
+
+        #endregion
+
         #region Method
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)

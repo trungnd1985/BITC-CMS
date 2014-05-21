@@ -64,6 +64,15 @@ Public Class CommonResource
     End Property
     
     '''<summary>
+    '''  Looks up a localized string similar to Add new.
+    '''</summary>
+    Public Shared ReadOnly Property AddNew() As String
+        Get
+            Return ResourceManager.GetString("AddNew", resourceCulture)
+        End Get
+    End Property
+    
+    '''<summary>
     '''  Looks up a localized string similar to Cancel.
     '''</summary>
     Public Shared ReadOnly Property Cancel() As String

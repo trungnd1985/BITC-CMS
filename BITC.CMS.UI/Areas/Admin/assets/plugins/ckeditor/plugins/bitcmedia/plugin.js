@@ -13,16 +13,19 @@ CKEDITOR.plugins.add('bitcmedia', {
                     dialogContent += "<h4 class='modal-title'>Modal title</h4>";
                     dialogContent += "</div>";
                     dialogContent += "<div class='modal-body'>";
-                    dialogContent += "<div class='col-md-2'>";
-                    dialogContent += "<div class='list-group'>";
-                    dialogContent += "<a class='list-group-item active' id='lnkInsertMedia'>Insert media</a>";
-                    //dialogContent += "<a class='list-group-item' id='lnkInsertYoutube'>Insert youtube</a>";
-                    //dialogContent += "<a class='list-group-item' id='lnkInsertUrl'>Insert url</a>";
+                    dialogContent += "<div id='content-container' class='col-md-12'>";
+                    dialogContent += "<div class='col-md-12'>";
+                    dialogContent += "<div class='col-md-12'>";
+                    dialogContent += "<input name='MediaUploadFile' id='MediaUploadFile' type='file' />";
                     dialogContent += "</div>";
-                    dialogContent += "</div>";
-                    dialogContent += "<div id='content-container' class='col-md-10'>";
-                    dialogContent += "</div>";
+                    dialogContent += "<div class='col-md-12'>";
+                    dialogContent += "<div class='tab-pane' id='bitc-media-library'>";
+                    dialogContent += "<div class='col-md-8' id='bitc-media-container'></div>";
+                    dialogContent += "<div class='col-md-4' id='bitc-media-info'></div>";
                     dialogContent += "<div class='clearfix'></div>";
+                    dialogContent += "</div>";
+                    dialogContent += "</div>";
+                    dialogContent += "</div>";
                     dialogContent += "</div>";
                     dialogContent += "<div class='modal-footer'>";
                     dialogContent += "<button type='button' class='btn blue' id='btnInsertMedia'>Insert</button>";
@@ -31,13 +34,81 @@ CKEDITOR.plugins.add('bitcmedia', {
 
                     $("body").append(dialogContent);
 
-                    media.init(CULTURE);
+                    //media.init(CULTURE);
                 }
 
                 $("#bitc-media-dialog").modal("show");
 
+
+
+                $("#MediaUploadFile").kendoUpload({
+                    async: {
+                        saveUrl: "/Admin/" + CULTURE + "/Media/Upload",
+                        autoUpload: true
+                    },
+                    success: function (e) {
+                        $("#tabMediaView a:last").tab("show");
+                    }
+                });
+
+                $(document).on("click", ".media-image", function (e) {
+                    if (e.shiftKey) {
+                        if ($(this).is(".selected")) {
+                            $(this).removeClass("selected");
+                        } else {
+                            $(this).addClass("selected");
+                        }
+                    } else {
+                        $(".media-image").removeClass("selected");
+                        $(this).addClass("selected");
+                    }
+
+                    $("#bitc-media-info").empty("");
+
+                    var infoBuilder = "";
+                    infoBuilder += "<div class='col-md-12'><label>Url</label><span class='info'>" + $(this).attr("data-url") + "</span></div>";
+                    infoBuilder += "<div class='col-md-12'><label class='label'>File size</label><span class='info'>" + $(this).attr("data-file-size") + "</span></div>";
+                    //infoBuilder += "<div class='col-md-12'><label>Url</label><span class='info'>" + $(this).attr("data-url") + "</span></div>";
+                    //infoBuilder += "<div class='col-md-12'><label>Url</label><span class='info'>" + $(this).attr("data-url") + "</span></div>";
+
+                    $("#bitc-media-info").append(infoBuilder);
+                });
+
                 $(document).on("hidden.bs.modal", "#bitc-media-dialog", function (e) {
                     $(".media-image.selected").removeClass("selected");
+                });
+
+                $(document).on("shown.bs.modal", "#bitc-media-dialog", function (e) {
+                    $.ajax({
+                        url: '/Admin/' + CULTURE + '/Media/GetMediaFiles',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (msg) {
+                            $("#bitc-media-container").empty();
+                            var imgBuilder = "";
+                            $.each(msg, function (index, item) {
+                                imgBuilder = "<img class='img-responsive img-thumbnail media-image'";
+                                imgBuilder += " src='/Areas/Admin/assets/img/ajax-loader.gif'";
+                                imgBuilder += " alt='" + item.AlternativeText !== null ? item.AlternativeText : "" + "'";
+                                imgBuilder += " data-caption='" + item.Caption !== null ? item.Caption : "" + "'";
+                                imgBuilder += " data-description='" + item.Description !== null ? item.Description : "" + "'";
+                                imgBuilder += " data-file-size='" + item.FileSize + "'";
+                                imgBuilder += " data-url='" + item.Url + "'";
+                                imgBuilder += "data-src='" + item.Url + "?height=100&width=100&mode=crop' />";
+
+                                $("#bitc-media-container").append(imgBuilder);
+                            });
+
+                            $('#bitc-media-container').loadImages({
+                                imgLoadedClb: function () { }, // Triggered when an image is loaded. ('this' is the loaded image)
+                                allLoadedClb: function () { }, // Triggered when all images are loaded. ('this' is the wrapper in which all images are loaded, or the image if you ran it on one image)
+                                imgErrorClb: function () { }, // Triggered when the image gives an error. Useful when you want to add a placeholder instead or remove it. ('this' is the loaded image)
+                                noImgClb: function () { }, // Triggered when there are no image found with data-src attributes, or when all images give an error. ('this' is the wrapper in which all images are loaded, or the image if you ran it on one image)
+                                dataAttr: 'src' // The data attribute that contains the source. Default 'src'.
+                            });
+                        }
+                    });
                 });
 
                 $(document).on("click", "#btnInsertMedia", function (e) {

@@ -1,18 +1,12 @@
-﻿using BITC.CMS.Data.Entity;
-using BITC.CMS.Data.Mapping;
-using BITC.Library.Data;
+﻿using BITC.Library.Data;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure.Pluralization;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Data.Entity.Design.PluralizationServices;
 using System.Globalization;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BITC.CMS.Data.Entity
 {
@@ -35,6 +29,8 @@ namespace BITC.CMS.Data.Entity
         //public DbSet<BlogTag> BlogTags { get; set; }
 
         public DbSet<Page> Pages { get; set; }
+
+        public DbSet<Media> Media { get; set; }
 
         #endregion
 

@@ -16,7 +16,6 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
     {
         #region Declaration
 
-        //private UnitOfWork _unitOfWork = null;
         private readonly IRepositoryAsync<Page> _pageRepository;
         private readonly IUnitOfWorkAsync _unitOfWorkAsync;
         #endregion
@@ -103,6 +102,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         #region AJAX
 
+        [AjaxOnly]
         public ActionResult LoadAllPages([DataSourceRequest]DataSourceRequest request)
         {
             var _culture = CultureHelper.GetCurrentCulture();
@@ -114,12 +114,11 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
             return Json(_result);
         }
 
+        [AjaxOnly]
         public ActionResult Delete([DataSourceRequest]DataSourceRequest request, Page _page)
         {
-            if (ModelState.IsValid)
-            {
-                _pageRepository.Delete(_page);
-            }
+            _pageRepository.Delete(_page);
+            _unitOfWorkAsync.SaveChanges();
             return Json(new[] { _page }.ToDataSourceResult(request, ModelState));
         }
 

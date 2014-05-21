@@ -54,11 +54,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="ImageResizer">
-      <HintPath>..\packages\ImageResizer.3.4.2\lib\ImageResizer.dll</HintPath>
+    <Reference Include="ImageResizer, Version=3.4.3.103, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ImageResizer.3.4.3\lib\ImageResizer.dll</HintPath>
     </Reference>
-    <Reference Include="ImageResizer.Mvc">
-      <HintPath>..\packages\ImageResizer.Mvc.3.4.2\lib\ImageResizer.Mvc.dll</HintPath>
+    <Reference Include="ImageResizer.Mvc, Version=3.4.3.103, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ImageResizer.Mvc.3.4.3\lib\ImageResizer.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Kendo.Mvc">
       <HintPath>C:\Program Files (x86)\Telerik\UI for ASP.NET MVC Q1 2014\wrappers\aspnetmvc\Binaries\Mvc5\Kendo.Mvc.dll</HintPath>
@@ -66,7 +68,7 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -74,7 +76,7 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.0.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -2516,8 +2518,8 @@
     <Content Include="Areas\Admin\assets\plugins\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Areas\Admin\assets\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
-    <Content Include="Mvc.sitemap" />
     <Content Include="Areas\Admin\Views\Blog\Tag.cshtml" />
+    <Content Include="Mvc.sitemap" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>

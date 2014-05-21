@@ -77,6 +77,7 @@
     <Compile Include="DataAnnotation\TemplateRenderAttribute.cs" />
     <Compile Include="Mvc\AjaxOnlyAttribute.cs" />
     <Compile Include="Mvc\BitcController.cs" />
+    <Compile Include="Mvc\BitcController`1.cs" />
     <Compile Include="Mvc\BitcCssRewriteUrlTransform.cs" />
     <Compile Include="Mvc\BitcRazorViewEngine.cs" />
     <Compile Include="Mvc\MvcExtension.cs" />

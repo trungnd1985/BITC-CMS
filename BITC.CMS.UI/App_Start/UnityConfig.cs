@@ -4,6 +4,7 @@ using Unity.Mvc5;
 using BITC.Library.Pattern;
 using BITC.CMS.Data.Entity;
 using BITC.Library.Data;
+using BITC.CMS.UI.Controllers;
 
 namespace BITC.CMS.UI
 {
@@ -20,6 +21,8 @@ namespace BITC.CMS.UI
             container
                 .RegisterType<IDataContextAsync, BITCContext>(new PerResolveLifetimeManager())
                 .RegisterType<IRepositoryAsync<Page>, Repository<Page>>()
+                .RegisterType<IRepositoryAsync<Media>, Repository<Media>>()
+                .RegisterType<AccountController>(new InjectionConstructor())
                 .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerResolveLifetimeManager());
             //.RegisterType<IRepositoryAsync<Customer>, Repository<Customer>>()
             //.RegisterType<IRepositoryAsync<Product>, Repository<Product>>()
@@ -27,6 +30,7 @@ namespace BITC.CMS.UI
             //.RegisterType<ICustomerService, CustomerService>()
             //.RegisterType<INorthwindStoredProcedures, NorthwindContext>(new PerRequestLifetimeManager())
             //.RegisterType<IStoredProcedureService, StoredProcedureService>();
+            
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
