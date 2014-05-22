@@ -68,6 +68,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogResource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BlogResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="CommonResource.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,6 +105,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BlogResource.vi-VN.resx" />
+    <EmbeddedResource Include="BlogResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BlogResource.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="CommonResource.vi-VN.resx" />
     <EmbeddedResource Include="CommonResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

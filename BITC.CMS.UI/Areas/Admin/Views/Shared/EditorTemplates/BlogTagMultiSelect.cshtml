@@ -1,0 +1,16 @@
+﻿@model IList<int>
+
+    @(Html.Kendo().MultiSelectFor(m => m)
+                .DataTextField("TagName")
+                .DataValueField("BlogTagID")
+                .AutoBind(false)
+                //.Value(Model)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("LoadAllBlogTags", "BlogTag");
+                    });
+                })
+
+    )

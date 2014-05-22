@@ -58,3 +58,7 @@ textarea {
     margin-bottom: 15px;
     cursor: pointer;
 }
+
+.page-title {
+    font-family: 'Segoe UI', sans-serif;
+}

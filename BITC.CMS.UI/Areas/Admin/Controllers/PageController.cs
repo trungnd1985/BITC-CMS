@@ -49,6 +49,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Culture = CultureHelper.GetCurrentCulture();
                 model.CreatedBy = HttpContext.User.Identity.Name;
                 model.CreatedDate = DateTime.Now;
                 model.ModifiedBy = HttpContext.User.Identity.Name;

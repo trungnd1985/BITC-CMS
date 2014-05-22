@@ -205,6 +205,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogTagController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\MediaController.cs" />
     <Compile Include="Areas\Admin\Controllers\PageController.cs" />
@@ -2518,8 +2519,11 @@
     <Content Include="Areas\Admin\assets\plugins\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Areas\Admin\assets\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Blog\Tag.cshtml" />
     <Content Include="Mvc.sitemap" />
+    <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogTag\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BlogTagMultiSelect.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>

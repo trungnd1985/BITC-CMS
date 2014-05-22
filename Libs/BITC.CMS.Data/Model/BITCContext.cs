@@ -24,9 +24,9 @@ namespace BITC.CMS.Data.Entity
 
         #region Property
 
-        //public DbSet<BlogEntry> BlogEntries { get; set; }
+        public DbSet<BlogEntry> BlogEntries { get; set; }
 
-        //public DbSet<BlogTag> BlogTags { get; set; }
+        public DbSet<BlogTag> BlogTags { get; set; }
 
         public DbSet<Page> Pages { get; set; }
 
@@ -36,9 +36,7 @@ namespace BITC.CMS.Data.Entity
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Configurations.Add(new BlogTagMap());
-            //modelBuilder.Configurations.Add(new BlogEntryMap());B
-            //modelBuilder.Configurations.Add(new PageMap());
+            modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.BlogEntryMap());
 
             modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<MaxLengthAttribute>().Any()).Configure(p => p.HasMaxLength(p.ClrPropertyInfo.GetCustomAttributes(false).OfType<MaxLengthAttribute>().FirstOrDefault().Length));
             modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<RequiredAttribute>().Any()).Configure(p => p.IsRequired());

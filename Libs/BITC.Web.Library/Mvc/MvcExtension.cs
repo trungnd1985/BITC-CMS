@@ -19,6 +19,9 @@ namespace System.Web.Mvc
             return (_partialView.View != null);
         }
 
-        
+        //public static string LocalResource(this HtmlHelper helper, string key)
+        //{
+        //    //var _virtualPath = helper.ViewContext
+        //}
     }
 }

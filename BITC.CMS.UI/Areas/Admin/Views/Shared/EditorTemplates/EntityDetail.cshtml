@@ -19,7 +19,7 @@
 {
     <div class="form-group">
         @Html.Label(item.PropertyName, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class='col-md-10 @(item.Order == _orderList.Min(i=>i.Order) ? "focus" : string.Empty )'>
 			@if(item.AdditionalValues.ContainsKey("Prefix")){
 				<div class="input-group">
 					<span class="input-group-addon">@item.AdditionalValues["Prefix"]</span>
@@ -35,4 +35,3 @@
         </div>
     </div>
 }
-

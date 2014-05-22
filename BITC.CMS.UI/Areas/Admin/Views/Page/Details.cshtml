@@ -1,7 +1,7 @@
 ﻿@model BITC.CMS.Data.Entity.Page
 
 @{
-    ViewBag.Title = "Page Detail";
+    ViewBag.Title = Model.PageID > 0 ? Model.PageTitle : "Page Detail";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 

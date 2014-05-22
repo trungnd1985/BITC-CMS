@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
+    [Authorize]
     public class UserController : BitcController
     {
         // GET: Admin/User

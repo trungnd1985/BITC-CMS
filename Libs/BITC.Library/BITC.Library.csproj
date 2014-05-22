@@ -65,6 +65,7 @@
     <Compile Include="Data\QueryFluent.cs" />
     <Compile Include="Data\QueryObject.cs" />
     <Compile Include="Data\StateHelper.cs" />
+    <Compile Include="Extension\StringExtension.cs" />
     <Compile Include="Pattern\IRepository.cs" />
     <Compile Include="Pattern\IRepositoryAsync.cs" />
     <Compile Include="Data\ObjectStateEnum.cs" />

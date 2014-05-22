@@ -84,7 +84,9 @@
     <Compile Include="Entity\Medium.cs" />
     <Compile Include="Entity\Page.cs" />
     <Compile Include="Mapping\BlogEntryMap.cs" />
+    <Compile Include="Mapping\BlogEntryMap.Generated.cs" />
     <Compile Include="Mapping\BlogTagMap.cs" />
+    <Compile Include="Mapping\BlogTagMap.Generated.cs" />
     <Compile Include="Mapping\PageMap.cs" />
     <Compile Include="Model\BITCContext.cs" />
     <Compile Include="Page.cs" />

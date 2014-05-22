@@ -854,6 +854,9 @@ var App = function () {
 
             //IMPORTANT!!!: Do not modify the core handlers call order.
             $(".ck-editor").ckeditor();
+
+            $(".focus > input").focus();
+
             //core handlers
             handleInit(); // initialize core variables
             handleResponsiveOnResize(); // set and handle responsive    

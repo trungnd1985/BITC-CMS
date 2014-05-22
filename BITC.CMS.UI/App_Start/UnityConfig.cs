@@ -22,6 +22,8 @@ namespace BITC.CMS.UI
                 .RegisterType<IDataContextAsync, BITCContext>(new PerResolveLifetimeManager())
                 .RegisterType<IRepositoryAsync<Page>, Repository<Page>>()
                 .RegisterType<IRepositoryAsync<Media>, Repository<Media>>()
+                .RegisterType<IRepositoryAsync<BlogTag>, Repository<BlogTag>>()
+                .RegisterType<IRepositoryAsync<BlogEntry>, Repository<BlogEntry>>()
                 .RegisterType<AccountController>(new InjectionConstructor())
                 .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerResolveLifetimeManager());
             //.RegisterType<IRepositoryAsync<Customer>, Repository<Customer>>()
@@ -30,7 +32,7 @@ namespace BITC.CMS.UI
             //.RegisterType<ICustomerService, CustomerService>()
             //.RegisterType<INorthwindStoredProcedures, NorthwindContext>(new PerRequestLifetimeManager())
             //.RegisterType<IStoredProcedureService, StoredProcedureService>();
-            
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

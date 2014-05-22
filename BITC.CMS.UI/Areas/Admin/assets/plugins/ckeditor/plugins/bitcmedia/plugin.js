@@ -39,8 +39,6 @@ CKEDITOR.plugins.add('bitcmedia', {
 
                 $("#bitc-media-dialog").modal("show");
 
-
-
                 $("#MediaUploadFile").kendoUpload({
                     async: {
                         saveUrl: "/Admin/" + CULTURE + "/Media/Upload",
