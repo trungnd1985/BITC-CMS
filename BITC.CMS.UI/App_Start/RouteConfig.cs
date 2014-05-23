@@ -17,14 +17,14 @@ namespace BITC.CMS.UI
             routes.MapRoute(
                 name: "Page",
                 url: "{culture}/{url}",
-                defaults: new { controller = "Page", action = "Index", url = UrlParameter.Optional, culture = CultureHelper.GetDefaultCulture() },
+                defaults: new { controller = "Page", action = "Index", url = UrlParameter.Optional, culture = "vi-VN" },
                 namespaces: new[] { "BITC.CMS.UI.Controllers" }
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{culture}/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, culture = CultureHelper.GetDefaultCulture() }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, culture = "vi-VN" }
             );
 
 

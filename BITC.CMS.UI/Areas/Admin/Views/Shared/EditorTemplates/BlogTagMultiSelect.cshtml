@@ -1,9 +1,9 @@
 ﻿@model IList<int>
 
-    @(Html.Kendo().MultiSelectFor(m => m)
+@(Html.Kendo().MultiSelectFor(m => m)
                 .DataTextField("TagName")
                 .DataValueField("BlogTagID")
-                .AutoBind(false)
+                .AutoBind(true)
                 //.Value(Model)
                 .DataSource(source =>
                 {
@@ -13,4 +13,4 @@
                     });
                 })
 
-    )
+)

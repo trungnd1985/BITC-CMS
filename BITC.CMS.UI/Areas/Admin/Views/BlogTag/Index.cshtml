@@ -11,12 +11,12 @@
                         columns.Bound(p => p.TagName);
                         columns.Command(command =>
                         {
-                            command.Destroy();
-                            command.Edit();
-                        });
+                            command.Destroy().Text(@CommonResource.Delete);
+                            command.Edit().CancelText(@CommonResource.Cancel).UpdateText(@CommonResource.Update).Text(@CommonResource.Edit);
+                        }).Width(200);
 
                     })
-                    .ToolBar(toolbar => toolbar.Create())
+                    .ToolBar(toolbar => toolbar.Create().Text(@CommonResource.AddNew))
                     .Pageable()
                     .Sortable()
                     .DataSource(source => source.Ajax()

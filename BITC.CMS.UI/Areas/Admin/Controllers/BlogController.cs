@@ -1,17 +1,12 @@
-﻿using BITC.Web.Library.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Kendo.Mvc.Extensions;
-using BITC.CMS.Data.Entity;
-using Kendo.Mvc.UI;
-using BITC.Web.Library;
+﻿using BITC.CMS.Data.Entity;
 using BITC.Library.Pattern;
-using Microsoft.AspNet.Identity;
-using BITC.CMS.UI.Models;
-using System.Net;
+using BITC.Web.Library;
+using BITC.Web.Library.Mvc;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using System;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
@@ -60,6 +55,13 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
                 model.ModifiedBy = User.Identity.Name;
                 model.ModifiedDate = DateTime.Now;
 
+                var lstTag = _blogTagRepo.Queryable(i => model.SelectedTags.Contains(i.BlogTagID));
+
+                foreach (var item in lstTag)
+                {
+                    model.BlogTags.Add(item);
+                }
+
                 _repo.Insert(model);
 
                 if (_unitOfWork.SaveChanges() > 0)
@@ -78,6 +80,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var _entity = _repo.Query().Include(m => m.BlogTags).Select().SingleOrDefault(i => i.BlogEntryID == id);
+            _entity.SelectedTags = _entity.BlogTags.Select(i => i.BlogTagID).ToList();
             return View("Details", _entity);
         }
 
@@ -92,7 +95,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
                 foreach (var item in model.SelectedTags)
                 {
-                   //model.
+                    //model.
                     //model.BlogTags.Add(_blogTagRepo.SelectQuery(item);
                 }
 

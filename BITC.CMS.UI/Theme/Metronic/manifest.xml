@@ -3,5 +3,7 @@
   <Templates>
     <Template name="Home" path="_Home"/>
     <Template name="Contact" path="_Contact"/>
+    <Template name="Blog" path="_BlogList" />
+    <Template name="Blog Detail" path="_BlogDetail"/>
   </Templates>
 </Theme>

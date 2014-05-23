@@ -27,11 +27,12 @@ namespace BITC.Web.Library.Mvc
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
+            //filterContext.
             base.OnActionExecuted(filterContext);
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
+        {            
             //using (var _unitOfWork = new UnitOfWork())
             //{
             //    var _settingRepo = _unitOfWork.GetRepository<Setting>();
