@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BITC.Library.Pattern
 {
-    public class UnitOfWork : IUnitOfWorkAsync
+    public class UnitOfWork : IUnitOfWorkAsync, IDisposable
     {
         #region Private Fields
         private readonly IDataContextAsync _dataContext;

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace BITC.Library.Data
 {
-    public partial class DataProvider
+    public partial class DataProvider : IDisposable
     {
         #region Declaration
 
@@ -192,5 +192,13 @@ namespace BITC.Library.Data
         }
 
         #endregion
+
+        public void Dispose()
+        {
+            if (_conn != null)
+            {
+                _conn.Dispose();
+            }
+        }
     }
 }

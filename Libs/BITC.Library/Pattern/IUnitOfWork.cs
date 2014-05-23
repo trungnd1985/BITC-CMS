@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace BITC.Library.Pattern
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         int SaveChanges();
-        void Dispose(bool disposing);
         IRepository<TEntity> Repository<TEntity>() where TEntity : IObjectState;
         void BeginTransaction(IsolationLevel isolateLevel = IsolationLevel.Unspecified);
         bool Commit();
