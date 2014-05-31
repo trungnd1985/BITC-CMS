@@ -37,6 +37,7 @@ namespace BITC.CMS.Data.Entity
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.BlogEntryMap());
+            modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.PageMap());
 
             modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<MaxLengthAttribute>().Any()).Configure(p => p.HasMaxLength(p.ClrPropertyInfo.GetCustomAttributes(false).OfType<MaxLengthAttribute>().FirstOrDefault().Length));
             modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<RequiredAttribute>().Any()).Configure(p => p.IsRequired());

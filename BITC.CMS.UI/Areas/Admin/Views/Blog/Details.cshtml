@@ -19,3 +19,13 @@
         </div>
     </form>
 </div>
+@section Script{
+    <script src='@Url.Content("~/Areas/Admin/assets/plugins/jquery-tags-input/jquery.tagsinput.min.js")' type="text/javascript"></script>
+    <script src='@Url.Content("~/Areas/Admin/assets/scripts/blogController.js")' type="text/javascript"></script>
+    <script>
+        blog.init();
+    </script>
+}
+@section PageStyleSheet{
+    <link rel="stylesheet" type="text/css" href='@Url.Content("~/Areas/Admin/assets/plugins/jquery-tags-input/jquery.tagsinput.css")' />
+}

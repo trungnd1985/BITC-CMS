@@ -46,13 +46,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=6847f3395fc61b47, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFrameworkWithHierarchyId.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=6847f3395fc61b47, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFrameworkWithHierarchyId.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="ImageResizer, Version=3.4.3.103, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -69,10 +69,6 @@
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -127,7 +123,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -185,8 +181,9 @@
     <Reference Include="Unity.Mvc5">
       <HintPath>..\packages\Unity.Mvc5.1.1\lib\net45\Unity.Mvc5.dll</HintPath>
     </Reference>
-    <Reference Include="WebActivatorEx">
-      <HintPath>..\packages\WebActivatorEx.2.0.1\lib\net40\WebActivatorEx.dll</HintPath>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -214,6 +211,7 @@
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\PageDetailModel.cs" />
+    <Compile Include="Areas\Admin\Models\PageIndexModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -876,9 +874,6 @@
     <Content Include="Areas\Admin\assets\plugins\bootstrap-hover-dropdown\demo.html" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-hover-dropdown\twitter-bootstrap-hover-dropdown.js" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-hover-dropdown\twitter-bootstrap-hover-dropdown.min.js" />
-    <Content Include="Areas\Admin\assets\plugins\bootstrap-markdown\css\bootstrap-markdown.min.css" />
-    <Content Include="Areas\Admin\assets\plugins\bootstrap-markdown\js\bootstrap-markdown.js" />
-    <Content Include="Areas\Admin\assets\plugins\bootstrap-markdown\lib\markdown.js" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-maxlength\bootstrap-maxlength.js" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-maxlength\bootstrap-maxlength.min.js" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-modal\bs3.html" />
@@ -1986,6 +1981,7 @@
     <Content Include="Areas\Admin\assets\plugins\uniform\jquery.uniform.js" />
     <Content Include="Areas\Admin\assets\plugins\uniform\jquery.uniform.min.js" />
     <Content Include="Areas\Admin\assets\scripts\app.js" />
+    <Content Include="Areas\Admin\assets\scripts\blogController.js" />
     <Content Include="Areas\Admin\assets\scripts\calendar.js" />
     <Content Include="Areas\Admin\assets\scripts\charts.js" />
     <Content Include="Areas\Admin\assets\scripts\coming-soon.js" />
@@ -2008,6 +2004,7 @@
     <Content Include="Areas\Admin\assets\scripts\maps-google.js" />
     <Content Include="Areas\Admin\assets\scripts\maps-vector.js" />
     <Content Include="Areas\Admin\assets\scripts\media-controller.js" />
+    <Content Include="Areas\Admin\assets\scripts\pageController.js" />
     <Content Include="Areas\Admin\assets\scripts\portfolio.js" />
     <Content Include="Areas\Admin\assets\scripts\portlet-draggable.js" />
     <Content Include="Areas\Admin\assets\scripts\search.js" />
@@ -2294,9 +2291,6 @@
     <Content Include="Areas\Admin\assets\plugins\bootstrap-editable\README.md" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-hover-dropdown\bower.json" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-hover-dropdown\README.md" />
-    <Content Include="Areas\Admin\assets\plugins\bootstrap-markdown\bower.json" />
-    <Content Include="Areas\Admin\assets\plugins\bootstrap-markdown\less\bootstrap-markdown.less" />
-    <Content Include="Areas\Admin\assets\plugins\bootstrap-markdown\README.md" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-maxlength\bootstrap-maxlength.jquery.json" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-maxlength\bower.json" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-maxlength\LICENSE" />
@@ -2524,6 +2518,9 @@
     <Content Include="Areas\Admin\Views\Blog\Details.cshtml" />
     <Content Include="Areas\Admin\Views\BlogTag\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BlogTagMultiSelect.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\PageParent.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_TopMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -3696,6 +3693,7 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_BlogList.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_BlogDetail.cshtml" />
+    <Content Include="Theme\Metronic\Views\Shared\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\PortfolioCategory\" />
@@ -3711,9 +3709,9 @@
       <Project>{a9e33dc5-07d1-4cad-a931-7a3b99aa0c0d}</Project>
       <Name>BITC.CMS.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libs\BITC.CMS.Repository\BITC.CMS.Repository.csproj">
-      <Project>{1be62a60-720d-464e-97d6-9874263df572}</Project>
-      <Name>BITC.CMS.Repository</Name>
+    <ProjectReference Include="..\Libs\BITC.CMS.Identity.EntityFramework\BITC.CMS.Identity.EntityFramework.csproj">
+      <Project>{da66e05f-61dc-4f7f-98b2-f2e038598866}</Project>
+      <Name>BITC.CMS.Identity.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libs\BITC.CMS.Resource\BITC.CMS.Resource.vbproj">
       <Project>{02e7fb5c-d52d-460e-bfb8-36fd4b9577a7}</Project>
@@ -3731,6 +3729,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201403291709415_InitialCreate.resx">
       <DependentUpon>201403291709415_InitialCreate.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

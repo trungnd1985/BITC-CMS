@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Hierarchy;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,6 +55,13 @@ namespace BITC.CMS.Data.Entity
         [DataType("Integer")]
         public int SortOrder { get; set; }
 
+        [Display(Name = "Parent", ResourceType = typeof(CommonResource))]
+        [DataType("PageParent")]
+        public int? ParentID { get; set; }
+        
+        public HierarchyId Path { get; set; }
+
+
         public string Culture { get; set; }
 
         public string CreatedBy { get; set; }
@@ -63,5 +71,8 @@ namespace BITC.CMS.Data.Entity
         public string ModifiedBy { get; set; }
 
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+
+        public virtual Page Parent { get; set; }
+        public virtual ICollection<Page> Children { get; set; }
     }
 }

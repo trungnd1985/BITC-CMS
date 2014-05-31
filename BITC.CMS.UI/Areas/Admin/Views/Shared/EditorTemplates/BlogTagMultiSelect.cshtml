@@ -1,6 +1,6 @@
-﻿@model IList<int>
+﻿@model string
 
-@(Html.Kendo().MultiSelectFor(m => m)
+@*@(Html.Kendo().MultiSelectFor(m => m)
                 .DataTextField("TagName")
                 .DataValueField("BlogTagID")
                 .AutoBind(true)
@@ -13,4 +13,5 @@
                     });
                 })
 
-)
+)*@
+@Html.TextBoxFor(m => m, new { @class = "form-control tag-input", autocompleteurl = @Url.Action("LoadAllBlogTags", "BlogTag") })

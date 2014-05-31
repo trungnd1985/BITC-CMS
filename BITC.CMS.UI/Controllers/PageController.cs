@@ -29,7 +29,7 @@ namespace BITC.CMS.UI.Controllers
             //var _repo = _uow.GetRepository<Page>();
             if (string.IsNullOrEmpty(url))
             {
-                url = "/";
+                url = "";
             }
             var _model = _pageRepository.Queryable().SingleOrDefault(i => i.Url == url);
 

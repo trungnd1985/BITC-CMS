@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using BITC.CMS.UI.Models;
 using BITC.Web.Library.Mvc;
+using BITC.CMS.Identity.EntityFramework;
 
 namespace BITC.CMS.UI.Controllers
 {

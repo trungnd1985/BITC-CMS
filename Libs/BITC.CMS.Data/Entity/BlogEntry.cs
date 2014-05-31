@@ -20,17 +20,13 @@ namespace BITC.CMS.Data.Entity
         [Key]
         public int BlogEntryID { get; set; }
 
-        List<int> _selectedTags;
-
         [Display(Name = "BlogTags", ResourceType = typeof(BlogResource), Order = 2)]
         [UIHint("BlogTagMultiSelect")]
         [NotMapped()]
-        public List<int> SelectedTags
+        public string SelectedTags
         {
             get;
             set;
-
-
         }
 
         [Required]

@@ -46,7 +46,12 @@ namespace BITC.Web.Library
         /// <returns></returns>
         public static List<SelectListItem> GetTemplate()
         {
-            return GetTemplate(GetTheme());
+            return GetTemplate(GetTheme(), "");
+        }
+
+        public static List<SelectListItem> GetTemplate(string selectedValue)
+        {
+            return GetTemplate(GetTheme(), selectedValue);
         }
 
         /// <summary>
@@ -54,11 +59,11 @@ namespace BITC.Web.Library
         /// </summary>
         /// <param name="_theme"></param>
         /// <returns></returns>
-        public static List<SelectListItem> GetTemplate(string _theme)
+        public static List<SelectListItem> GetTemplate(string _theme, string selectedValue)
         {
             List<SelectListItem> _templates = new List<SelectListItem>();
 
-            _templates.Add(new SelectListItem() { Text = "- Select Template -", Value = "" });
+            _templates.Add(new SelectListItem() { Text = "Default", Value = "" });
 
             if (string.IsNullOrEmpty(_theme))
             {
@@ -70,10 +75,12 @@ namespace BITC.Web.Library
             if (File.Exists(_manifestPath))
             {
                 XElement _xml = XElement.Load(_manifestPath);
-
+                SelectListItem _selectListItem;
                 foreach (var _node in _xml.Descendants("Template"))
                 {
-                    _templates.Add(new SelectListItem() { Text = _node.Attribute("name").Value, Value = _node.Attribute("path").Value });
+                    _selectListItem = new SelectListItem() { Text = _node.Attribute("name").Value, Value = _node.Attribute("path").Value };
+                    _selectListItem.Selected = (selectedValue == _selectListItem.Value);
+                    _templates.Add(_selectListItem);
                 }
             }
 

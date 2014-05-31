@@ -30,7 +30,10 @@ namespace BITC.CMS.UI
             bundles.Add(new StyleBundle("~/Admin/css/global")
                 .Include("~/Areas/Admin/assets/plugins/font-awesome/css/font-awesome.css", new CssRewriteUrlTransform())
                 .Include("~/Areas/Admin/assets/plugins/bootstrap/css/bootstrap.css", new CssRewriteUrlTransform())
+                .Include("~/Areas/Admin/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css", new CssRewriteUrlTransform())
                 .Include("~/Areas/Admin/assets/plugins/uniform/css/uniform.default.css", new CssRewriteUrlTransform())
+                .Include("~/Areas/Admin/assets/plugins/select2/select2_metro.css", new CssRewriteUrlTransform())
+                .Include("~/Areas/Admin/assets/plugins/bootstrap-switch/static/stylesheets/bootstrap-switch-metro.css", new CssRewriteUrlTransform())
                 );
 
             bundles.Add(new StyleBundle("~/Admin/css/theme")
@@ -44,8 +47,12 @@ namespace BITC.CMS.UI
             bundles.Add(new ScriptBundle("~/Admin/js/global")
                 .Include("~/Areas/Admin/assets/plugins/jquery-1.10.2.min.js")
                 .Include("~/Areas/Admin/assets/plugins/jquery-migrate-1.2.1.min.js")
+                .Include("~/Areas/Admin/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js")
                 .Include("~/Scripts/jquery.validate*")
+                .Include("~/Areas/Admin/assets/plugins/select2/select2.min.js")
                 .Include("~/Areas/Admin/assets/plugins/bootstrap/js/bootstrap.min.js")
+                .Include("~/Areas/Admin/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js")
+                .Include("~/Areas/Admin/assets/plugins/bootstrap-switch/static/js/bootstrap-switch.min.js")
                 .Include("~/Areas/Admin/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js")
                 .Include("~/Areas/Admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js")
                 .Include("~/Areas/Admin/assets/plugins/jquery.blockui.min.js")

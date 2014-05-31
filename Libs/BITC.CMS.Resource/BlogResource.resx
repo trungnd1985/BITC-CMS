@@ -132,4 +132,7 @@
   <data name="Source" xml:space="preserve">
     <value>Source</value>
   </data>
+  <data name="TagName" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
 </root>

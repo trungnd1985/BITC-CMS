@@ -26,7 +26,7 @@ namespace BITC.Library.Data
 
         public override int SaveChanges()
         {
-            SyncObjectsStatePreCommit();
+            SyncObjectsStatePreCommit();            
             var changes = base.SaveChanges();
             SyncObjectsStatePostCommit();
             return changes;

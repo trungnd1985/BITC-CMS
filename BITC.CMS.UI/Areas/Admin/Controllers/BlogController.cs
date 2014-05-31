@@ -55,11 +55,31 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
                 model.ModifiedBy = User.Identity.Name;
                 model.ModifiedDate = DateTime.Now;
 
-                var lstTag = _blogTagRepo.Queryable(i => model.SelectedTags.Contains(i.BlogTagID));
+                var arrTagSelected = model.SelectedTags.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                foreach (var item in lstTag)
+                var lstTag = _blogTagRepo.Queryable(i => model.SelectedTags.Contains(i.TagName));
+
+                string currentTagName;
+
+                for (int i = 0; i < arrTagSelected.Length; i++)
                 {
-                    model.BlogTags.Add(item);
+                    currentTagName = arrTagSelected[i];
+
+                    var newTag = lstTag.FirstOrDefault(t => t.TagName == currentTagName);
+
+                    if (newTag == null)
+                    {
+                        newTag = new BlogTag();
+                        newTag.TagName = arrTagSelected[i];
+                        newTag.Culture = CultureHelper.GetCurrentCulture();
+                        newTag.Slug = newTag.TagName.ToSlug();
+                        newTag.BlogEntries.Add(model);
+                        _blogTagRepo.Insert(newTag);
+                    }
+                    else
+                    {
+                        model.BlogTags.Add(newTag);
+                    }
                 }
 
                 _repo.Insert(model);
@@ -80,7 +100,12 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var _entity = _repo.Query().Include(m => m.BlogTags).Select().SingleOrDefault(i => i.BlogEntryID == id);
-            _entity.SelectedTags = _entity.BlogTags.Select(i => i.BlogTagID).ToList();
+
+            foreach (var item in _entity.BlogTags)
+            {
+                _entity.SelectedTags += item.TagName + ",";
+            }
+
             return View("Details", _entity);
         }
 
@@ -90,19 +115,41 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.BlogEntryID = id;
-                model.ModifiedDate = DateTime.Now;
+                var currentEntry = _repo.Query(i => i.BlogEntryID == id).Include(i => i.BlogTags).Select().FirstOrDefault();
 
-                foreach (var item in model.SelectedTags)
+                currentEntry.ModifiedBy = HttpContext.User.Identity.Name;
+                currentEntry.ModifiedDate = DateTime.Now;
+                currentEntry.BlogTags.Clear();
+
+                var arrTagSelected = model.SelectedTags.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                var lstTag = _blogTagRepo.Queryable(i => model.SelectedTags.Contains(i.TagName));
+
+                string currentTagName;
+
+                for (int i = 0; i < arrTagSelected.Length; i++)
                 {
-                    //model.
-                    //model.BlogTags.Add(_blogTagRepo.SelectQuery(item);
-                }
+                    currentTagName = arrTagSelected[i];
 
-                model.ModifiedBy = User.Identity.Name;
+                    var newTag = lstTag.FirstOrDefault(t => t.TagName == currentTagName);
+
+                    if (newTag == null)
+                    {
+                        newTag = new BlogTag();
+                        newTag.TagName = arrTagSelected[i];
+                        newTag.Culture = CultureHelper.GetCurrentCulture();
+                        newTag.Slug = newTag.TagName.ToSlug();
+                        newTag.BlogEntries.Add(currentEntry);
+                        _blogTagRepo.Insert(newTag);
+                    }
+                    else
+                    {
+                        currentEntry.BlogTags.Add(newTag);
+                    }
+                }
                 //AuthenticationManager.
 
-                _repo.Update(model);
+                _repo.Update(currentEntry);
 
                 if (_unitOfWork.SaveChanges() > 0)
                 {

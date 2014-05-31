@@ -1,0 +1,7 @@
+﻿@model int?
+@(Html.Kendo().DropDownListFor(m => m)
+                .DataTextField("PageTitle")
+                .DataValueField("PageID")
+                .DataSource(source =>
+                    source.Read("GetDataForPageParentDropDownList", "Page", new { id = Model }))
+)

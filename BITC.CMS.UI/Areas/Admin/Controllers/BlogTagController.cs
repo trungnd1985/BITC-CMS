@@ -54,10 +54,10 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         }
 
         [AjaxOnly]
-        public ActionResult LoadAllBlogTags()
+        public ActionResult LoadAllBlogTags(string term)
         {
             var _culture = CultureHelper.GetCurrentCulture();
-            return Json(_repo.Queryable(i => i.Culture == _culture), JsonRequestBehavior.AllowGet);
+            return Json(_repo.Queryable(i => i.Culture == _culture && i.TagName.StartsWith(term)).Select(i => i.TagName), JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -97,6 +97,6 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         #endregion
 
-        #endregion        
+        #endregion
     }
 }

@@ -10,8 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="@ViewBag.Keywords" />
     <meta name="description" content="@ViewBag.Description" />
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-
+    <title>BITC - @ViewBag.Title</title>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="/Theme/Metronic/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="/Theme/Metronic/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -32,28 +31,6 @@
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body>
-    <!-- BEGIN STYLE CUSTOMIZER -->
-    <div class="color-panel hidden-sm">
-        <div class="color-mode-icons icon-color"></div>
-        <div class="color-mode-icons icon-color-close"></div>
-        <div class="color-mode">
-            <p>THEME COLOR</p>
-            <ul class="inline">
-                <li class="color-blue current color-default" data-style="blue"></li>
-                <li class="color-red" data-style="red"></li>
-                <li class="color-green" data-style="green"></li>
-                <li class="color-orange" data-style="orange"></li>
-            </ul>
-            <label>
-                <span>Header</span>
-                <select class="header-option form-control input-small">
-                    <option value="default" selected>Default</option>
-                    <option value="fixed">Fixed</option>
-                </select>
-            </label>
-        </div>
-    </div>
-    <!-- END BEGIN STYLE CUSTOMIZER -->
     <!-- BEGIN HEADER -->
     <div class="header navbar navbar-default navbar-static-top">
         <div class="container">
@@ -71,73 +48,9 @@
                 </a>
                 <!-- END LOGO -->
             </div>
-
             <!-- BEGIN TOP NAVIGATION MENU -->
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href='@Url.Action("Index", "Page", new { url = "/" })'>
-                            Home
-                        </a>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
-                            Pages
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="page_about.html">About Us</a></li>
-                            <li><a href="page_services.html">Services</a></li>
-                            <li><a href="page_prices.html">Prices</a></li>
-                            <li><a href="page_faq.html">FAQ</a></li>
-                            <li><a href="page_gallery.html">Gallery</a></li>
-                            <li><a href="page_search_result.html">Search Result</a></li>
-                            <li><a href="page_404.html">404</a></li>
-                            <li><a href="page_500.html">500</a></li>
-                            <li><a href="page_login.html">Login Page</a></li>
-                            <li><a href="page_signup.html">Signup Page</a></li>
-                            <li><a href="page_careers.html">Careers</a></li>
-                            <li><a href="page_contacts.html">Contact</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
-                            Features
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="feature_typography.html">Typography</a></li>
-                            <li><a href="feature_buttons.html">Buttons</a></li>
-                            <li><a href="feature_forms.html">Forms</a></li>
-                            <li><a href="feature_icons.html">Icons</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
-                            Portfolio
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="portfolio_4.html">Portfolio 4</a></li>
-                            <li><a href="portfolio_3.html">Portfolio 3</a></li>
-                            <li><a href="portfolio_2.html">Portfolio 2</a></li>
-                            <li><a href="portfolio_item.html">Portfolio Item</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
-                            Blog
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="blog.html">Blog Page</a></li>
-                            <li><a href="blog_item.html">Blog Item</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href='@Url.Action("Index","Page",new {url = "Contact"})'>Contact</a>
-                    </li>
-                </ul>
+                @Html.Partial("_Menu")
             </div>
             <!-- BEGIN TOP NAVIGATION MENU -->
         </div>

@@ -857,6 +857,24 @@ var App = function () {
 
             $(".focus > input").focus();
 
+            $.each($(".touchspin"), function (index, item) {
+                var min = Number($(item).attr("min"));
+                var max = Number($(item).attr("max"));
+                var interval = Number($(item).attr("interval"));
+                var prefix = $(item).attr("prefix");
+
+                $(item).TouchSpin({
+                    inputGroupClass: 'input-medium',
+                    spinUpClass: 'green',
+                    spinDownClass: 'green',
+                    min: min,
+                    max: max,
+                    stepinterval: interval,
+                    maxboostedstep: 10000000,
+                    prefix: prefix
+                });
+            });
+
             //core handlers
             handleInit(); // initialize core variables
             handleResponsiveOnResize(); // set and handle responsive    

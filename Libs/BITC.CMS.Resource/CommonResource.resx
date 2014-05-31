@@ -150,6 +150,9 @@
   <data name="PageSize" xml:space="preserve">
     <value>Page size</value>
   </data>
+  <data name="Parent" xml:space="preserve">
+    <value>Parent</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>

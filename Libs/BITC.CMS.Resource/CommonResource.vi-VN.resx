@@ -150,6 +150,9 @@
   <data name="PageSize" xml:space="preserve">
     <value>Số lượng bản ghi 1 trang</value>
   </data>
+  <data name="Parent" xml:space="preserve">
+    <value>Cha</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Lưu</value>
   </data>

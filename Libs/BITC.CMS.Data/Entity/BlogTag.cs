@@ -1,4 +1,5 @@
-﻿using BITC.Library.Data;
+﻿using BITC.CMS.Resource;
+using BITC.Library.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,8 @@ namespace BITC.CMS.Data.Entity
         [Key]
         public int BlogTagID { get; set; }
         public string Culture { get; set; }
+
+        [Display(Name = "TagName", ResourceType = typeof(BlogResource))]
         public string TagName { get; set; }
         public string Slug { get; set; }
 

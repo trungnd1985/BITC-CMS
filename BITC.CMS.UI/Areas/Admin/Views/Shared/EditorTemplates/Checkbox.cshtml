@@ -1,2 +1,4 @@
 ﻿@model bool
-@Html.CheckBoxFor(m => m)
+<div class="make-switch">
+    @Html.CheckBoxFor(m => m, new { @class = "toggle" })
+</div>
