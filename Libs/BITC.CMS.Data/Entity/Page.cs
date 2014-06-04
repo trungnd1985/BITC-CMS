@@ -58,7 +58,10 @@ namespace BITC.CMS.Data.Entity
         [Display(Name = "Parent", ResourceType = typeof(CommonResource))]
         [DataType("PageParent")]
         public int? ParentID { get; set; }
-        
+
+        [Display(Name = "Expression", ResourceType = typeof(PageResource))]
+        public string Expression { get; set; }
+
         public HierarchyId Path { get; set; }
 
 

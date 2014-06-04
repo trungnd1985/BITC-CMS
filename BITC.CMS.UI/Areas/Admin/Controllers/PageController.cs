@@ -65,6 +65,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
                 {
                     _parentPage = _pageRepository.Query(i => i.PageID == model.ParentID.Value).Include(i => i.Children).Select().FirstOrDefault();
                 }
+                
 
                 if (_parentPage != null)
                 {

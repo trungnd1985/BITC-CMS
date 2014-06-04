@@ -2388,6 +2388,8 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\PageParent.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_TopMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
+    <Content Include="App_Code\ViewHelper.cshtml" />
+    <Content Include="App_Code\Metronic.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>

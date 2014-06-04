@@ -74,6 +74,7 @@ namespace BITC.CMS.Data.Mapping
             Property(t => t.ModifiedDate)
                 .HasColumnName("ModifiedDate")
                 .IsOptional();
+            Property(t => t.Expression).HasColumnName("Expression").IsOptional();
             Property(t => t.ParentID)
                 .HasColumnName("ParentID")
                 .IsOptional();

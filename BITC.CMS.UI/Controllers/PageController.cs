@@ -1,12 +1,9 @@
-﻿using BITC.CMS.Data;
-using BITC.CMS.Data.Entity;
-using BITC.Library.Data;
+﻿using BITC.CMS.Data.Entity;
 using BITC.Library.Pattern;
 using BITC.Web.Library.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 
 namespace BITC.CMS.UI.Controllers
@@ -25,22 +22,48 @@ namespace BITC.CMS.UI.Controllers
 
         public ActionResult Index(string url)
         {
-            //var _uow = new UnitOfWork();
-            //var _repo = _uow.GetRepository<Page>();
             if (string.IsNullOrEmpty(url))
             {
                 url = "";
             }
-            var _model = _pageRepository.Queryable().SingleOrDefault(i => i.Url == url);
+            var lst = _pageRepository.Query(i => url.Contains(i.Url)).Include(i => i.Parent).Select().OrderByDescending(i => i.Expression.Count());
+            Page _model = null;
+
+            foreach (var item in lst)
+            {
+                if (Regex.IsMatch(item.Expression, item.Url))
+                {
+                    _model = item;
+                    break;
+                }
+            }
 
             if (_model != null)
             {
                 ViewBag.Title = _model.PageTitle;
                 ViewBag.Description = _model.Description;
                 ViewBag.Keywords = _model.Keywords;
+
+                Dictionary<string, string> _dict = new Dictionary<string, string>();
+                GenerateBreadCrumbData(_model, _dict);
+                ViewBag.BreadCrumb = _dict;
+            }
+            else
+            {
+
             }
 
             return View(_model);
+        }
+
+        private void GenerateBreadCrumbData(Page _page, Dictionary<string, string> _data)
+        {
+            if (_page.Parent != null)
+            {
+                GenerateBreadCrumbData(_page.Parent, _data);
+            }
+
+            _data.Add(Url.Action("Index", "Page", new { url = _page.Url }), _page.PageTitle);
         }
     }
 }

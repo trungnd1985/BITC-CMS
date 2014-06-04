@@ -65,9 +65,9 @@ namespace BITC.Library.Pattern
         public virtual void InsertGraphRange(IEnumerable<TEntity> entities) { _dbSet.AddRange(entities); }
 
         public virtual void Update(TEntity entity)
-        {
-            ((IObjectState)entity).ObjectState = ObjectState.Modified;
-            _dbSet.Attach(entity);
+        {            
+            ((IObjectState)entity).ObjectState = ObjectState.Modified;            
+            //_dbSet.Attach(entity);
             _context.SyncObjectState(entity);
         }
 

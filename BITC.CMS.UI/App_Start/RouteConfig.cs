@@ -16,7 +16,7 @@ namespace BITC.CMS.UI
 
             routes.MapRoute(
                 name: "Page",
-                url: "{culture}/{url}",
+                url: "{culture}/{*url}",
                 defaults: new { controller = "Page", action = "Index", url = UrlParameter.Optional, culture = "vi-VN" },
                 namespaces: new[] { "BITC.CMS.UI.Controllers" }
             );

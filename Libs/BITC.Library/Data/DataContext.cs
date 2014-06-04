@@ -26,7 +26,7 @@ namespace BITC.Library.Data
 
         public override int SaveChanges()
         {
-            SyncObjectsStatePreCommit();            
+            SyncObjectsStatePreCommit();
             var changes = base.SaveChanges();
             SyncObjectsStatePostCommit();
             return changes;
@@ -48,7 +48,10 @@ namespace BITC.Library.Data
             return changesAsync;
         }
 
-        public void SyncObjectState(object entity) { Entry(entity).State = StateHelper.ConvertState(((IObjectState)entity).ObjectState); }
+        public void SyncObjectState(object entity)
+        {
+            Entry(entity).State = StateHelper.ConvertState(((IObjectState)entity).ObjectState);
+        }
         public new DbSet<T> Set<T>() where T : class { return base.Set<T>(); }
 
         private void SyncObjectsStatePreCommit()
