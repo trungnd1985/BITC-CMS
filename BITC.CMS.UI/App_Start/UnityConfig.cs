@@ -24,6 +24,7 @@ namespace BITC.CMS.UI
                 .RegisterType<IRepositoryAsync<Media>, Repository<Media>>()
                 .RegisterType<IRepositoryAsync<BlogTag>, Repository<BlogTag>>()
                 .RegisterType<IRepositoryAsync<BlogEntry>, Repository<BlogEntry>>()
+                .RegisterType<IRepositoryAsync<Client>, Repository<Client>>()
                 .RegisterType<AccountController>(new InjectionConstructor())
                 .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerResolveLifetimeManager());
             //.RegisterType<IRepositoryAsync<Customer>, Repository<Customer>>()
