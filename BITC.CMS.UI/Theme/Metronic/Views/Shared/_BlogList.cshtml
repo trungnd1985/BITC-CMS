@@ -1,10 +1,18 @@
 ﻿@{
     IRepositoryAsync<BlogTag> _repo = DependencyResolver.Current.GetService<IRepositoryAsync<BlogTag>>();
     IRepositoryAsync<BlogEntry> _entryRepo = DependencyResolver.Current.GetService<IRepositoryAsync<BlogEntry>>();
+    var _tag = Request.Params["tag"];
     var _culture = BITC.Web.Library.CultureHelper.GetCurrentCulture();
     var lstTag = _repo.Query(i => i.Culture == _culture);
-    var _entriesCount = _entryRepo.Queryable(i => i.Culture == _culture).Count();
-    var _entries = _entryRepo.Query(i => i.Culture == _culture).Include(i => i.BlogTags).Select().OrderByDescending(i => i.ModifiedDate);
+    int _entriesCount = 0;
+    var _page = string.IsNullOrEmpty(Request.Params["page"]) ? 1 : int.Parse(Request.Params["page"]);
+    var _currentDate = DateTime.Now;
+    var _entries = _entryRepo.Query(i => i.Culture == _culture 
+                                            && (string.IsNullOrEmpty(_tag) ? true : i.BlogTags.Where(j => j.Slug == _tag).Count() > 0) 
+                                            && (i.PublishDate.HasValue && (i.PublishDate.Value.CompareTo(_currentDate) == 0 || i.PublishDate.Value.CompareTo(_currentDate) == -1)))
+                                .Include(i => i.BlogTags)
+                                .OrderBy(q => q.OrderByDescending(i => i.CreatedDate))
+                                .SelectPage(_page, 10, out _entriesCount);
 }
 <!-- BEGIN BREADCRUMBS -->
 <div class="row breadcrumbs margin-bottom-40">
@@ -27,13 +35,10 @@
             @foreach (var _entry in _entries)
             {
                 <div class="row">
-                    <div class="col-md-4 col-sm-4">
-                        <img src="/Theme/Metronic/assets/img/works/img2.jpg" alt="" class="img-responsive">
-                    </div>
-                    <div class="col-md-8 col-sm-8">
+                    <div class="col-md-12 col-sm-12">
                         <h2><a href="blog_item.html">@_entry.BlogTitle</a></h2>
                         <ul class="blog-info">
-                            <li><i class="fa fa-calendar"></i> @_entry.CreatedDate.Value.ToString("dd/MM/yyyy")</li>
+                            <li><i class="fa fa-calendar"></i> @_entry.PublishDate.Value.ToString("dd/MM/yyyy")</li>
                             <li><i class="fa fa-comments"></i> 17</li>
                             <li>
                                 <i class="fa fa-tags"></i> @foreach (var _tags in _entry.BlogTags)
@@ -58,7 +63,7 @@
                         {
                             <li><a href="#">@(i + 1)</a></li>
                         }
-                        <li><a href="#">Next</a></li>
+                        <li><a href="#">@Html.Localize("Next")</a></li>
                     </ul>
                 </div>
             }
@@ -99,48 +104,13 @@
                 </div>
             </div>
             <!-- END RECENT NEWS -->
-            <!-- BEGIN BLOG TALKS -->
-            <div class="blog-talks margin-bottom-30">
-                <h2>Popular Talks</h2>
-                <div class="tab-style-1">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab-1" data-toggle="tab">Multipurpose</a></li>
-                        <li><a href="#tab-2" data-toggle="tab">Documented</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane row-fluid fade in active" id="tab-1">
-                            <p class="margin-bottom-10">Raw denim you probably haven't heard of them jean shorts Austin. eu banh mi, qui irure terry richardson ex squid Aliquip placeat salvia cillum iphone.</p>
-                            <p><a href="#" class="read-more">Read more</a></p>
-                        </div>
-                        <div class="tab-pane fade" id="tab-2">
-                            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. aliquip jean shorts ullamco ad vinyl aesthetic magna delectus mollit. Keytar helvetica VHS salvia..</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END BLOG TALKS -->
-            <!-- BEGIN BLOG PHOTOS STREAM -->
-            <div class="blog-photo-stream margin-bottom-20">
-                <h2>Photos Stream</h2>
-                <ul class="list-unstyled">
-                    <li><a href="#"><img src="assets/img/people/img5-small.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/img/works/img1.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/img/people/img4-large.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/img/works/img6.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/img/pics/img1-large.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/img/pics/img2-large.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/img/works/img3.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/img/people/img2-large.jpg" alt=""></a></li>
-                </ul>
-            </div>
-            <!-- END BLOG PHOTOS STREAM -->
             <!-- BEGIN BLOG TAGS -->
             <div class="blog-tags margin-bottom-20">
                 <h2>Tags</h2>
                 <ul>
                     @foreach (var item in lstTag.Select())
                     {
-                        <li><a href="#"><i class="fa fa-tags"></i>@item.TagName</a></li>
+                        <li><a href='@Url.Action("Index","Page",new {tag = item.Slug})'><i class="fa fa-tags"></i>@item.TagName</a></li>
                     }
                 </ul>
             </div>

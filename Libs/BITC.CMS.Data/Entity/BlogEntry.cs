@@ -62,6 +62,9 @@ namespace BITC.CMS.Data.Entity
         [DataType("Integer")]
         public Nullable<int> SortOrder { get; set; }
 
+        [Display(Name = "PublishDate", ResourceType = typeof(BlogResource))]
+        public DateTime? PublishDate { get; set; }
+
         public Nullable<System.DateTime> CreatedDate { get; set; }
 
         public string CreatedBy { get; set; }

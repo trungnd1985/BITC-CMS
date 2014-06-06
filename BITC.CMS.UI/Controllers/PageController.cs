@@ -22,24 +22,33 @@ namespace BITC.CMS.UI.Controllers
 
         public ActionResult Index(string url)
         {
+            Page _model = null;
+
             if (string.IsNullOrEmpty(url))
             {
                 url = "";
-            }
-            var lst = _pageRepository.Query(i => url.Contains(i.Url)).Include(i => i.Parent).Select().OrderByDescending(i => i.Expression.Count());
-            Page _model = null;
 
-            foreach (var item in lst)
+                _model = _pageRepository.Query(i => i.Url == url).Select().FirstOrDefault();
+            }
+            else
             {
-                if (Regex.IsMatch(item.Expression, item.Url))
+                var lst = _pageRepository.Query(i => url.Contains(i.Url)).Include(i => i.Parent).Select().OrderByDescending(i => i.Expression.Count());
+
+                foreach (var item in lst)
                 {
-                    _model = item;
-                    break;
+                    if (Regex.IsMatch(item.Expression, item.Url))
+                    {
+                        _model = item;
+                        break;
+                    }
                 }
             }
 
+
             if (_model != null)
             {
+                ViewBag.Url = _model.Url;
+                ViewBag.Expression = _model.Expression;
                 ViewBag.Title = _model.PageTitle;
                 ViewBag.Description = _model.Description;
                 ViewBag.Keywords = _model.Keywords;

@@ -5,6 +5,8 @@ using BITC.Library.Pattern;
 using BITC.CMS.Data.Entity;
 using BITC.Library.Data;
 using BITC.CMS.UI.Controllers;
+using BITC.CMS.Service;
+using BITC.CMS.UI.Areas.Admin.Controllers;
 
 namespace BITC.CMS.UI
 {
@@ -25,7 +27,8 @@ namespace BITC.CMS.UI
                 .RegisterType<IRepositoryAsync<BlogTag>, Repository<BlogTag>>()
                 .RegisterType<IRepositoryAsync<BlogEntry>, Repository<BlogEntry>>()
                 .RegisterType<IRepositoryAsync<Client>, Repository<Client>>()
-                .RegisterType<AccountController>(new InjectionConstructor())
+                .RegisterType<IBlogService, BlogService>()
+                .RegisterType<AuthenticationController>(new InjectionConstructor())
                 .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerResolveLifetimeManager());
             //.RegisterType<IRepositoryAsync<Customer>, Repository<Customer>>()
             //.RegisterType<IRepositoryAsync<Product>, Repository<Product>>()

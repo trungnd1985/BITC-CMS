@@ -696,6 +696,13 @@ var App = function () {
         });
     }
 
+    var handleLogOut = function () {
+
+        $("#trigger_logout").click(function () {
+            document.getElementById('logoutForm').submit();
+        });
+    };
+
     // Handle Select2 Dropdowns
     var handleSelect2 = function () {
         if (jQuery().select2) {
@@ -853,6 +860,7 @@ var App = function () {
         init: function () {
 
             //IMPORTANT!!!: Do not modify the core handlers call order.
+            handleLogOut();
             $(".ck-editor").ckeditor();
 
             $(".focus > input").focus();
@@ -908,6 +916,7 @@ var App = function () {
 
         //main function to initiate core javascript after ajax complete
         initAjax: function () {
+
             handleSelect2(); // handle custom Select2 dropdowns
             handleDropdowns(); // handle dropdowns
             handleTooltips(); // handle bootstrap tooltips

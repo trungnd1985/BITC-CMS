@@ -15,7 +15,7 @@ namespace BITC.CMS.UI
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/" + CultureHelper.GetCurrentCulture() + "/Account/Login")
+                LoginPath = new PathString("/Admin/" + CultureHelper.GetCurrentCulture() + "/Authentication/Login")
             });
             // Use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

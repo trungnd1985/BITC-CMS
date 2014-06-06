@@ -65,6 +65,8 @@ namespace BITC.CMS.Data.Mapping
                 .HasMaxLength(255)
                 .IsOptional();
 
+            Property(t => t.PublishDate).HasColumnName("PublishDate").IsOptional();
+
             // Relationships
             HasMany(t => t.BlogTags)
                 .WithMany(t => t.BlogEntries)

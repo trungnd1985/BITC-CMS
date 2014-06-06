@@ -1,27 +1,26 @@
-﻿using System;
+﻿using BITC.CMS.Identity.EntityFramework;
+using BITC.CMS.UI.Models;
+using BITC.Web.Library.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
-using BITC.CMS.UI.Models;
-using BITC.Web.Library.Mvc;
-using BITC.CMS.Identity.EntityFramework;
 
-namespace BITC.CMS.UI.Controllers
+namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
-    [Authorize]
-    public class AccountController : BitcController
+    public class AuthenticationController : BitcController
     {
-        public AccountController()
+        
+        public AuthenticationController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AuthenticationController(UserManager<ApplicationUser> userManager)
         {
             UserManager = userManager;
         }
@@ -291,7 +290,7 @@ namespace BITC.CMS.UI.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Authentication");
         }
 
         //

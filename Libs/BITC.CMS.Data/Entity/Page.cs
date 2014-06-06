@@ -64,7 +64,6 @@ namespace BITC.CMS.Data.Entity
 
         public HierarchyId Path { get; set; }
 
-
         public string Culture { get; set; }
 
         public string CreatedBy { get; set; }

@@ -79,7 +79,6 @@ namespace BITC.CMS.Data.Mapping
                 .HasColumnName("ParentID")
                 .IsOptional();
             Property(t => t.Path).HasColumnName("Path").HasColumnType("hierarchyid").IsOptional();
-
             // Relationships
             HasOptional(t => t.Parent)
                 .WithMany(t => t.Children)

@@ -100,6 +100,15 @@ Public Class BlogResource
     End Property
     
     '''<summary>
+    '''  Looks up a localized string similar to Publish date.
+    '''</summary>
+    Public Shared ReadOnly Property PublishDate() As String
+        Get
+            Return ResourceManager.GetString("PublishDate", resourceCulture)
+        End Get
+    End Property
+    
+    '''<summary>
     '''  Looks up a localized string similar to Source.
     '''</summary>
     Public Shared ReadOnly Property Source() As String

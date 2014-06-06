@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using BITC.CMS.Service;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
@@ -16,18 +17,17 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
     {
         #region Declaration
 
-        private IRepositoryAsync<BlogEntry> _repo;
+        private readonly IBlogService _service;
         private IUnitOfWorkAsync _unitOfWork;
-        private IRepositoryAsync<BlogTag> _blogTagRepo;
+
         #endregion
 
         #region Constructor
 
-        public BlogController(IRepositoryAsync<BlogEntry> repo, IUnitOfWorkAsync uow, IRepositoryAsync<BlogTag> tagRepo)
+        public BlogController(IBlogService service, IUnitOfWorkAsync uow)
         {
-            _repo = repo;
             _unitOfWork = uow;
-            _blogTagRepo = tagRepo;
+            _service = service;
         }
 
         #endregion
@@ -50,40 +50,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Culture = CultureHelper.GetCurrentCulture();
-                model.CreatedBy = User.Identity.Name;
-                model.CreatedDate = DateTime.Now;
-                model.ModifiedBy = User.Identity.Name;
-                model.ModifiedDate = DateTime.Now;
-
-                var arrTagSelected = model.SelectedTags.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                var lstTag = _blogTagRepo.Queryable(i => model.SelectedTags.Contains(i.TagName));
-
-                string currentTagName;
-
-                for (int i = 0; i < arrTagSelected.Length; i++)
-                {
-                    currentTagName = arrTagSelected[i];
-
-                    var newTag = lstTag.FirstOrDefault(t => t.TagName == currentTagName);
-
-                    if (newTag == null)
-                    {
-                        newTag = new BlogTag();
-                        newTag.TagName = arrTagSelected[i];
-                        newTag.Culture = CultureHelper.GetCurrentCulture();
-                        newTag.Slug = newTag.TagName.ToSlug();
-                        newTag.BlogEntries.Add(model);
-                        _blogTagRepo.Insert(newTag);
-                    }
-                    else
-                    {
-                        model.BlogTags.Add(newTag);
-                    }
-                }
-
-                _repo.Insert(model);
+                _service.Insert(model);
 
                 if (_unitOfWork.SaveChanges() > 0)
                 {
@@ -100,7 +67,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var _entity = _repo.Query().Include(m => m.BlogTags).Select().SingleOrDefault(i => i.BlogEntryID == id);
+            var _entity = _service.GetBlogEntry(id);
 
             foreach (var item in _entity.BlogTags)
             {
@@ -116,41 +83,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var currentEntry = _repo.Query(i => i.BlogEntryID == id).Include(i => i.BlogTags).Select().FirstOrDefault();
-
-                currentEntry.ModifiedBy = HttpContext.User.Identity.Name;
-                currentEntry.ModifiedDate = DateTime.Now;
-                currentEntry.BlogTags.Clear();
-
-                var arrTagSelected = model.SelectedTags.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                var lstTag = _blogTagRepo.Queryable(i => model.SelectedTags.Contains(i.TagName));
-
-                string currentTagName;
-
-                for (int i = 0; i < arrTagSelected.Length; i++)
-                {
-                    currentTagName = arrTagSelected[i];
-
-                    var newTag = lstTag.FirstOrDefault(t => t.TagName == currentTagName);
-
-                    if (newTag == null)
-                    {
-                        newTag = new BlogTag();
-                        newTag.TagName = arrTagSelected[i];
-                        newTag.Culture = CultureHelper.GetCurrentCulture();
-                        newTag.Slug = newTag.TagName.ToSlug();
-                        newTag.BlogEntries.Add(currentEntry);
-                        _blogTagRepo.Insert(newTag);
-                    }
-                    else
-                    {
-                        currentEntry.BlogTags.Add(newTag);
-                    }
-                }
-                //AuthenticationManager.
-
-                _repo.Update(currentEntry);
+                _service.Update(id, model);
 
                 if (_unitOfWork.SaveChanges() > 0)
                 {
@@ -171,7 +104,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         public ActionResult Read([DataSourceRequest]DataSourceRequest request)
         {
             var _culture = CultureHelper.GetCurrentCulture();
-            DataSourceResult _result = _repo.Queryable(i => i.Culture == _culture)
+            DataSourceResult _result = _service.FindByCulture(_culture)
                 .Where(request.Filters)
                 .Sort(request.Sorts)
                 .Page(request.Page - 1, request.PageSize)
@@ -182,7 +115,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         [AjaxOnly]
         public ActionResult Delete([DataSourceRequest]DataSourceRequest request, BlogEntry _tag)
         {
-            _repo.Delete(_tag);
+            _service.Delete(_tag);
             _unitOfWork.SaveChanges();
             return Json(new[] { _tag }.ToDataSourceResult(request, ModelState));
         }

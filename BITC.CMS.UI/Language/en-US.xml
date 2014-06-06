@@ -1,1 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<languages>
+  <language key="ContactUs">Contact us</language>
+  <language key="About">About</language>
+  <language key="Address">
+    <![CDATA[
+          BITC Vietnam. <br />
+          99/47/40 Đức Giang <br />
+          Long Biên, Hà Nội <br />
+          M: +84 949 793 285 <br />
+          Email: <a href="mailto:trungnd1985@gmail.com">trungnd1985@gmail.com</a>
+  ]]>
+  </language>
+  <language key="GoalDefinition">Goal definition</language>
+  <language key="Analyse">Analyse</language>
+  <language key="Implementation">Implementation</language>
+  <language key="OurClient">Our clients</language>
+  <language key="Next">Next</language>
+</languages>
