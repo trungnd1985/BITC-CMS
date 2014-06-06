@@ -11,6 +11,7 @@ using System.Linq;
 using System.Data.Entity.Hierarchy;
 using BITC.CMS.UI.Areas.Admin.Models;
 using System.Collections.Generic;
+using BITC.CMS.Service;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
@@ -19,16 +20,17 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
     {
         #region Declaration
 
-        private readonly IRepositoryAsync<Page> _pageRepository;
+        private readonly IPageService _service;
         private readonly IUnitOfWorkAsync _unitOfWorkAsync;
+
         #endregion
 
         #region Constructor
 
-        public PageController(IUnitOfWorkAsync unitOfWork, IRepositoryAsync<Page> _repository)
+        public PageController(IUnitOfWorkAsync unitOfWork, IPageService service)
         {
             _unitOfWorkAsync = unitOfWork;
-            _pageRepository = _repository;
+            _service = service;
         }
 
         #endregion
@@ -53,30 +55,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Culture = CultureHelper.GetCurrentCulture();
-                model.CreatedBy = HttpContext.User.Identity.Name;
-                model.CreatedDate = DateTime.Now;
-                model.ModifiedBy = HttpContext.User.Identity.Name;
-                model.ModifiedDate = DateTime.Now;
-
-                Page _parentPage = null;
-
-                if (model.ParentID.HasValue)
-                {
-                    _parentPage = _pageRepository.Query(i => i.PageID == model.ParentID.Value).Include(i => i.Children).Select().FirstOrDefault();
-                }
-                
-
-                if (_parentPage != null)
-                {
-                    model.Path = _parentPage.Path.GetDescendant(_parentPage.Children.LastOrDefault() != null ? _parentPage.Children.LastOrDefault().Path : null, null);
-                }
-                else
-                {
-                    model.Path = HierarchyId.GetRoot();
-                }
-
-                _pageRepository.Insert(model);
+                _service.Insert(model);
 
                 if (_unitOfWorkAsync.SaveChanges() > 0)
                 {
@@ -93,7 +72,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var _entity = _pageRepository.Queryable().SingleOrDefault(i => i.PageID == id);
+            var _entity = _service.GetPage(id);
             ViewBag.PageList = GetPageList(_entity.ParentID, _entity.Path);
             return View("Details", _entity);
         }
@@ -106,27 +85,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                model.PageID = id;
-                model.ModifiedDate = DateTime.Now;
-                model.ModifiedBy = HttpContext.User.Identity.Name;
-
-                Page _parentPage = null;
-
-                if (model.ParentID.HasValue)
-                {
-                    _parentPage = _pageRepository.Query(i => i.PageID == model.ParentID.Value).Include(i => i.Children).Select().FirstOrDefault();
-                }
-
-                if (_parentPage != null)
-                {
-                    model.Path = _parentPage.Path.GetDescendant(_parentPage.Children.LastOrDefault() != null ? _parentPage.Children.LastOrDefault().Path : null, null);
-                }
-                else
-                {
-                    model.Path = HierarchyId.GetRoot();
-                }
-
-                _pageRepository.Update(model);
+                _service.Update(id, model);
 
                 if (_unitOfWorkAsync.SaveChanges() > 0)
                 {
@@ -148,7 +107,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         {
             var _culture = CultureHelper.GetCurrentCulture();
             ;
-            DataSourceResult _result = _pageRepository.Query(i => i.Culture == _culture)
+            DataSourceResult _result = _service.FindByCulture(_culture)
                 .Select(i => new PageIndexModel { PageID = i.PageID, PageTitle = i.PageTitle, CreatedDate = i.CreatedDate, Url = i.Url, CreatedBy = i.CreatedBy, SortOrder = i.SortOrder })
                 .AsQueryable()
                 .Where(request.Filters)
@@ -161,7 +120,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         [AjaxOnly]
         public ActionResult GetUrl(int? parentId, string title)
         {
-            var _parent = _pageRepository.Queryable(i => i.PageID == parentId).FirstOrDefault();
+            var _parent = _service.Find(parentId);
             var _path = title.ToSlug();
             var _result = (_parent != null && !string.IsNullOrEmpty(_parent.Url) ? (_parent.Url + "/") : string.Empty) + _path;
 
@@ -178,7 +137,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         [AjaxOnly]
         public ActionResult Delete([DataSourceRequest]DataSourceRequest request, Page _page)
         {
-            _pageRepository.Delete(_page);
+            _service.Delete(_page);
             _unitOfWorkAsync.SaveChanges();
             return Json(new[] { _page }.ToDataSourceResult(request, ModelState));
         }
@@ -186,10 +145,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         [AjaxOnly]
         public ActionResult GetDataForPageParentDropDownList(int? id)
         {
-            var currentPath = _pageRepository.Query(i => id.HasValue && i.PageID == id.Value).Select(i => i.Path).FirstOrDefault();
-            var lst = _pageRepository.Queryable(i => currentPath != null && !i.Path.IsDescendantOf(currentPath));
-
-            return Json(lst, JsonRequestBehavior.AllowGet);
+            return Json(_service.GetDataForPageParentDropDownList(id), JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -200,17 +156,17 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         private IEnumerable<SelectListItem> GetPageList(int? parentId, HierarchyId _path)
         {
-            IQueryable<Page> lst;
+            IEnumerable<Page> lst;
 
             var _culture = CultureHelper.GetCurrentCulture();
 
             if (_path == null)
             {
-                lst = _pageRepository.Queryable(i => i.Culture == _culture).OrderBy(i => i.Path);
+                lst = _service.Query(i => i.Culture == _culture).OrderBy(i => i.OrderBy(o => o.Path)).Select();
             }
             else
             {
-                lst = _pageRepository.Queryable(i => i.Culture == _culture && !i.Path.IsDescendantOf(_path)).OrderBy(i => i.Path);
+                lst = _service.Query(i => i.Culture == _culture && !i.Path.IsDescendantOf(_path)).OrderBy(i => i.OrderBy(o => o.Path)).Select();
             }
 
             if (lst != null)
