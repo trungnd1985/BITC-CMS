@@ -9,38 +9,41 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BITC.CMS.Data.Mapping
 {
-    public partial class BlogTagMap
-        : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<BITC.CMS.Data.Entity.BlogTag>
+    public partial class ModuleMap
+        : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<BITC.CMS.Data.Entity.Module>
     {
-        public BlogTagMap()
+        public ModuleMap()
         {
             // table
-            ToTable("BlogTag", "dbo");
+            ToTable("Module", "dbo");
 
             // keys
-            HasKey(t => t.BlogTagID);
+            HasKey(t => t.ModuleID);
 
             // Properties
-            Property(t => t.BlogTagID)
-                .HasColumnName("BlogTagID")
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+            Property(t => t.ModuleID)
+                .HasColumnName("ModuleID")
                 .IsRequired();
-            Property(t => t.TagName)
-                .HasColumnName("TagName")
+            Property(t => t.ModuleName)
+                .HasColumnName("ModuleName")
                 .HasMaxLength(255)
                 .IsRequired();
-            Property(t => t.Slug)
-                .HasColumnName("Slug")
+            Property(t => t.Inactive)
+                .HasColumnName("Inactive")
+                .IsRequired();
+            Property(t => t.IsSystem)
+                .HasColumnName("IsSystem")
+                .IsRequired();
+            Property(t => t.CreatedDate)
+                .HasColumnName("CreatedDate")
+                .IsOptional();
+            Property(t => t.CreatedBy)
+                .HasColumnName("CreatedBy")
                 .HasMaxLength(255)
-                .IsRequired();
-            Property(t => t.Culture)
-                .HasColumnName("Culture")
-                .HasMaxLength(10)
-                .IsRequired();
+                .IsOptional();
 
             // Relationships
 

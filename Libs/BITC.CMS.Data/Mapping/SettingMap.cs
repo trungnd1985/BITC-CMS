@@ -6,7 +6,7 @@ using BITC.CMS.Data.Entity;
 
 namespace BITC.CMS.Data.Mapping
 {
-    public partial class BlogEntryMap
+    public partial class SettingMap
     {
         public void InitializeMapping()
         {

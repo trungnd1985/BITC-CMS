@@ -27,16 +27,14 @@ namespace BITC.CMS.UI
                 .RegisterType<IRepositoryAsync<BlogTag>, Repository<BlogTag>>()
                 .RegisterType<IRepositoryAsync<BlogEntry>, Repository<BlogEntry>>()
                 .RegisterType<IRepositoryAsync<Client>, Repository<Client>>()
+                .RegisterType<IRepositoryAsync<Module>, Repository<Module>>()
                 .RegisterType<IBlogService, BlogService>()
                 .RegisterType<IPageService, PageService>()
+                .RegisterType<IBlogTagService, BlogTagService>()
+                .RegisterType<IModuleService, ModuleService>()
+                .RegisterType<ISettingService, SettingService>()
                 .RegisterType<AuthenticationController>(new InjectionConstructor())
                 .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerResolveLifetimeManager());
-            //.RegisterType<IRepositoryAsync<Customer>, Repository<Customer>>()
-            //.RegisterType<IRepositoryAsync<Product>, Repository<Product>>()
-            //.RegisterType<IProductService, ProductService>()
-            //.RegisterType<ICustomerService, CustomerService>()
-            //.RegisterType<INorthwindStoredProcedures, NorthwindContext>(new PerRequestLifetimeManager())
-            //.RegisterType<IStoredProcedureService, StoredProcedureService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

@@ -108,5 +108,30 @@ namespace BITC.CMS.Service
         {
             return _repository.Queryable(i => i.Culture == _culture);
         }
+
+        public IEnumerable<BlogEntry> GetBlogEntriesList(string _culture, string _tag, int _pageIndex, int _pageSize, out int _totalCount)
+        {
+            int _entriesCount = 0;
+            var _currentDate = DateTime.Now;
+            var _entries = _repository.Query(i => i.Culture == _culture
+                                                    && (string.IsNullOrEmpty(_tag) ? true : i.BlogTags.Where(j => j.Slug == _tag).Count() > 0)
+                                                    && (i.PublishDate.HasValue && (i.PublishDate.Value.CompareTo(_currentDate) == 0 || i.PublishDate.Value.CompareTo(_currentDate) == -1)))
+                                        .Include(i => i.BlogTags)
+                                        .OrderBy(q => q.OrderByDescending(i => i.PublishDate))
+                                        .SelectPage(_pageIndex, _pageSize, out _entriesCount);
+            _totalCount = _entriesCount;
+
+            return _entries;
+        }
+
+        public IEnumerable<BlogEntry> GetRecentBlogEntriesList(string _culture, int _excludeId, int topCount)
+        {
+            var _currentDate = DateTime.Now;
+            return _repository.Query(i => i.Culture == _culture
+                                        && (i.PublishDate.HasValue && (i.PublishDate.Value.CompareTo(_currentDate) == 0 || i.PublishDate.Value.CompareTo(_currentDate) == -1))
+                                        && i.BlogEntryID != _excludeId)
+                                .OrderBy(q => q.OrderByDescending(i => i.PublishDate))
+                                .Select().Skip(0).Take(topCount);
+        }
     }
 }

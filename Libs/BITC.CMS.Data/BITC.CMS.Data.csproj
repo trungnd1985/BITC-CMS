@@ -80,19 +80,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\BlogEntry.cs" />
+    <Compile Include="Entity\BlogEntry.Generated.cs" />
+    <Compile Include="Entity\BlogEntryComment.cs" />
+    <Compile Include="Entity\BlogEntryComment.Generated.cs" />
     <Compile Include="Entity\BlogTag.cs" />
     <Compile Include="Entity\Client.cs" />
     <Compile Include="Entity\Client.Generated.cs" />
     <Compile Include="Entity\Medium.cs" />
+    <Compile Include="Entity\Module.cs" />
+    <Compile Include="Entity\Module.Generated.cs" />
     <Compile Include="Entity\Page.cs" />
+    <Compile Include="Entity\Setting.cs" />
+    <Compile Include="Entity\Setting.Generated.cs" />
+    <Compile Include="Mapping\BlogEntryCommentMap.cs" />
+    <Compile Include="Mapping\BlogEntryCommentMap.Generated.cs" />
     <Compile Include="Mapping\BlogEntryMap.cs" />
     <Compile Include="Mapping\BlogEntryMap.Generated.cs" />
     <Compile Include="Mapping\BlogTagMap.cs" />
     <Compile Include="Mapping\BlogTagMap.Generated.cs" />
     <Compile Include="Mapping\ClientMap.cs" />
     <Compile Include="Mapping\ClientMap.Generated.cs" />
+    <Compile Include="Mapping\MediaMap.cs" />
+    <Compile Include="Mapping\MediaMap.Generated.cs" />
+    <Compile Include="Mapping\ModuleMap.cs" />
+    <Compile Include="Mapping\ModuleMap.Generated.cs" />
     <Compile Include="Mapping\PageMap.cs" />
     <Compile Include="Mapping\PageMap.Generated.cs" />
+    <Compile Include="Mapping\SettingMap.cs" />
+    <Compile Include="Mapping\SettingMap.Generated.cs" />
     <Compile Include="Model\BITCContext.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PortfolioMetadata.cs" />

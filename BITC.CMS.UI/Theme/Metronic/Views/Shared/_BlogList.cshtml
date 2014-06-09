@@ -1,18 +1,16 @@
 ﻿@{
-    IRepositoryAsync<BlogTag> _repo = DependencyResolver.Current.GetService<IRepositoryAsync<BlogTag>>();
-    IRepositoryAsync<BlogEntry> _entryRepo = DependencyResolver.Current.GetService<IRepositoryAsync<BlogEntry>>();
+    BITC.CMS.Service.IBlogTagService _tagService = DependencyResolver.Current.GetService<BITC.CMS.Service.IBlogTagService>();
+    BITC.CMS.Service.IBlogService _service = DependencyResolver.Current.GetService<BITC.CMS.Service.IBlogService>();
+    BITC.CMS.Service.IModuleService _moduleService = DependencyResolver.Current.GetService<BITC.CMS.Service.IModuleService>();
+    var _module = _moduleService.FindModuleByName("Blog");
     var _tag = Request.Params["tag"];
     var _culture = BITC.Web.Library.CultureHelper.GetCurrentCulture();
-    var lstTag = _repo.Query(i => i.Culture == _culture);
+    var lstTag = _tagService.Query(i => i.Culture == _culture);
     int _entriesCount = 0;
     var _page = string.IsNullOrEmpty(Request.Params["page"]) ? 1 : int.Parse(Request.Params["page"]);
     var _currentDate = DateTime.Now;
-    var _entries = _entryRepo.Query(i => i.Culture == _culture 
-                                            && (string.IsNullOrEmpty(_tag) ? true : i.BlogTags.Where(j => j.Slug == _tag).Count() > 0) 
-                                            && (i.PublishDate.HasValue && (i.PublishDate.Value.CompareTo(_currentDate) == 0 || i.PublishDate.Value.CompareTo(_currentDate) == -1)))
-                                .Include(i => i.BlogTags)
-                                .OrderBy(q => q.OrderByDescending(i => i.CreatedDate))
-                                .SelectPage(_page, 10, out _entriesCount);
+    var _entries = _service.GetBlogEntriesList(_culture, _tag, _page, 10, out _entriesCount);
+    var _detailPage = _module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue;
 }
 <!-- BEGIN BREADCRUMBS -->
 <div class="row breadcrumbs margin-bottom-40">
@@ -36,10 +34,10 @@
             {
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
-                        <h2><a href="blog_item.html">@_entry.BlogTitle</a></h2>
+                        <h2><a href='@(_detailPage + "/" + _entry.BlogTitle.ToSlug() + "-" + _entry.BlogEntryID)'>@_entry.BlogTitle</a></h2>
                         <ul class="blog-info">
                             <li><i class="fa fa-calendar"></i> @_entry.PublishDate.Value.ToString("dd/MM/yyyy")</li>
-                            <li><i class="fa fa-comments"></i> 17</li>
+                            <li><i class="fa fa-comments"></i> @_entry.BlogEntryComments.Count</li>
                             <li>
                                 <i class="fa fa-tags"></i> @foreach (var _tags in _entry.BlogTags)
                                 {
@@ -48,7 +46,7 @@
                             </li>
                         </ul>
                         @Html.Raw(_entry.Body)
-                        <a class="more" href="blog_item.html">Read more <i class="icon-angle-right"></i></a>
+                        <a class="more" href='@(_detailPage + "/" + _entry.BlogTitle.ToSlug() + "-" + _entry.BlogEntryID)'>Read more <i class="icon-angle-right"></i></a>
                     </div>
                 </div>
                 <hr class="blog-post-sep">

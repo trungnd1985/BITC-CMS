@@ -27,7 +27,6 @@ namespace BITC.Web.Library.Mvc
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            //filterContext.
             base.OnActionExecuted(filterContext);
         }
 
@@ -59,7 +58,6 @@ namespace BITC.Web.Library.Mvc
 
             // Validate culture name
             cultureName = CultureHelper.GetImplementedCulture(cultureName); // This is safe
-
 
             if (RouteData.Values["culture"] as string != cultureName)
             {

@@ -1,22 +1,27 @@
 ﻿@{
-    IRepositoryAsync<BlogTag> _repo = DependencyResolver.Current.GetService<IRepositoryAsync<BlogTag>>();
-    IRepositoryAsync<BlogEntry> _entryRepo = DependencyResolver.Current.GetService<IRepositoryAsync<BlogEntry>>();
     var _tag = Request.Params["tag"];
     var _culture = BITC.Web.Library.CultureHelper.GetCurrentCulture();
-    var lstTag = _repo.Query(i => i.Culture == _culture);
+
     var _id = int.Parse(System.Text.RegularExpressions.Regex.Match(ViewContext.RouteData.Values["url"].ToString(), @"\d*$").Value);
-    
     var _currentDate = DateTime.Now;
-    var _entry = _entryRepo.Query(i => i.BlogEntryID == _id)
-                                .Include(i => i.BlogTags).Select().FirstOrDefault();
-    ViewBag.Title = _entry.BlogTitle;
-                                
+
+
+    BITC.CMS.Service.IBlogTagService _tagService = DependencyResolver.Current.GetService<BITC.CMS.Service.IBlogTagService>();
+    BITC.CMS.Service.IBlogService _service = DependencyResolver.Current.GetService<BITC.CMS.Service.IBlogService>();
+    BITC.CMS.Service.IModuleService _moduleService = DependencyResolver.Current.GetService<BITC.CMS.Service.IModuleService>();
+    var _module = _moduleService.FindModuleByName("Blog");
+    var _recentQuantity = int.Parse(_module.Settings.FirstOrDefault(i => i.SettingKey == "RECENT_ENTRY_QUANTITY").SettingValue);
+    var _recentEntries = _service.GetRecentBlogEntriesList(_culture, _id, _recentQuantity);
+    var _entry = _service.Query(i => i.BlogEntryID == _id).Include(i => i.BlogTags).Include(i => i.BlogEntryComments).Select().FirstOrDefault();
+    var _detailPage = _module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue;
+    var lstTag = _tagService.Query(i => i.Culture == _culture);
+
 }
 <!-- BEGIN BREADCRUMBS -->
 <div class="row breadcrumbs margin-bottom-40">
     <div class="container">
         <div class="col-md-4 col-sm-4">
-            <h1>@ViewBag.Title</h1>
+            <h1>@_entry.BlogTitle</h1>
         </div>
         <div class="col-md-8 col-sm-8">
             @ViewHelper.BreadCrumb(ViewBag.BreadCrumb)
@@ -29,29 +34,40 @@
     <!-- BEGIN BLOG -->
     <div class="row">
         <!-- BEGIN LEFT SIDEBAR -->
-        <div class="col-md-9 blog-item margin-bottom-40">                        
+        <div class="col-md-9 blog-item margin-bottom-40">
             @Html.Raw(_entry.Body)
+            <ul class="blog-info">
+                <li><i class="fa fa-user"></i> By @_entry.CreatedBy</li>
+                <li><i class="fa fa-calendar"></i> @_entry.PublishDate.Value.ToString("dd/MM/yyyy")</li>
+                <li><i class="fa fa-comments"></i> @_entry.BlogEntryComments.Count</li>
+                <li>
+                    <i class="fa fa-tags"></i> @foreach (var _tags in _entry.BlogTags)
+                    {
+                        @(_tags.TagName + ", ");
+                    }
+                </li>
+            </ul>
             @if (_entry.AllowComment)
             {
-            <hr>
-            <div class="post-comment">
-                <h3>Leave a Comment</h3>
-                <form role="form">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Email <span class="color-red">*</span></label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Message</label>
-                        <textarea class="form-control" rows="8"></textarea>
-                    </div>
-                    <p><button class="btn btn-default theme-btn" type="submit">Post a Comment</button></p>
-                </form>
-            </div>
+                <hr>
+                <div class="post-comment">
+                    <h3>Leave a Comment</h3>
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Email <span class="color-red">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea class="form-control" rows="8"></textarea>
+                        </div>
+                        <p><button class="btn btn-default theme-btn" type="submit">Post a Comment</button></p>
+                    </form>
+                </div>
             }
         </div>
         <!-- END LEFT SIDEBAR -->
@@ -70,47 +86,25 @@
             <!-- BEGIN RECENT NEWS -->
             <h2>Recent News</h2>
             <div class="recent-news margin-bottom-10">
-                <div class="row margin-bottom-10">
-                    <div class="col-md-3">
-                        <img src="assets/img/people/img2-large.jpg" alt="" class="img-responsive">
-                    </div>
-                    <div class="col-md-9 recent-news-inner">
-                        <h3><a href="#">Letiusto gnissimos</a></h3>
+                @foreach (var item in _recentEntries)
+                {
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-12">
+                            <h3><a href="#">@item.BlogTitle</a></h3>
                         <p>Decusamus tiusto odiodig nis simos ducimus qui sint</p>
                     </div>
                 </div>
-                <div class="row margin-bottom-10">
-                    <div class="col-md-3">
-                        <img src="assets/img/people/img1-large.jpg" alt="" class="img-responsive">
-                    </div>
-                    <div class="col-md-9 recent-news-inner">
-                        <h3><a href="#">Deiusto anissimos</a></h3>
-                        <p>Decusamus tiusto odiodig nis simos ducimus qui sint</p>
-                    </div>
-                </div>
-                <div class="row margin-bottom-10">
-                    <div class="col-md-3">
-                        <img src="assets/img/people/img3-large.jpg" alt="" class="img-responsive">
-                    </div>
-                    <div class="col-md-9 recent-news-inner">
-                        <h3><a href="#">Tesiusto baissimos</a></h3>
-                        <p>Decusamus tiusto odiodig nis simos ducimus qui sint</p>
-                    </div>
-                </div>
+                }
             </div>
-            <!-- END RECENT NEWS -->            
+            <!-- END RECENT NEWS -->
             <!-- BEGIN BLOG TAGS -->
             <div class="blog-tags margin-bottom-20">
                 <h2>Tags</h2>
                 <ul>
-                    <li><a href="#"><i class="fa fa-tags"></i>OS</a></li>
-                    <li><a href="#"><i class="fa fa-tags"></i>Metronic</a></li>
-                    <li><a href="#"><i class="fa fa-tags"></i>Dell</a></li>
-                    <li><a href="#"><i class="fa fa-tags"></i>Conquer</a></li>
-                    <li><a href="#"><i class="fa fa-tags"></i>MS</a></li>
-                    <li><a href="#"><i class="fa fa-tags"></i>Google</a></li>
-                    <li><a href="#"><i class="fa fa-tags"></i>Keenthemes</a></li>
-                    <li><a href="#"><i class="fa fa-tags"></i>Twitter</a></li>
+                    @foreach (var item in lstTag.Select())
+                    {
+                        <li><a href='@Url.Action("Index", "Page", new { url="Blog",tag = item.Slug })'><i class="fa fa-tags"></i>@item.TagName</a></li>
+                    }
                 </ul>
             </div>
             <!-- END BLOG TAGS -->

@@ -14,5 +14,9 @@ namespace BITC.CMS.Service
         BlogEntry GetBlogEntry(int id);
 
         IQueryable<BlogEntry> FindByCulture(string _culture);
+
+        IEnumerable<BlogEntry> GetBlogEntriesList(string _culture, string _tag, int _pageIndex, int _pageSize, out int _totalCount);
+
+        IEnumerable<BlogEntry> GetRecentBlogEntriesList(string _culture, int _excludeId, int topCount);
     }
 }

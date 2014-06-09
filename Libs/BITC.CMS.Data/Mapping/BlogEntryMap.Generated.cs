@@ -46,7 +46,6 @@ namespace BITC.CMS.Data.Mapping
             Property(t => t.Inactive)
                 .HasColumnName("Inactive")
                 .IsRequired();
-            Property(t => t.Source).HasColumnName("Source");
             Property(t => t.SortOrder)
                 .HasColumnName("SortOrder")
                 .IsOptional();
@@ -64,8 +63,13 @@ namespace BITC.CMS.Data.Mapping
                 .HasColumnName("ModifiedBy")
                 .HasMaxLength(255)
                 .IsOptional();
-
-            Property(t => t.PublishDate).HasColumnName("PublishDate").IsOptional();
+            Property(t => t.Source)
+                .HasColumnName("Source")
+                .HasMaxLength(255)
+                .IsOptional();
+            Property(t => t.PublishDate)
+                .HasColumnName("PublishDate")
+                .IsOptional();
 
             // Relationships
             HasMany(t => t.BlogTags)
@@ -81,3 +85,4 @@ namespace BITC.CMS.Data.Mapping
         }
     }
 }
+

@@ -12,7 +12,7 @@ namespace BITC.CMS.UI
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.{ext}/{*pathInfo}", new { ext = @"axd|jpg|png|gif" });
 
             routes.MapRoute(
                 name: "Default",

@@ -13,36 +13,37 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BITC.CMS.Data.Mapping
 {
-    public partial class BlogTagMap
-        : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<BITC.CMS.Data.Entity.BlogTag>
+    public partial class SettingMap
+        : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<BITC.CMS.Data.Entity.Setting>
     {
-        public BlogTagMap()
+        public SettingMap()
         {
             // table
-            ToTable("BlogTag", "dbo");
+            ToTable("Setting", "dbo");
 
             // keys
-            HasKey(t => t.BlogTagID);
+            HasKey(t => t.SettingID);
 
             // Properties
-            Property(t => t.BlogTagID)
-                .HasColumnName("BlogTagID")
+            Property(t => t.SettingID)
+                .HasColumnName("SettingID")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
-            Property(t => t.TagName)
-                .HasColumnName("TagName")
-                .HasMaxLength(255)
-                .IsRequired();
-            Property(t => t.Slug)
-                .HasColumnName("Slug")
-                .HasMaxLength(255)
-                .IsRequired();
-            Property(t => t.Culture)
-                .HasColumnName("Culture")
-                .HasMaxLength(10)
-                .IsRequired();
+            Property(t => t.ModuleID)
+                .HasColumnName("ModuleID")
+                .IsOptional();
+            Property(t => t.SettingKey)
+                .HasColumnName("SettingKey")
+                .HasMaxLength(50)
+                .IsOptional();
+            Property(t => t.SettingValue)
+                .HasColumnName("SettingValue")
+                .IsOptional();
 
             // Relationships
+            HasOptional(t => t.Module)
+                .WithMany(t => t.Settings)
+                .HasForeignKey(d => d.ModuleID);
 
             InitializeMapping();
         }
