@@ -118,9 +118,6 @@
     <Reference Include="Microsoft.Practices.Unity.Configuration">
       <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="MvcSiteMapProvider">
-      <HintPath>..\packages\MvcSiteMapProvider.MVC5.Core.4.6.3\lib\net45\MvcSiteMapProvider.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -180,10 +177,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Unity.Mvc5">
       <HintPath>..\packages\Unity.Mvc5.1.1\lib\net45\Unity.Mvc5.dll</HintPath>
-    </Reference>
-    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -2382,7 +2375,6 @@
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Language\en-US.xml" />
     <Content Include="Language\vi-VN.xml" />
-    <Content Include="Mvc.sitemap" />
     <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Details.cshtml" />
     <Content Include="Areas\Admin\Views\BlogTag\Index.cshtml" />
@@ -2401,9 +2393,6 @@
     <Content Include="Areas\Admin\Views\Authentication\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Authentication\Manage.cshtml" />
     <Content Include="Areas\Admin\Views\Authentication\Register.cshtml" />
-    <None Include="MvcSiteMapSchema.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\PublishProfiles\BITC CMS.pubxml" />
     <None Include="Properties\PublishProfiles\BITC.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -3445,14 +3434,6 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\EntityDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TextBox.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_Contact.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_BlogList.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_BlogDetail.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_Menu.cshtml" />
