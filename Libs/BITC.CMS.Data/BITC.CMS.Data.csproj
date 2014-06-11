@@ -87,6 +87,8 @@
     <Compile Include="Entity\Client.cs" />
     <Compile Include="Entity\Client.Generated.cs" />
     <Compile Include="Entity\Medium.cs" />
+    <Compile Include="Entity\Menu.cs" />
+    <Compile Include="Entity\Menu.Generated.cs" />
     <Compile Include="Entity\Module.cs" />
     <Compile Include="Entity\Module.Generated.cs" />
     <Compile Include="Entity\Page.cs" />
@@ -102,6 +104,8 @@
     <Compile Include="Mapping\ClientMap.Generated.cs" />
     <Compile Include="Mapping\MediaMap.cs" />
     <Compile Include="Mapping\MediaMap.Generated.cs" />
+    <Compile Include="Mapping\MenuMap.cs" />
+    <Compile Include="Mapping\MenuMap.Generated.cs" />
     <Compile Include="Mapping\ModuleMap.cs" />
     <Compile Include="Mapping\ModuleMap.Generated.cs" />
     <Compile Include="Mapping\PageMap.cs" />

@@ -201,6 +201,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\LanguageController.cs" />
     <Compile Include="Areas\Admin\Controllers\MediaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\PageController.cs" />
     <Compile Include="Areas\Admin\Controllers\PortfolioCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\PortfolioController.cs" />
@@ -3441,6 +3442,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Client\" />
     <Folder Include="Areas\Admin\Views\Language\" />
+    <Folder Include="Areas\Admin\Views\Menu\" />
     <Folder Include="Areas\Admin\Views\PortfolioCategory\" />
     <Folder Include="Areas\Admin\Views\Setting\" />
     <Folder Include="Content\Admin\" />

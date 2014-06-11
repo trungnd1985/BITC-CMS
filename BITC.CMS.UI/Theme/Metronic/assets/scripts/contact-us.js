@@ -3,24 +3,24 @@ var ContactUs = function () {
     return {
         //main function to initiate the module
         init: function () {
-			var map;
-			$(document).ready(function(){
-			  map = new GMaps({
-				div: '#map',
-	            lat: -13.004333,
-				lng: -38.494333,
-			  });
-			   var marker = map.addMarker({
-		            lat: -13.004333,
-					lng: -38.494333,
-		            title: 'Loop, Inc.',
-		            infoWindow: {
-		                content: "<b>Loop, Inc.</b> 795 Park Ave, Suite 120<br>San Francisco, CA 94107"
-		            }
-		        });
+            var map;
+            $(document).ready(function () {
+                map = new GMaps({
+                    div: '#map',
+                    lat: 21.063879,
+                    lng: 105.883238,
+                });
+                var marker = map.addMarker({
+                    lat: 21.063879,
+                    lng: 105.883238,
+                    title: 'BITC Vietnam',
+                    infoWindow: {
+                        content: "<b>BITC Vietnam,</b> No. 20, 99/47/40 Duc Giang, Long Bien, Hanoi"
+                    }
+                });
 
-			   marker.infoWindow.open(map, marker);
-			});
+                marker.infoWindow.open(map, marker);
+            });
         }
     };
 

@@ -33,9 +33,10 @@ namespace BITC.CMS.UI
                 .RegisterType<IBlogTagService, BlogTagService>()
                 .RegisterType<IModuleService, ModuleService>()
                 .RegisterType<ISettingService, SettingService>()
+                .RegisterType<IMenuService, MenuService>()
                 .RegisterType<AuthenticationController>(new InjectionConstructor())
                 .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerResolveLifetimeManager());
-
+            
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

@@ -11,9 +11,12 @@
           Email: <a href="mailto:trungnd1985@gmail.com">trungnd1985@gmail.com</a>
   ]]>
   </language>
-  <language key="GoalDefinition">Xác định yêu cầu</language>
+  <language key="GoalDefinition">Nhận yêu cầu</language>
+  <language key="GoalDefinitionDescription">Nhận yêu cầu phần mềm từ khách hàng đưa ra.</language>
   <language key="Analyse">Phân tích</language>
+  <language key="AnalyseDescription">BITC sẽ dựa trên yêu cầu để đưa ra tài liệu nghiệp vụ.</language>
   <language key="Implementation">Thi công</language>
+  <language key="ImplementationDescription">Thi công phần mềm dựa trên tài liệu nghiệp vụ đã phân tích.</language>
   <language key="OurClient">Khách hàng</language>
   <language key="Next">Next</language>
 </languages>

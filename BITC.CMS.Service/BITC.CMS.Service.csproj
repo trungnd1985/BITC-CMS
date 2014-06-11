@@ -77,10 +77,12 @@
     <Compile Include="BlogTagService.cs" />
     <Compile Include="IBlogService.cs" />
     <Compile Include="IBlogTagService.cs" />
+    <Compile Include="IMenuService.cs" />
     <Compile Include="IModuleService.cs" />
     <Compile Include="IPageService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ISettingService.cs" />
+    <Compile Include="MenuService.cs" />
     <Compile Include="ModuleService.cs" />
     <Compile Include="PageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
