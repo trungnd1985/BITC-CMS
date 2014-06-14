@@ -19,7 +19,7 @@
 <div class="container min-hight">
     <div class="row">
         <div class="col-md-9 col-sm-9">
-            <h2>Contact Form</h2>
+            <h2>@Html.Localize("ContactForm")</h2>
             <p>Lorem ipsum dolor sit amet, Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat consectetuer adipiscing elit, sed diam nonummy nibh euismod tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
             <div class="space20"></div>
             <!-- BEGIN FORM-->
@@ -48,19 +48,19 @@
             <!-- END FORM-->
         </div>
         <div class="col-md-3 col-sm-3">
-            <h2>Our Contacts</h2>
+            <h2>@Html.Localize("ContactInformation")</h2>
             <address>
                @Html.Raw(Html.Localize("Address"))
             </address>
             <ul class="social-icons margin-bottom-10">
-                <li><a href="#" data-original-title="facebook" class="facebook"></a></li>
-                <li><a href="#" data-original-title="github" class="github"></a></li>
+                <li><a href="https://www.facebook.com/bitc.vietnam" target="_blank" data-original-title="facebook" class="facebook"></a></li>
+                <li>@*<a href="#" data-original-title="github" class="github"></a>*@</li>
                 <li><a href="#" data-original-title="Goole Plus" class="googleplus"></a></li>
                 <li><a href="#" data-original-title="linkedin" class="linkedin"></a></li>
-                <li><a href="#" data-original-title="rss" class="rss"></a></li>
+                <li>@*<a href="#" data-original-title="rss" class="rss"></a>*@</li>
             </ul>
             <div class="clearfix margin-bottom-30"></div>
-            <h2>About Us</h2>
+            <h2>@Html.Localize("About")</h2>
             <p>Sediam nonummy nibh euismod tation ullamcorper suscipit</p>
             <ul class="list-unstyled">
                 <li><i class="fa fa-check"></i> Officia deserunt molliti</li>

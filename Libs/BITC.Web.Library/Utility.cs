@@ -158,9 +158,37 @@ namespace BITC.Web.Library
             return _mediaFolderPath;
         }
 
+        public static string GetMediaFolderPhysicalPath()
+        {
+            var _userName = HttpContext.Current.User.Identity.Name;
+
+            var _mediaFolderPath = DEFAULT_MEDIA_FOLDER + "/" + _userName;
+
+            if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[MEDIA_FOLDER_KEY]))
+            {
+                _mediaFolderPath = HttpContext.Current.Server.MapPath(WebConfigurationManager.AppSettings[MEDIA_FOLDER_KEY] + "/" + _userName);
+            }
+
+            return _mediaFolderPath;
+        }
+
         public static string GetMediaFolder(HttpContextBase _context)
         {
             var _userName = _context.User.Identity.Name;
+
+            var _mediaFolderPath = DEFAULT_MEDIA_FOLDER + "/" + _userName;
+
+            if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings[MEDIA_FOLDER_KEY]))
+            {
+                _mediaFolderPath = WebConfigurationManager.AppSettings[MEDIA_FOLDER_KEY] + "/" + _userName;
+            }
+
+            return _mediaFolderPath;
+        }
+
+        public static string GetMediaFolder()
+        {
+            var _userName = HttpContext.Current.User.Identity.Name;
 
             var _mediaFolderPath = DEFAULT_MEDIA_FOLDER + "/" + _userName;
 

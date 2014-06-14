@@ -28,12 +28,16 @@ namespace BITC.CMS.UI
                 .RegisterType<IRepositoryAsync<BlogEntry>, Repository<BlogEntry>>()
                 .RegisterType<IRepositoryAsync<Client>, Repository<Client>>()
                 .RegisterType<IRepositoryAsync<Module>, Repository<Module>>()
+                .RegisterType<IRepositoryAsync<Project>,Repository<Project>>()
+                .RegisterType<IRepositoryAsync<ProjectCategory>, Repository<ProjectCategory>>()
                 .RegisterType<IBlogService, BlogService>()
                 .RegisterType<IPageService, PageService>()
                 .RegisterType<IBlogTagService, BlogTagService>()
                 .RegisterType<IModuleService, ModuleService>()
                 .RegisterType<ISettingService, SettingService>()
                 .RegisterType<IMenuService, MenuService>()
+                .RegisterType<IProjectCategoryService, ProjectCategoryService>()
+                .RegisterType<IProjectService, ProjectService>()
                 .RegisterType<AuthenticationController>(new InjectionConstructor())
                 .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerResolveLifetimeManager());
             

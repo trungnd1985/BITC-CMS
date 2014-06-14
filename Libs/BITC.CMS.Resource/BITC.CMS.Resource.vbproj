@@ -103,6 +103,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PortfolioResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="ProjectResource.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectResource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BlogResource.vi-VN.resx" />
@@ -130,6 +135,11 @@
     <EmbeddedResource Include="PortfolioResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PortfolioResource.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectResource.vi-VN.resx" />
+    <EmbeddedResource Include="ProjectResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProjectResource.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

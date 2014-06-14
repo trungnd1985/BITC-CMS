@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<languages>
+<languages xmlns="http://bitc.com.vn/language.xsd">
   <language key="ContactUs">Contact us</language>
+  <language key="ContactForm">Liên hệ</language>
   <language key="About">About</language>
+  <language key="ContactInformation">Our Contacts</language>
   <language key="Address">
     <![CDATA[
           BITC Vietnam. <br />

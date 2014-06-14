@@ -41,8 +41,9 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult MediaPopup()
+        public ActionResult MediaPopup(string _target)
         {
+            ViewBag.Target = _target;
             return PartialView("_MediaPopup");
         }
 

@@ -6,7 +6,7 @@
     </li>
     <li>
         <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-        <form class="sidebar-search" action="extra_search.html" method="POST">
+        <form class="sidebar-search" action="#" method="POST">
             <div class="form-container">
                 <div class="input-box">
                     <a href="javascript:;" class="remove"></a>
@@ -54,13 +54,17 @@
         </a>
         <ul class="sub-menu">
             <li>
-                <a href='@Url.Action("Index","Portfolio")'>
+                <a href='@Url.Action("Index","Project")'>
                     <i class="fa fa-list-alt"></i>
                     <span class="title">All portfolio</span>
                 </a>
-                <a href='@Url.Action("Create", "Portfolio")'>
+                <a href='@Url.Action("Create", "Project")'>
                     <i class="fa fa-plus"></i>
                     <span class="title">Add new</span>
+                </a>
+                <a href='@Url.Action("Index", "ProjectCategory")'>
+                    <i class="fa fa-list-alt"></i>
+                    <span class="title">Project category</span>
                 </a>
             </li>
         </ul>
@@ -111,13 +115,8 @@
         </a>
         <ul class="sub-menu">
             <li>
-                <a href="layout_email.html">
-                    Email Templates
-                </a>
-            </li>
-            <li>
-                <a href="layout_ajax.html">
-                    Content Loading via Ajax
+                <a href='@Url.Action("Index","Language")'>
+                    Language Manager
                 </a>
             </li>
         </ul>

@@ -27,7 +27,13 @@ namespace System.Web.Mvc
             var _filePath = helper.ViewContext.HttpContext.Server.MapPath("~/Language/" + _currentCulture + ".xml");
 
             XDocument _doc = XDocument.Load(_filePath);
-            XElement _ele = _doc.Descendants("language").Where(i => i.Attribute("key").Value == key).FirstOrDefault();
+            XElement _ele = _doc.Descendants().Where(i => i.Name.LocalName == "language" && i.Attribute("key").Value == key).FirstOrDefault();
+            
+            if (_ele == null)
+            {
+                return string.Empty;
+            }
+
             return _ele.Value;
         }
 

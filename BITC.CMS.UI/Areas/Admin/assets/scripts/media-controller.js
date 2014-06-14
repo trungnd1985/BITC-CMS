@@ -12,7 +12,7 @@ var media = function () {
     // public functions
     return {
         //main function
-        init: function (culture) {
+        init: function (culture, target) {
             //initialize here something.         
             $("#content-container").load("/Admin/" + culture + "/Media/MediaView");
 
@@ -54,7 +54,12 @@ var media = function () {
                     $(this).addClass("selected");
                 }
             });
+
+            $(document).on('click', '#btnInsertMedia', function (e) {
+                media.insertSelected(target);
+            });
         },
+        insert: function (func) { func; },
         uploadSuccess: function (e) {
             $("#tabMediaView a:last").tab("show");
         },
@@ -62,12 +67,7 @@ var media = function () {
             var arrSelected = $(".selected");
 
             $.each(arrSelected, function (index, item) {
-                if ($(target).ckeditor() !== undefined && $(target).ckeditor().editor) {
-                    var editor = $(target).ckeditor().editor;
-                    var selectionText = editor.getSelection().getSelectedText();
-
-                    editor.insertHtml("<img src='" + $(item).attr("src") + "' title='" + $(item).attr("title") + "' />")
-                }
+                $(target).append("<img src='" + $(item).attr("src") + "' title='" + $(item).attr("title") + "' />");
             });
         }
     };

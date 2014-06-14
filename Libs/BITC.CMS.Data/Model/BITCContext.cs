@@ -40,6 +40,10 @@ namespace BITC.CMS.Data.Entity
 
         public System.Data.Entity.DbSet<BITC.CMS.Data.Entity.Menu> Menus { get; set; }
 
+        public DbSet<Project> Projects { get; set; }
+
+        public DbSet<ProjectCategory> ProjectCategories { get; set; }
+
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -52,7 +56,8 @@ namespace BITC.CMS.Data.Entity
             modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.ModuleMap());
             modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.MediaMap());
             modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.MenuMap());
-
+            modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.ProjectCategoryMap());
+            modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.ProjectMap());
             //modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<MaxLengthAttribute>().Any()).Configure(p => p.HasMaxLength(p.ClrPropertyInfo.GetCustomAttributes(false).OfType<MaxLengthAttribute>().FirstOrDefault().Length));
             //modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<RequiredAttribute>().Any()).Configure(p => p.IsRequired());
             //modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<KeyAttribute>().Any()).Configure(p => p.IsKey());

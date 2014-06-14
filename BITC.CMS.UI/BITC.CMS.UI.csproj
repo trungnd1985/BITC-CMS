@@ -199,14 +199,21 @@
     <Compile Include="Areas\Admin\Controllers\BlogTagController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClientController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\Admin\Controllers\LanguageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LanguageController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Areas\Admin\Controllers\MediaController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\PageController.cs" />
-    <Compile Include="Areas\Admin\Controllers\PortfolioCategoryController.cs" />
-    <Compile Include="Areas\Admin\Controllers\PortfolioController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProjectCategoryController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Admin\Controllers\ProjectController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Models\LanguageModel.cs" />
     <Compile Include="Areas\Admin\Models\PageDetailModel.cs" />
     <Compile Include="Areas\Admin\Models\PageIndexModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1887,6 +1894,7 @@
     <Content Include="Areas\Admin\assets\scripts\login.js" />
     <Content Include="Areas\Admin\assets\scripts\media-controller.js" />
     <Content Include="Areas\Admin\assets\scripts\pageController.js" />
+    <Content Include="Areas\Admin\assets\scripts\projectController.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -2394,6 +2402,14 @@
     <Content Include="Areas\Admin\Views\Authentication\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Authentication\Manage.cshtml" />
     <Content Include="Areas\Admin\Views\Authentication\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Language\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProjectCategory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProjectCategory\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\Details.cshtml" />
+    <None Include="Language\language.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\BITC CMS.pubxml" />
     <None Include="Properties\PublishProfiles\BITC.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -3441,11 +3457,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Client\" />
-    <Folder Include="Areas\Admin\Views\Language\" />
     <Folder Include="Areas\Admin\Views\Menu\" />
     <Folder Include="Areas\Admin\Views\PortfolioCategory\" />
     <Folder Include="Areas\Admin\Views\Setting\" />
     <Folder Include="Content\Admin\" />
+    <Folder Include="Theme\Vinacic\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
