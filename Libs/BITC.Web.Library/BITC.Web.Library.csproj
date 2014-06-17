@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="CultureHelper.cs" />
     <Compile Include="DataAnnotation\TemplateRenderAttribute.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="Mvc\AjaxOnlyAttribute.cs" />
     <Compile Include="Mvc\BitcController.cs" />
     <Compile Include="Mvc\BitcController`1.cs" />

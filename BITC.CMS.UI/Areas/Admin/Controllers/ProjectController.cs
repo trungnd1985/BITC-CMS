@@ -3,14 +3,10 @@ using BITC.Library.Pattern;
 using BITC.Web.Library;
 using BITC.Web.Library.Mvc;
 using Kendo.Mvc.UI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using BITC.CMS.Data.Entity;
-using System.Data.Entity.Hierarchy;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {

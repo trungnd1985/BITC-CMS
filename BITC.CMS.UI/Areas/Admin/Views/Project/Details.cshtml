@@ -112,9 +112,11 @@
 
             $.each(arrSelected, function (index, item) {
                 if (current.lastIndexOf($(item).attr("src")) < 0) {
-                    $("#ProjectImages").val(current + ";" + $(item).attr("data-src"));
+                    current += $(item).attr("data-src") + ";";                    
                 }
             });
+
+            $("#ProjectImages").val(current);
         });
 
         $(document).ready(function () {

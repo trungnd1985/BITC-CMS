@@ -59,10 +59,11 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
             {
                 var _doc = LoadLanguageFile();
 
-                var newElement = new XElement("language");
-                newElement.Attribute("key").SetValue(_model.Key);
+                var newElement = new XElement(XName.Get("language", "http://bitc.com.vn/language.xsd"));
+                XAttribute key = new XAttribute("key", _model.Key);
+                newElement.Add(key);
                 newElement.SetValue(_model.Value);
-                _doc.Element("languages").Add(newElement);
+                _doc.Element(XName.Get("languages", "http://bitc.com.vn/language.xsd")).Add(newElement);
                 _doc.Save(GetLanguageFile());
             }
 
@@ -105,6 +106,6 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
             return Json(new[] { _model }.ToDataSourceResult(request, ModelState));
         }
 
-        #endregion        
+        #endregion
     }
 }

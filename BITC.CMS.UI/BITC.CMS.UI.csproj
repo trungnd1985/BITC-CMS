@@ -1432,15 +1432,6 @@
     <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown.css" />
     <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown.js" />
     <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown.min.js" />
-    <Content Include="Areas\Admin\assets\plugins\data-tables\DT_bootstrap.css" />
-    <Content Include="Areas\Admin\assets\plugins\data-tables\DT_bootstrap.js" />
-    <Content Include="Areas\Admin\assets\plugins\data-tables\images\sort_asc.png" />
-    <Content Include="Areas\Admin\assets\plugins\data-tables\images\sort_asc_disabled.png" />
-    <Content Include="Areas\Admin\assets\plugins\data-tables\images\sort_both.png" />
-    <Content Include="Areas\Admin\assets\plugins\data-tables\images\sort_desc.png" />
-    <Content Include="Areas\Admin\assets\plugins\data-tables\images\sort_desc_disabled.png" />
-    <Content Include="Areas\Admin\assets\plugins\data-tables\jquery.dataTables.js" />
-    <Content Include="Areas\Admin\assets\plugins\data-tables\jquery.dataTables.min.js" />
     <Content Include="Areas\Admin\assets\plugins\dropzone\css\basic.css" />
     <Content Include="Areas\Admin\assets\plugins\dropzone\css\dropzone.css" />
     <Content Include="Areas\Admin\assets\plugins\dropzone\dropzone.js" />
@@ -2143,7 +2134,6 @@
     <Content Include="Areas\Admin\assets\fonts\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="Areas\Admin\assets\fonts\k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="Areas\Admin\assets\fonts\MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff" />
-    <Content Include="Areas\Admin\assets\img\social\Thumbs.db" />
     <Content Include="Areas\Admin\assets\plugins\bootbox\README.md" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-colorpicker\less\colorpicker.less" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap-datepaginator\README.md" />

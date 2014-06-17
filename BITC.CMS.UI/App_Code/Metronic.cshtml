@@ -3,49 +3,19 @@
 
 @helper ClientView()
 {
+    var _service = Utility.GetService<IClientService>();
+    var _lst = _service.FindAvailableClient();
+
     <ul class="bxslider1 clients-list">
-        <li>
-            <a href="http://133.com.vn" target="_blank">
-                <img src="/Upload/Client/Z133_gray.png" alt="" />
-                <img src="/Upload/Client/Z133.png" class="color-img" alt="" />
-            </a>
-        </li>
-        <li>
-            <a href="http://azzavietnam.com.vn" target="_blank">
-                <img src="/Upload/Client/azza_gray.png" alt="" />
-                <img src="/Upload/Client/azza.png" class="color-img" alt="" />
-            </a>
-        </li>
-        <li>
-            <a href="http://vietphap.vn" target="_blank">
-                <img src="/Upload/Client/vietphap_gray.png" alt="" />
-                <img src="/Upload/Client/vietphap.png" class="color-img" alt="" />
-            </a>
-        </li>
-        <li>
-            <a href="http://captreotaythien.vn" target="_blank">
-                <img src="/Upload/Client/captreotaythien_gray.png" alt="" />
-                <img src="/Upload/Client/captreotaythien.png" class="color-img" alt="" />
-            </a>
-        </li>
-        <li>
-            <a href="http://marmedia.vn" target="_blank">
-                <img src="/Upload/Client/marmedia_gray.png" alt="" />
-                <img src="/Upload/Client/marmedia.png" class="color-img" alt="" />
-            </a>
-        </li>
-        <li>
-            <a href="http://hacid.vn" target="_blank">
-                <img src="/Upload/Client/hacid_gray.png" alt="" />
-                <img src="/Upload/Client/hacid.png" class="color-img" alt="" />
-            </a>
-        </li>
-        <li>
-            <a href="http://riostudio" target="_blank">
-                <img src="/Upload/Client/rio_gray.png" alt="" />
-                <img src="/Upload/Client/rio.png" class="color-img" alt="" />
-            </a>
-        </li>
+        @foreach (var item in _lst)
+        {
+            <li>
+                <a href="@item.Website" target="_blank">
+                    <img src="@item.GrayscaleLogo" alt="" />
+                    <img src="@item.Logo" class="color-img" alt="" />
+                </a>
+            </li>
+        }
     </ul>
 }
 
@@ -63,8 +33,8 @@
     var _listPage = _pageService.Find(_listPageId);
 
     <div class="col-md-3">
-        <h2><a href="@_listPage.Url"></a></h2>
-        <p>Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde voluptatem. Sed unde omnis iste natus error sit voluptatem.</p>
+        <h2><a href="@_listPage.Url">@Language.Localize("RecentProject")</a></h2>
+        @*<p>Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde voluptatem. Sed unde omnis iste natus error sit voluptatem.</p>*@
     </div>
     <div class="col-md-9">
         <ul class="bxslider">
@@ -74,10 +44,10 @@
                 <li>
                     <em>
                         <img src="@arrImg[0]?width=800&mode=crop" alt="" class="img-responsive" />
-                        <a href="@(_detailPage != null ? _culture +"/"+ _detailPage.Url + "/" + item.ClientID : "#")"><i class="fa fa-link icon-hover icon-hover-1"></i></a>
+                        <a href="@(_detailPage != null ? _culture +"/"+ _detailPage.Url + "/" + item.ProjectID : "#")"><i class="fa fa-link icon-hover icon-hover-1"></i></a>
                         <a href="@arrImg[0]" class="fancybox-button" title="@item.ProjectName" data-rel="fancybox-button"><i class="fa fa-search icon-hover icon-hover-2"></i></a>
                     </em>
-                    <a class="bxslider-block" href="@(_detailPage != null ? _culture +"/" + _detailPage.Url + "/" + item.ClientID : "#")">
+                    <a class="bxslider-block" href="@(_detailPage != null ? _culture + "/" + _detailPage.Url + "/" + item.ProjectID : "#")">
                         <strong>@item.ProjectName</strong>
                         @if (item.ClientID.HasValue)
                         {

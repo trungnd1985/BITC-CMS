@@ -25,5 +25,10 @@ namespace BITC.CMS.Service
         }
 
         #endregion
+
+        public IQueryable<Client> FindAvailableClient()
+        {
+            return _repository.Queryable(i => !i.Inactive).OrderBy(i => i.SortOrder);
+        }
     }
 }

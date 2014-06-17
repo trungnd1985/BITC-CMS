@@ -9,5 +9,6 @@ namespace BITC.CMS.Service
 {
     public interface IClientService : IService<Client>
     {
+        IQueryable<Client> FindAvailableClient();
     }
 }
