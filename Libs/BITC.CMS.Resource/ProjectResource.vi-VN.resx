@@ -123,8 +123,14 @@
   <data name="Location" xml:space="preserve">
     <value>Địa điểm</value>
   </data>
+  <data name="ProjectCategories" xml:space="preserve">
+    <value>Loại dự án</value>
+  </data>
   <data name="ProjectCategoryName" xml:space="preserve">
     <value>Loại dự án</value>
+  </data>
+  <data name="ProjectImages" xml:space="preserve">
+    <value>Ảnh dự án</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Tên dự án</value>

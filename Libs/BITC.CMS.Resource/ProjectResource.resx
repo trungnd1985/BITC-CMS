@@ -123,8 +123,14 @@
   <data name="Location" xml:space="preserve">
     <value>Location</value>
   </data>
+  <data name="ProjectCategories" xml:space="preserve">
+    <value>Project categories</value>
+  </data>
   <data name="ProjectCategoryName" xml:space="preserve">
     <value>Project category name</value>
+  </data>
+  <data name="ProjectImages" xml:space="preserve">
+    <value>Project images</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Project name</value>

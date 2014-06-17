@@ -82,11 +82,29 @@ Public Class ProjectResource
     End Property
     
     '''<summary>
+    '''  Looks up a localized string similar to Project categories.
+    '''</summary>
+    Public Shared ReadOnly Property ProjectCategories() As String
+        Get
+            Return ResourceManager.GetString("ProjectCategories", resourceCulture)
+        End Get
+    End Property
+    
+    '''<summary>
     '''  Looks up a localized string similar to Project category name.
     '''</summary>
     Public Shared ReadOnly Property ProjectCategoryName() As String
         Get
             Return ResourceManager.GetString("ProjectCategoryName", resourceCulture)
+        End Get
+    End Property
+    
+    '''<summary>
+    '''  Looks up a localized string similar to Project images.
+    '''</summary>
+    Public Shared ReadOnly Property ProjectImages() As String
+        Get
+            Return ResourceManager.GetString("ProjectImages", resourceCulture)
         End Get
     End Property
     

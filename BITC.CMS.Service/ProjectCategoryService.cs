@@ -30,5 +30,11 @@ namespace BITC.CMS.Service
         {
             return _repository.Queryable(i => i.Culture == _culture);
         }
+
+
+        public IQueryable<ProjectCategory> FindAvailableProjectCategory(string _culture)
+        {
+            return _repository.Queryable(i => i.Culture == _culture && !i.Inactive);
+        }
     }
 }

@@ -126,6 +126,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -134,6 +138,14 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.1.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.1.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -1722,6 +1734,8 @@
     <Content Include="Areas\Admin\assets\plugins\jquery-inputmask\jquery.inputmask.bundle.min.js" />
     <Content Include="Areas\Admin\assets\plugins\jquery-knob\index.html" />
     <Content Include="Areas\Admin\assets\plugins\jquery-knob\js\jquery.knob.js" />
+    <Content Include="Areas\Admin\assets\plugins\jquery-lazy\jquery.lazy.js" />
+    <Content Include="Areas\Admin\assets\plugins\jquery-lazy\jquery.lazy.min.js" />
     <Content Include="Areas\Admin\assets\plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="Areas\Admin\assets\plugins\jquery-mixitup\jquery.mixitup.min.js" />
     <Content Include="Areas\Admin\assets\plugins\jquery-multi-select\css\multi-select.css" />
@@ -2338,11 +2352,7 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TemplateDropDownList.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Html.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TagEditor.cshtml" />
-    <Content Include="Areas\Admin\Views\Portfolio\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Portfolio\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\_PortfolioImages.cshtml" />
-    <Content Include="Areas\Admin\Views\Portfolio\PortfolioImageDetail.cshtml" />
-    <Content Include="Areas\Admin\Views\Portfolio\Setting.cshtml" />
     <Content Include="Areas\Admin\Views\Media\_MediaPopup.cshtml" />
     <Content Include="Areas\Admin\Views\Media\_UrlView.cshtml" />
     <Content Include="Areas\Admin\Views\Media\_YoutubeView.cshtml" />
@@ -2407,6 +2417,9 @@
     <Content Include="Areas\Admin\Views\ProjectCategory\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Project\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Project\Details.cshtml" />
+    <Content Include="Areas\Admin\assets\plugins\jquery-lazy\bower.json" />
+    <Content Include="Areas\Admin\assets\plugins\jquery-lazy\lazy.jquery.json" />
+    <Content Include="Areas\Admin\assets\plugins\jquery-lazy\README.md" />
     <None Include="Language\language.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -3453,12 +3466,12 @@
     <Content Include="Theme\Metronic\Views\Shared\_Contact.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_BlogList.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_BlogDetail.cshtml" />
-    <Content Include="Theme\Metronic\Views\Shared\_Menu.cshtml" />
+    <Content Include="Theme\Metronic\Views\Shared\_ProjectList.cshtml" />
+    <Content Include="Theme\Metronic\Views\Shared\_ProjectDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Client\" />
     <Folder Include="Areas\Admin\Views\Menu\" />
-    <Folder Include="Areas\Admin\Views\PortfolioCategory\" />
     <Folder Include="Areas\Admin\Views\Setting\" />
     <Folder Include="Content\Admin\" />
     <Folder Include="Theme\Vinacic\Views\" />

@@ -8,11 +8,12 @@ var media = function () {
     var myFunc = function (text) {
         alert(text);
     }
+    var insertEventFunc;
 
     // public functions
     return {
         //main function
-        init: function (culture, target) {
+        init: function (culture, target, insertCompleteFunc) {
             //initialize here something.         
             $("#content-container").load("/Admin/" + culture + "/Media/MediaView");
 
@@ -27,15 +28,7 @@ var media = function () {
                             $("#media-container").empty();
 
                             $.each(msg, function (index, item) {
-                                $("#media-container").append("<img class='img-responsive img-thumbnail media-image' src='/Areas/Admin/assets/img/ajax-loader.gif' data-src='" + item.Url + "?height=100&width=100&mode=crop' />");
-                            });
-
-                            $('#media-container').loadImages({
-                                imgLoadedClb: function () { }, // Triggered when an image is loaded. ('this' is the loaded image)
-                                allLoadedClb: function () { }, // Triggered when all images are loaded. ('this' is the wrapper in which all images are loaded, or the image if you ran it on one image)
-                                imgErrorClb: function () { }, // Triggered when the image gives an error. Useful when you want to add a placeholder instead or remove it. ('this' is the loaded image)
-                                noImgClb: function () { }, // Triggered when there are no image found with data-src attributes, or when all images give an error. ('this' is the wrapper in which all images are loaded, or the image if you ran it on one image)
-                                dataAttr: 'src' // The data attribute that contains the source. Default 'src'.
+                                $("#media-container").append("<img class='img-responsive img-thumbnail media-image lazy' src='" + item.Url + "?height=100&width=100&mode=crop' data-src='" + item.Url + "' />");
                             });
                         }
                     });
@@ -57,9 +50,14 @@ var media = function () {
 
             $(document).on('click', '#btnInsertMedia', function (e) {
                 media.insertSelected(target);
+                insertEventFunc();
+                media.close();
             });
         },
-        insert: function (func) { func; },
+        close: function () {
+            $("#media-popup").modal("hide");
+        },
+        insert: function (func) { insertEventFunc = func; },
         uploadSuccess: function (e) {
             $("#tabMediaView a:last").tab("show");
         },
@@ -67,8 +65,11 @@ var media = function () {
             var arrSelected = $(".selected");
 
             $.each(arrSelected, function (index, item) {
-                $(target).append("<img src='" + $(item).attr("src") + "' title='" + $(item).attr("title") + "' />");
+                $(target).append("<div class='project-image'><img class='img-responsive lazy' src='" + $(item).attr("data-src") + "?width=200&mode=crop' title='" + $(item).attr("title") + "' /></div>");
             });
+        },
+        getSelectedItems: function () {
+            return $(".selected");
         }
     };
 }();

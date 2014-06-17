@@ -8,27 +8,22 @@ using System.Threading.Tasks;
 
 namespace BITC.CMS.Service
 {
-    public class MenuService : BaseService<Menu>, IMenuService
+    public class ClientService : BaseService<Client>, IClientService
     {
         #region Declaration
 
-        private readonly IRepositoryAsync<Menu> _repository;
+        private readonly IRepositoryAsync<Client> _repository;
 
         #endregion
 
         #region Constructor
 
-        public MenuService(IRepositoryAsync<Menu> repository)
+        public ClientService(IRepositoryAsync<Client> repository)
             : base(repository)
         {
             _repository = repository;
         }
 
         #endregion
-
-        public IQueryable<Menu> FindMenuInactive(string _culture)
-        {
-            return _repository.Queryable(i => i.Culture == _culture && !i.Inactive);
-        }
     }
 }

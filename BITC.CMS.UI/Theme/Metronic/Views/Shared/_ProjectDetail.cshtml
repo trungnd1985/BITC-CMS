@@ -1,0 +1,73 @@
+﻿@{
+    var _culture = CultureHelper.GetCurrentCulture();
+    var _id = int.Parse(System.Text.RegularExpressions.Regex.Match(ViewContext.RouteData.Values["url"].ToString(), @"\d*$").Value);
+    var _currentDate = DateTime.Now;
+    var  _service = DependencyResolver.Current.GetService<IProjectService>();
+    var _moduleService = DependencyResolver.Current.GetService<IModuleService>();
+    var _module = _moduleService.FindModuleByName("Project");
+    var _project = _service.Find(_id);
+    var _detailPage = _module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue;
+    string[] _arrImg = _project.ProjectImages.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+}
+
+<!-- BEGIN BREADCRUMBS -->
+<div class="row breadcrumbs margin-bottom-40">
+    <div class="container">
+        <div class="col-md-4 col-sm-4">
+            <h1>@ViewBag.Title</h1>
+        </div>
+        <div class="col-md-8 col-sm-8">
+            @ViewHelper.BreadCrumb(ViewBag.BreadCrumb)
+        </div>
+    </div>
+</div>
+<!-- END BREADCRUMBS -->
+<!-- BEGIN CONTAINER -->
+<div class="container min-hight portfolio-page margin-bottom-30">
+    <!-- BEGIN PORTFOLIO ITEM -->
+    <div class="row">
+        <!-- BEGIN CAROUSEL -->
+        <div class="col-md-5 front-carousel">
+            <div id="myCarousel" class="carousel slide">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    @for (int i = 0; i < _arrImg.Length; i++)
+                    {
+                        <div class="item @(i==0?"active":"")">
+                            <img src="@_arrImg[i]" />
+                        </div>
+                    }
+                </div>
+                @if (_arrImg.Length > 1)
+                {
+                    <!-- Carousel nav -->
+                    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                }
+
+            </div>
+        </div>
+        <!-- END CAROUSEL -->
+        <!-- BEGIN PORTFOLIO DESCRIPTION -->
+        <div class="col-md-7">
+            <h2>@_project.ProjectName</h2>
+            <div class="margin-bottom-15">
+                @_project.Description
+            </div>
+            @*<a href="#" class="btn theme-btn"> VISIT THE PROJECT</a>*@
+        </div>
+        <!-- END PORTFOLIO DESCRIPTION -->
+    </div>
+    <!-- END PORTFOLIO ITEM -->
+    <div class="clearfix"></div>
+    <!-- BEGIN RECENT WORKS -->
+    <div class="row recent-work margin-bottom-40">
+        @Metronic.RecentPortfolio()
+    </div>
+    <!-- END RECENT WORKS -->
+</div>
+<!-- END CONTAINER -->

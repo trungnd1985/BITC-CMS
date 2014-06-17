@@ -44,6 +44,14 @@ namespace BITC.CMS.Data.Entity
             [Display(Name = "Year", ResourceType = typeof(ProjectResource), Order = 3)]
             [DataType("Integer")]
             public int? Year { get; set; }
+
+            [Display(Name = "ProjectCategories", ResourceType = typeof(ProjectResource), Order = 3)]
+            public List<int> ProjectCategoriesID { get; set; }
+
+            [Display(Name = "ProjectImages", ResourceType = typeof(ProjectResource), Order = 3)]
+            public string ProjectImages { get; set; }
         }
+
+        public List<int> ProjectCategoriesID { get; set; }
     }
 }

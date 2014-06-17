@@ -73,8 +73,14 @@ namespace BITC.CMS.Data.Mapping
             Property(t => t.ProjectImages)
                 .HasColumnName("ProjectImages")
                 .IsOptional();
+            Property(t => t.ClientID)
+                .HasColumnName("ClientID")
+                .IsOptional();
 
             // Relationships
+            HasOptional(t => t.Client)
+                .WithMany(t => t.Projects)
+                .HasForeignKey(d => d.ClientID);
             HasMany(t => t.ProjectCategories)
                 .WithMany(t => t.Projects)
                 .Map(m =>

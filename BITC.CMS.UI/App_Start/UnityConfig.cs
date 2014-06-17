@@ -28,9 +28,11 @@ namespace BITC.CMS.UI
                 .RegisterType<IRepositoryAsync<BlogEntry>, Repository<BlogEntry>>()
                 .RegisterType<IRepositoryAsync<Client>, Repository<Client>>()
                 .RegisterType<IRepositoryAsync<Module>, Repository<Module>>()
-                .RegisterType<IRepositoryAsync<Project>,Repository<Project>>()
+                .RegisterType<IRepositoryAsync<Project>, Repository<Project>>()
                 .RegisterType<IRepositoryAsync<ProjectCategory>, Repository<ProjectCategory>>()
+                .RegisterType<IRepositoryAsync<Menu>, Repository<Menu>>()
                 .RegisterType<IBlogService, BlogService>()
+                .RegisterType<IClientService, ClientService>()
                 .RegisterType<IPageService, PageService>()
                 .RegisterType<IBlogTagService, BlogTagService>()
                 .RegisterType<IModuleService, ModuleService>()
@@ -40,7 +42,7 @@ namespace BITC.CMS.UI
                 .RegisterType<IProjectService, ProjectService>()
                 .RegisterType<AuthenticationController>(new InjectionConstructor())
                 .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerResolveLifetimeManager());
-            
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

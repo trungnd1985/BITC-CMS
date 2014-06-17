@@ -10,5 +10,7 @@ namespace BITC.CMS.Service
     public interface IProjectCategoryService : IService<ProjectCategory>
     {
         IQueryable<ProjectCategory> FindByCulture(string _culture);
+
+        IQueryable<ProjectCategory> FindAvailableProjectCategory(string _culture);
     }
 }

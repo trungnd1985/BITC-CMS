@@ -17,6 +17,7 @@ namespace BITC.CMS.Data.Entity
         public Project()
         {
             ProjectCategories = new List<ProjectCategory>();
+            ProjectCategoriesID = new List<int>();
         }
 
         public int ProjectID { get; set; }
@@ -34,6 +35,8 @@ namespace BITC.CMS.Data.Entity
         public int? Year { get; set; }
         public string ProjectImages { get; set; }
 
+        public int? ClientID { get; set; }
+        public virtual Client Client { get; set; }
         public virtual ICollection<ProjectCategory> ProjectCategories { get; set; }
     }
 }

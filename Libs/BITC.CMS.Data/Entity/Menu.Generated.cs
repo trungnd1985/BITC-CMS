@@ -25,7 +25,7 @@ namespace BITC.CMS.Data.Entity
         public string Url { get; set; }
         public int? ParentID { get; set; }
         public int SortOrder { get; set; }
-        public int Inactive { get; set; }
+        public bool Inactive { get; set; }
         public string Culture { get; set; }
         public System.DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }

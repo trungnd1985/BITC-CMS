@@ -76,6 +76,14 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         #region AJAX
 
         [AjaxOnly]
+        public ActionResult GetProjectCategories()
+        {
+            var _culture = CultureHelper.GetCurrentCulture();
+
+            return Json(_service.FindByCulture(_culture).Where(i => i.Inactive == false),JsonRequestBehavior.AllowGet);
+        }
+
+        [AjaxOnly]
         public ActionResult Read([DataSourceRequest]DataSourceRequest request)
         {
             var _culture = CultureHelper.GetCurrentCulture();

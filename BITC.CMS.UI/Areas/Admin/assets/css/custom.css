@@ -62,6 +62,25 @@ textarea {
 .page-title {
     font-family: 'Segoe UI', sans-serif;
 }
+
 .k-ff {
     overflow: inherit !important;
+}
+
+.project-image {
+    width: 200px;
+    height: 153px !important;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    display: inline-block;
+    height: auto;
+    line-height: 1.42857;
+    max-width: 100%;
+    padding: 4px;
+    -moz-transition: all 0.2s ease-in-out 0s;
+    -o-transition: all 0.2s ease-in-out 0s;
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+    text-align: center;
 }

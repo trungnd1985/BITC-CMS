@@ -5,5 +5,7 @@
     <Template name="Contact" path="_Contact"/>
     <Template name="Blog" path="_BlogList" />
     <Template name="Blog Detail" path="_BlogDetail"/>
+    <Template name="Project" path="_ProjectList"></Template>
+    <Template name="Project Detail" path="_ProjectDetail"></Template>
   </Templates>
 </Theme>

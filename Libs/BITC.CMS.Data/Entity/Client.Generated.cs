@@ -30,6 +30,6 @@ namespace BITC.CMS.Data.Entity
         public System.DateTime? ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public bool Inactive { get; set; }
-
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

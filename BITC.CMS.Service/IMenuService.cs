@@ -9,5 +9,6 @@ namespace BITC.CMS.Service
 {
     public interface IMenuService : IService<Menu>
     {
+        IQueryable<Menu> FindMenuInactive(string _culture);
     }
 }

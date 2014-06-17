@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using BITC.CMS.Data.Entity;
+using System.Data.Entity.Hierarchy;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
@@ -18,6 +19,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
     {
         #region Declaration
 
+        private readonly IClientService _clientService;
         private readonly IProjectService _service;
         private readonly IUnitOfWorkAsync _unitOfWork;
 
@@ -25,9 +27,10 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         #region Constructor
 
-        public ProjectController(IProjectService service, IUnitOfWorkAsync uow)
+        public ProjectController(IProjectService service, IClientService clientService, IUnitOfWorkAsync uow)
         {
             _service = service;
+            _clientService = clientService;
             _unitOfWork = uow;
         }
 
@@ -43,6 +46,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.ClientList = GetClientList(null);
             return View("Details", new Project());
         }
 
@@ -53,6 +57,43 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _service.Insert(_model);
+
+                if (_unitOfWork.SaveChanges() > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("Details", _model);
+                }
+            }
+
+            return View("Details", _model);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var _entity = _service.FindByKey(id);
+            ViewBag.ClientList = GetClientList(_entity.ClientID);
+
+            foreach (var item in _entity.ProjectCategories)
+            {
+                _entity.ProjectCategoriesID.Add(item.ProjectCategoryID);
+            }
+
+            return View("Details", _entity);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Project _model)
+        {
+            if (ModelState.IsValid)
+            {
+                //_model.ProjectID = id;
+                //_model.ModifiedBy = HttpContext.User.Identity.Name;
+                //_model.ModifiedDate = DateTime.Now;
+                _service.Update(id, _model);
 
                 if (_unitOfWork.SaveChanges() > 0)
                 {
@@ -90,6 +131,23 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         }
 
         #endregion
+
+        #endregion
+
+        #region Method
+
+        private IEnumerable<SelectListItem> GetClientList(int? id)
+        {
+            var lst = _clientService.Query(i => !i.Inactive).Select();
+
+            if (lst != null)
+            {
+                foreach (var item in lst)
+                {
+                    yield return new SelectListItem() { Text = item.ClientName, Value = item.ClientID.ToString(), Selected = item.ClientID == id };
+                }
+            }
+        }
 
         #endregion
     }

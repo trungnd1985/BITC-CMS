@@ -200,6 +200,11 @@ namespace BITC.Web.Library
             return _mediaFolderPath;
         }
 
+        public static T GetService<T>()
+        {
+            return (T)DependencyResolver.Current.GetService(typeof(T));
+        }
+
         #endregion
     }
 }

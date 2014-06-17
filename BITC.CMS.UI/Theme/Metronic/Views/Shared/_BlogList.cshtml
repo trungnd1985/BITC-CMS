@@ -1,7 +1,7 @@
 ﻿@{
-    BITC.CMS.Service.IBlogTagService _tagService = DependencyResolver.Current.GetService<BITC.CMS.Service.IBlogTagService>();
-    BITC.CMS.Service.IBlogService _service = DependencyResolver.Current.GetService<BITC.CMS.Service.IBlogService>();
-    BITC.CMS.Service.IModuleService _moduleService = DependencyResolver.Current.GetService<BITC.CMS.Service.IModuleService>();
+    IBlogTagService _tagService = DependencyResolver.Current.GetService<IBlogTagService>();
+    IBlogService _service = DependencyResolver.Current.GetService<IBlogService>();
+    IModuleService _moduleService = DependencyResolver.Current.GetService<IModuleService>();
     var _module = _moduleService.FindModuleByName("Blog");
     var _tag = Request.Params["tag"];
     var _culture = BITC.Web.Library.CultureHelper.GetCurrentCulture();

@@ -1,0 +1,68 @@
+﻿@{
+    var _culture = CultureHelper.GetCurrentCulture();
+    var _currentDate = DateTime.Now;
+    var _service = DependencyResolver.Current.GetService<IProjectService>();
+    var _projectCategoryService = DependencyResolver.Current.GetService<IProjectCategoryService>();
+    var _lstCategories = _projectCategoryService.FindAvailableProjectCategory(_culture);
+    var _moduleService = DependencyResolver.Current.GetService<IModuleService>();
+    IPageService _pageService = BITC.Web.Library.Utility.GetService<IPageService>();
+    var _module = _moduleService.FindModuleByName("Project");
+    var _lstProject = _service.FindAvailableProject(_culture);
+    var _detailPageId = int.Parse(_module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue);
+    var _detailPage = _pageService.Find(_detailPageId);
+    var _displayColumn = int.Parse(_module.Settings.FirstOrDefault(i => i.SettingKey == "DISPLAY_COLUMN").SettingValue);
+}
+
+<!-- BEGIN BREADCRUMBS -->
+<div class="row breadcrumbs margin-bottom-40">
+    <div class="container">
+        <div class="col-md-4 col-sm-4">
+            <h1>@ViewBag.Title</h1>
+        </div>
+        <div class="col-md-8 col-sm-8">
+            @ViewHelper.BreadCrumb(ViewBag.BreadCrumb)
+        </div>
+    </div>
+</div>
+<!-- END BREADCRUMBS -->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN CONTAINER -->
+        <div class="container min-hight portfolio-page margin-bottom-40">
+            <!-- BEGIN FILTER -->
+            <div class="filter-v1 margin-top-10">
+                <ul class="mix-filter">
+                    <li class="filter" data-filter="all">All</li>
+                    @foreach (var item in _lstCategories)
+                    {
+                        <li class="filter" data-filter="@item.ProjectCategoryID">@item.ProjectCategoryName</li>
+                    }
+                </ul>
+                <div class="row mix-grid thumbnails">
+                    @foreach (var item in _lstProject)
+                    {
+                        var img = item.ProjectImages.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                        string _categoryClass = string.Empty;
+                        foreach (var category in item.ProjectCategories)
+                        {
+                            _categoryClass += category.ProjectCategoryID + " ";
+                        }
+                        <div class="col-md-@(12 / _displayColumn) col-sm-@(12 / _displayColumn) mix @_categoryClass">
+                            <div class="mix-inner">
+                                <img class="img-responsive" src="@img" alt="">
+                                <div class="mix-details">
+                                    <h4>@item.ProjectName</h4>
+                                    <div>@item.Description</div>
+                                    <a class="mix-link" href="@(_detailPage != null ? _culture +"/"+ _detailPage.Url + "/" + item.ClientID : "#")"><i class="fa fa-link"></i></a>
+                                    <a class="mix-preview fancybox-button" href="@img" title="@item.ProjectName" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- END FILTER -->
+        </div>
+        <!-- END CONTAINER -->
+    </div>
+</div>

@@ -14,7 +14,7 @@
 
             for (int i = 0; i < arr.Length; i++)
             {
-                <img src="@arr[i]" />
+                <div class="project-image"><img data-src="@arr[i]?width=200&mode=crop" src="/Areas/Admin/assets/img/ajax-loading.gif" class="img-responsive lazy" /></div>
             }
 
         }
@@ -33,11 +33,28 @@
                 </div>
             </div>
             <div class="form-group">
+                @Html.LabelFor(m => m.ClientID, new { @class = "control-label col-md-2" })
+                <div class="col-md-10 focus">
+                   @Html.DropDownListFor(m => m.ClientID, (IEnumerable<SelectListItem>)ViewBag.ClientList, new { @class = "select2me input-xlarge" })
+                </div>
+            </div>
+            <div class="form-group">
                 @Html.LabelFor(m => m.ProjectImages, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.HiddenFor(m => m.ProjectImages)
                     @RenderProjectImages(Model.ProjectImages)
                     @{Html.RenderAction("MediaPopup", "Media", new { _target = "#divProjectImages" }); }
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ProjectCategoriesID, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @(Html.Kendo().MultiSelectFor(i => i.ProjectCategoriesID)
+                                    .DataTextField("ProjectCategoryName")
+                                    .DataValueField("ProjectCategoryID")
+                            //.AutoBind(false)
+                                    .DataSource(i => i.Read("GetProjectCategories", "ProjectCategory"))
+                    )
                 </div>
             </div>
             <div class="form-group">
@@ -90,7 +107,18 @@
     <script type="text/javascript">
         project.init();
         media.insert(function () {
-            alert(1);
+            var current = $("#ProjectImages").val();
+            var arrSelected = media.getSelectedItems();
+
+            $.each(arrSelected, function (index, item) {
+                if (current.lastIndexOf($(item).attr("src")) < 0) {
+                    $("#ProjectImages").val(current + ";" + $(item).attr("data-src"));
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $(".lazy").lazy();
         });
     </script>
 }

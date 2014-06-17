@@ -30,6 +30,8 @@ namespace BITC.CMS.Data.Entity
 
         public DbSet<BlogEntryComment> BlogEntryComments { get; set; }
 
+        public DbSet<Client> Clients { get; set; }
+
         public DbSet<Page> Pages { get; set; }
 
         public DbSet<Media> Media { get; set; }
@@ -58,6 +60,7 @@ namespace BITC.CMS.Data.Entity
             modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.MenuMap());
             modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.ProjectCategoryMap());
             modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.ProjectMap());
+            modelBuilder.Configurations.Add(new BITC.CMS.Data.Mapping.ClientMap());
             //modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<MaxLengthAttribute>().Any()).Configure(p => p.HasMaxLength(p.ClrPropertyInfo.GetCustomAttributes(false).OfType<MaxLengthAttribute>().FirstOrDefault().Length));
             //modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<RequiredAttribute>().Any()).Configure(p => p.IsRequired());
             //modelBuilder.Properties().Where(p => p.GetCustomAttributes(false).OfType<KeyAttribute>().Any()).Configure(p => p.IsKey());
