@@ -49,11 +49,11 @@
                         }
                         <div class="col-md-@(12 / _displayColumn) col-sm-@(12 / _displayColumn) mix @_categoryClass">
                             <div class="mix-inner">
-                                <img class="img-responsive" src="@img" alt="">
+                                <img class="img-responsive" src="@img?width=800&height=600&mode=crop&anchor=topcenter" alt="">
                                 <div class="mix-details">
                                     <h4>@item.ProjectName</h4>
                                     <div>@item.Description</div>
-                                    <a class="mix-link" href="@(_detailPage != null ? _culture +"/"+ _detailPage.Url + "/" + item.ClientID : "#")"><i class="fa fa-link"></i></a>
+                                    <a class="mix-link" href="/@(_detailPage != null ? _culture +"/"+ _detailPage.Url + "/" + item.ProjectID : "#")"><i class="fa fa-link"></i></a>
                                     <a class="mix-preview fancybox-button" href="@img" title="@item.ProjectName" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>
