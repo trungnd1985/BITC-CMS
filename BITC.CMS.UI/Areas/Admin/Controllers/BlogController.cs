@@ -41,7 +41,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            return View("Details", new BITC.CMS.Data.Entity.BlogEntry());
+            return View("Details", new BITC.CMS.Data.Entity.BlogEntry() { PublishDate = DateTime.Now });
         }
 
         [HttpPost]

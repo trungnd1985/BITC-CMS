@@ -3,6 +3,8 @@ using BITC.Library.Pattern;
 using BITC.Web.Library;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.SqlServer;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -109,13 +111,22 @@ namespace BITC.CMS.Service
             return _repository.Queryable(i => i.Culture == _culture);
         }
 
-        public IEnumerable<BlogEntry> GetBlogEntriesList(string _culture, string _tag, int _pageIndex, int _pageSize, out int _totalCount)
+        public IEnumerable<BlogEntry> GetBlogEntriesList(string _culture, string _tag, string _archive, int _pageIndex, int _pageSize, out int _totalCount)
         {
             int _entriesCount = 0;
             var _currentDate = DateTime.Now;
+            DateTime _fromDate = DateTime.Now;
+            DateTime _toDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(_archive))
+            {
+                _fromDate = DateTime.ParseExact(_archive, "MMMM yyyy", CultureInfo.InvariantCulture).AddHours(-12);
+                _toDate = _fromDate.AddMonths(1);
+            }
+
             var _entries = _repository.Query(i => i.Culture == _culture
                                                     && (string.IsNullOrEmpty(_tag) ? true : i.BlogTags.Where(j => j.Slug == _tag).Count() > 0)
-                                                    && (i.PublishDate.HasValue && (i.PublishDate.Value.CompareTo(_currentDate) == 0 || i.PublishDate.Value.CompareTo(_currentDate) == -1)))
+                                                    && (i.PublishDate.HasValue && (string.IsNullOrEmpty(_archive) ? (i.PublishDate.Value.CompareTo(_currentDate) == 0 || i.PublishDate.Value.CompareTo(_currentDate) == -1) : i.PublishDate.Value.CompareTo(_fromDate) == 1 && i.PublishDate.Value.CompareTo(_toDate) == -1)))
                                         .Include(i => i.BlogTags)
                                         .OrderBy(q => q.OrderByDescending(i => i.PublishDate))
                                         .SelectPage(_pageIndex, _pageSize, out _entriesCount);
@@ -132,6 +143,15 @@ namespace BITC.CMS.Service
                                         && i.BlogEntryID != _excludeId)
                                 .OrderBy(q => q.OrderByDescending(i => i.PublishDate))
                                 .Select().Skip(0).Take(topCount);
+        }
+
+
+        public Dictionary<string, int> GetArchives()
+        {
+            var lst = from p in _repository.Queryable()
+                      group p by SqlFunctions.DateName("month", p.PublishDate) + " " + SqlFunctions.DateName("year", p.PublishDate) into g
+                      select new { Display = g.Key, EntryCount = g.Count() };
+            return lst.ToDictionary(i => i.Display, i => i.EntryCount);
         }
     }
 }

@@ -1,20 +1,23 @@
-﻿@{
-    var _tag = Request.Params["tag"];
+﻿@{    
     var _culture = BITC.Web.Library.CultureHelper.GetCurrentCulture();
-
     var _id = int.Parse(System.Text.RegularExpressions.Regex.Match(ViewContext.RouteData.Values["url"].ToString(), @"\d*$").Value);
     var _currentDate = DateTime.Now;
 
-
-    BITC.CMS.Service.IBlogTagService _tagService = DependencyResolver.Current.GetService<BITC.CMS.Service.IBlogTagService>();
-    BITC.CMS.Service.IBlogService _service = DependencyResolver.Current.GetService<BITC.CMS.Service.IBlogService>();
-    BITC.CMS.Service.IModuleService _moduleService = DependencyResolver.Current.GetService<BITC.CMS.Service.IModuleService>();
+    IBlogTagService _tagService = DependencyResolver.Current.GetService<IBlogTagService>();
+    IBlogService _service = DependencyResolver.Current.GetService<IBlogService>();
+    IModuleService _moduleService = DependencyResolver.Current.GetService<IModuleService>();
+    IPageService _pageService = DependencyResolver.Current.GetService<IPageService>();
+    
     var _module = _moduleService.FindModuleByName("Blog");
     var _recentQuantity = int.Parse(_module.Settings.FirstOrDefault(i => i.SettingKey == "RECENT_ENTRY_QUANTITY").SettingValue);
     var _recentEntries = _service.GetRecentBlogEntriesList(_culture, _id, _recentQuantity);
     var _entry = _service.Query(i => i.BlogEntryID == _id).Include(i => i.BlogTags).Include(i => i.BlogEntryComments).Select().FirstOrDefault();
-    var _detailPage = _module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue;
+    var _detailPageId = _module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue;
+    var _listPageId = _module.Settings.FirstOrDefault(i => i.SettingKey == "LIST_PAGE").SettingValue;
+    var _listPage = _pageService.GetPage(int.Parse(_listPageId));
+    var _detailPage = _pageService.GetPage(int.Parse(_detailPageId));    
     var lstTag = _tagService.Query(i => i.Culture == _culture);
+    var _lstArchive = _service.GetArchives();
 
 }
 <!-- BEGIN BREADCRUMBS -->
@@ -74,13 +77,12 @@
         <!-- BEGIN RIGHT SIDEBAR -->
         <div class="col-md-3 blog-sidebar">
             <!-- CATEGORIES START -->
-            <h2 class="no-top-space">Categories</h2>
+            <h2>Archives</h2>
             <ul class="nav sidebar-categories margin-bottom-40">
-                <li><a href="#">London (18)</a></li>
-                <li><a href="#">Moscow (5)</a></li>
-                <li class="active"><a href="#">Paris (12)</a></li>
-                <li><a href="#">Berlin (7)</a></li>
-                <li><a href="#">Instanbul (3)</a></li>
+                @foreach (var item in _lstArchive)
+                {
+                    <li><a href="/@(_culture + "/" + _listPage.Url + "?archive=" + @item.Key)">@item.Key (@item.Value)</a></li>
+                }
             </ul>
             <!-- CATEGORIES END -->
             <!-- BEGIN RECENT NEWS -->
@@ -90,10 +92,10 @@
                 {
                     <div class="row margin-bottom-10">
                         <div class="col-md-12">
-                            <h3><a href="#">@item.BlogTitle</a></h3>
-                        <p>Decusamus tiusto odiodig nis simos ducimus qui sint</p>
+                            <h3><a href="/@(_culture + "/" + _detailPage.Url + "/" + item.BlogTitle.ToSlug() + "-" + item.BlogEntryID)">@item.BlogTitle</a></h3>
+                            <p>@HttpUtility.HtmlDecode(item.Body.Brief(52))</p>
+                        </div>
                     </div>
-                </div>
                 }
             </div>
             <!-- END RECENT NEWS -->
@@ -103,7 +105,7 @@
                 <ul>
                     @foreach (var item in lstTag.Select())
                     {
-                        <li><a href='@Url.Action("Index", "Page", new { url="Blog",tag = item.Slug })'><i class="fa fa-tags"></i>@item.TagName</a></li>
+                        <li><a href="/@(_culture + "/" + _listPage.Url + "?tag=" + item.Slug)"><i class="fa fa-tags"></i>@item.TagName</a></li>
                     }
                 </ul>
             </div>

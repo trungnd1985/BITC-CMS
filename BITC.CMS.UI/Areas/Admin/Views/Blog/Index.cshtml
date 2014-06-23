@@ -11,7 +11,7 @@
                         columns.Bound(p => p.BlogTitle);
                         //columns.Bound(p => p.c);
                         columns.Bound(p => p.CreatedBy);
-                        columns.Bound(p => p.CreatedDate).Format("{0:dd/MM/yyyy}");
+                        columns.Bound(p => p.PublishDate).Format("{0:dd/MM/yyyy}");
                         columns.Template(a => a.BlogEntryID).ClientTemplate("<a class='k-button' href='" + BITC.Web.Library.Utility.GenerateClientTemplateUrl("Edit", "Blog", "BlogEntryID", "Admin") + "'><span class='glyphicon glyphicon-pencil'></span></a><a class='k-button k-button-icontext k-grid-delete'><span class='glyphicon glyphicon-remove'></span></a>").Width(155);
                         columns.Command(command => command.Destroy()).Visible(false);
 
@@ -27,7 +27,7 @@
                             model.Id(p => p.BlogEntryID);
                             model.Field(p => p.BlogEntryID).Editable(false);
                         })
-                        .Sort(sort => sort.Add("SortOrder"))                        
+                        .Sort(sort => sort.Add("PublishDate").Descending())                        
                         .Read(read => read.Action("Read", "Blog"))
                         .Destroy(destroy => destroy.Action("Delete", "Blog")))
     )

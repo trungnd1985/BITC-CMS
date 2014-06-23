@@ -2,15 +2,19 @@
     IBlogTagService _tagService = DependencyResolver.Current.GetService<IBlogTagService>();
     IBlogService _service = DependencyResolver.Current.GetService<IBlogService>();
     IModuleService _moduleService = DependencyResolver.Current.GetService<IModuleService>();
+    IPageService _pageService = DependencyResolver.Current.GetService<IPageService>();
     var _module = _moduleService.FindModuleByName("Blog");
     var _tag = Request.Params["tag"];
+    var _archive = Request.Params["archive"];
     var _culture = BITC.Web.Library.CultureHelper.GetCurrentCulture();
     var lstTag = _tagService.Query(i => i.Culture == _culture);
     int _entriesCount = 0;
     var _page = string.IsNullOrEmpty(Request.Params["page"]) ? 1 : int.Parse(Request.Params["page"]);
     var _currentDate = DateTime.Now;
-    var _entries = _service.GetBlogEntriesList(_culture, _tag, _page, 10, out _entriesCount);
-    var _detailPage = _module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue;
+    var _entries = _service.GetBlogEntriesList(_culture, _tag, _archive, _page, 10, out _entriesCount);
+    var _detailPageId = _module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue;
+    var _detailPage = _pageService.GetPage(int.Parse(_detailPageId));
+    var _lstArchive = _service.GetArchives();
 }
 <!-- BEGIN BREADCRUMBS -->
 <div class="row breadcrumbs margin-bottom-40">
@@ -34,7 +38,7 @@
             {
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
-                        <h2><a href='@(_detailPage + "/" + _entry.BlogTitle.ToSlug() + "-" + _entry.BlogEntryID)'>@_entry.BlogTitle</a></h2>
+                        <h2><a href="/@(_culture + "/" + _detailPage.Url + "/" + _entry.BlogTitle.ToSlug() + "-" + _entry.BlogEntryID)">@_entry.BlogTitle</a></h2>
                         <ul class="blog-info">
                             <li><i class="fa fa-calendar"></i> @_entry.PublishDate.Value.ToString("dd/MM/yyyy")</li>
                             <li><i class="fa fa-comments"></i> @_entry.BlogEntryComments.Count</li>
@@ -46,7 +50,7 @@
                             </li>
                         </ul>
                         @Html.Raw(_entry.Body)
-                        <a class="more" href='@(_detailPage + "/" + _entry.BlogTitle.ToSlug() + "-" + _entry.BlogEntryID)'>Read more <i class="icon-angle-right"></i></a>
+                        <a class="more" href="/@(_culture + "/" + _detailPage.Url + "/" + _entry.BlogTitle.ToSlug() + "-" + _entry.BlogEntryID)">Read more <i class="icon-angle-right"></i></a>
                     </div>
                 </div>
                 <hr class="blog-post-sep">
@@ -56,10 +60,10 @@
             {
                 <div class="text-center">
                     <ul class="pagination pagination-centered">
-                        <li><a href='@Url.Action("Index", new { page = 2 })'>Prev</a></li>
+                        <li><a href='@Url.Action("Index", new { url = _detailPage.Url, page = 2 })'>Prev</a></li>
                         @for (int i = 0; i < _entriesCount; i++)
                         {
-                            <li><a href="#">@(i + 1)</a></li>
+                            <li><a href="/@(_detailPage != null ? _culture +"/"+ _detailPage.Url + "?page=" + i: "#")">@(i + 1)</a></li>
                         }
                         <li><a href="#">@Html.Localize("Next")</a></li>
                     </ul>
@@ -68,7 +72,16 @@
         </div>
         <!-- END LEFT SIDEBAR -->
         <!-- BEGIN RIGHT SIDEBAR -->
-        <div class="col-md-3 col-sm-3 blog-sidebar">            
+        <div class="col-md-3 col-sm-3 blog-sidebar">
+
+            <h2>Archives</h2>
+            <ul class="nav sidebar-categories margin-bottom-40">
+                @foreach (var item in _lstArchive)
+                {
+                    <li><a href="@Url.Action("Index","Page",new {archive=item.Key})">@item.Key (@item.Value)</a></li>
+                }
+            </ul>
+
             <div class="blog-tags margin-bottom-20">
                 <h2>Tags</h2>
                 <ul>

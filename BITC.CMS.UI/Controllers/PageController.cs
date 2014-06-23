@@ -52,7 +52,7 @@ namespace BITC.CMS.UI.Controllers
                 ViewBag.Title = _model.PageTitle;
                 ViewBag.Description = _model.Description;
                 ViewBag.Keywords = _model.Keywords;
-
+                ViewBag.Template = _model.Template;
                 Dictionary<string, string> _dict = new Dictionary<string, string>();
                 GenerateBreadCrumbData(_model, _dict);
                 ViewBag.BreadCrumb = _dict;

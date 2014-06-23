@@ -76,7 +76,7 @@ namespace BITC.Web.Library
             {
                 XElement _xml = XElement.Load(_manifestPath);
                 SelectListItem _selectListItem;
-                foreach (var _node in _xml.Descendants("Template"))
+                foreach (var _node in _xml.Descendants("template"))
                 {
                     _selectListItem = new SelectListItem() { Text = _node.Attribute("name").Value, Value = _node.Attribute("path").Value };
                     _selectListItem.Selected = (selectedValue == _selectListItem.Value);
@@ -85,6 +85,16 @@ namespace BITC.Web.Library
             }
 
             return _templates;
+        }
+
+        public static string GetManifestFile(string _theme)
+        {
+            return HttpContext.Current.Server.MapPath(string.Format(MANIFEST_PATH_FORMAT, _theme));
+        }
+
+        public static string GetManifestFile()
+        {
+            return GetManifestFile(GetTheme());
         }
 
         public static string GenerateClientTemplateHyperLink(string title, string action, string controller, object key, string areaName)
