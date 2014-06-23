@@ -120,6 +120,9 @@
   <data name="Body" xml:space="preserve">
     <value>Nội dung trang</value>
   </data>
+  <data name="Expression" xml:space="preserve">
+    <value>Chuỗi ràng buộc</value>
+  </data>
   <data name="Keywords" xml:space="preserve">
     <value>Từ khóa</value>
   </data>

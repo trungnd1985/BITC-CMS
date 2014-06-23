@@ -73,6 +73,15 @@ Public Class PageResource
     End Property
     
     '''<summary>
+    '''  Looks up a localized string similar to Constraint expression.
+    '''</summary>
+    Public Shared ReadOnly Property Expression() As String
+        Get
+            Return ResourceManager.GetString("Expression", resourceCulture)
+        End Get
+    End Property
+    
+    '''<summary>
     '''  Looks up a localized string similar to Keywords.
     '''</summary>
     Public Shared ReadOnly Property Keywords() As String

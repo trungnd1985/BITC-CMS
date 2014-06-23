@@ -60,6 +60,7 @@ namespace BITC.CMS.Data.Entity
         public int? ParentID { get; set; }
 
         [Display(Name = "Expression", ResourceType = typeof(PageResource))]
+        [UIHint("TextBox")]
         public string Expression { get; set; }
 
         public HierarchyId Path { get; set; }

@@ -40,6 +40,9 @@ var page = function () {
                 getUrl(parentId, title);
             });
 
+            $("#Url").on("blur", function (e) {
+                $("#Expression").val($(this).val());
+            });
             //$("#Template").on("change", function (e) {
             //    var template = $(this).select2("val");
             //    $.ajax({

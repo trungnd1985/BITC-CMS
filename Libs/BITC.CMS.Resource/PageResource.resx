@@ -120,6 +120,9 @@
   <data name="Body" xml:space="preserve">
     <value>Body</value>
   </data>
+  <data name="Expression" xml:space="preserve">
+    <value>Constraint expression</value>
+  </data>
   <data name="Keywords" xml:space="preserve">
     <value>Keywords</value>
   </data>

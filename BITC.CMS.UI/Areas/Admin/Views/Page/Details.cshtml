@@ -33,6 +33,12 @@
                 </div>
             </div>
             <div class="form-group">
+                @Html.LabelFor(m => m.Expression, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.Expression)
+                </div>
+            </div>
+            <div class="form-group">
                 @Html.LabelFor(m => m.Template, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(m => m.Template)
