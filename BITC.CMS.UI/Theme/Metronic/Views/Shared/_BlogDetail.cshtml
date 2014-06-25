@@ -20,6 +20,15 @@
     var _lstArchive = _service.GetArchives();
 
 }
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <!-- BEGIN BREADCRUMBS -->
 <div class="row breadcrumbs margin-bottom-40">
     <div class="container">
@@ -48,6 +57,9 @@
                     {
                         @(_tags.TagName + ", ");
                     }
+                </li>
+                <li>
+                    <div class="fb-share-button" data-href="@HttpContext.Current.Request.Url.AbsoluteUri" data-type="button_count"></div>
                 </li>
             </ul>
             @if (_entry.AllowComment)

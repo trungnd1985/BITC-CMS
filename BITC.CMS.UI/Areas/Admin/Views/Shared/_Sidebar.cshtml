@@ -6,7 +6,7 @@
     </li>
     <li>
         <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-        <form class="sidebar-search" action="#" method="POST">
+        <div class="sidebar-search">
             <div class="form-container">
                 <div class="input-box">
                     <a href="javascript:;" class="remove"></a>
@@ -14,7 +14,7 @@
                     <input type="button" class="submit" value=" " />
                 </div>
             </div>
-        </form>
+        </div>
         <!-- END RESPONSIVE QUICK SEARCH FORM -->
     </li>
     <li class="start ">
@@ -33,15 +33,15 @@
             <li>
                 <a href='@Url.Action("Index","Blog")'>
                     <i class="fa fa-list-alt"></i>
-                    <span class="title">All blog entries</span>
+                    <span class="title">@Html.Localize("ListOfBlog")</span>
                 </a>
                 <a href='@Url.Action("Create","Blog")'>
                     <i class="fa fa-plus"></i>
-                    <span class="title">Add new</span>
+                    <span class="title">@Html.Localize("AddNew")</span>
                 </a>
                 <a href='@Url.Action("Index","BlogTag")'>
                     <i class="fa fa-list-alt"></i>
-                    <span class="title">Tags</span>
+                    <span class="title">@Html.Localize("Tags")</span>
                 </a>
             </li>
         </ul>
@@ -49,22 +49,22 @@
     <li class="">
         <a href="javascript:;">
             <i class="fa fa-briefcase"></i>
-            <span class="title">Portfolio</span>
+            <span class="title">@Html.Localize("Project")</span>
             <span class="arrow "></span>
         </a>
         <ul class="sub-menu">
             <li>
                 <a href='@Url.Action("Index","Project")'>
                     <i class="fa fa-list-alt"></i>
-                    <span class="title">All portfolio</span>
+                    <span class="title">@Html.Localize("ListOfProject")</span>
                 </a>
                 <a href='@Url.Action("Create", "Project")'>
                     <i class="fa fa-plus"></i>
-                    <span class="title">Add new</span>
+                    <span class="title">@Html.Localize("AddNew")</span>
                 </a>
                 <a href='@Url.Action("Index", "ProjectCategory")'>
                     <i class="fa fa-list-alt"></i>
-                    <span class="title">Project category</span>
+                    <span class="title">@Html.Localize("ProjectCategory")</span>
                 </a>
             </li>
         </ul>

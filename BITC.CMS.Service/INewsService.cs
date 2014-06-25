@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace BITC.CMS.Service
 {
-    public interface IBlogTagService : IService<BlogTag>
+    public interface INewsService : IService<News>
     {
-        IQueryable<BlogTag> FindByCulture(string _culture);
+        News GetNews(int id);
 
-        IQueryable<BlogTag> LoadAllTagsByTerm(string _culture, string _term);
+        IQueryable<News> FindByCulture(string _culture);
+
+        void Update(int id, News _model);
     }
 }

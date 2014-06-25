@@ -25,5 +25,15 @@ namespace BITC.CMS.Service
         }
 
         #endregion
+
+        public IQueryable<BlogTag> FindByCulture(string _culture)
+        {
+            return _repository.Queryable(i => i.Culture == _culture);
+        }
+
+        public IQueryable<BlogTag> LoadAllTagsByTerm(string _culture, string _term)
+        {
+            return _repository.Queryable(i => i.Culture == _culture && i.TagName.StartsWith(_term));
+        }
     }
 }

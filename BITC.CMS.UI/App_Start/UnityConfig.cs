@@ -31,6 +31,8 @@ namespace BITC.CMS.UI
                 .RegisterType<IRepositoryAsync<Project>, Repository<Project>>()
                 .RegisterType<IRepositoryAsync<ProjectCategory>, Repository<ProjectCategory>>()
                 .RegisterType<IRepositoryAsync<Menu>, Repository<Menu>>()
+                .RegisterType<IRepositoryAsync<NewsCategory>, Repository<NewsCategory>>()
+                .RegisterType<IRepositoryAsync<News>, Repository<News>>()
                 .RegisterType<IBlogService, BlogService>()
                 .RegisterType<IClientService, ClientService>()
                 .RegisterType<IPageService, PageService>()
@@ -40,6 +42,8 @@ namespace BITC.CMS.UI
                 .RegisterType<IMenuService, MenuService>()
                 .RegisterType<IProjectCategoryService, ProjectCategoryService>()
                 .RegisterType<IProjectService, ProjectService>()
+                .RegisterType<INewsCategoryService, NewsCategoryService>()
+                .RegisterType<INewsService, NewsService>()
                 .RegisterType<AuthenticationController>(new InjectionConstructor())
                 .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerResolveLifetimeManager());
 

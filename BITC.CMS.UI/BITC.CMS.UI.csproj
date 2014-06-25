@@ -216,6 +216,8 @@
     </Compile>
     <Compile Include="Areas\Admin\Controllers\MediaController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewsCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectCategoryController.cs">
       <SubType>Code</SubType>
@@ -1342,66 +1344,6 @@
     <Content Include="Areas\Admin\assets\plugins\ckeditor\skins\bootstrapck\sample\js\analytics.js" />
     <Content Include="Areas\Admin\assets\plugins\ckeditor\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
     <Content Include="Areas\Admin\assets\plugins\ckeditor\styles.js" />
-    <Content Include="Areas\Admin\assets\plugins\clockface\CHANGELOG.txt" />
-    <Content Include="Areas\Admin\assets\plugins\clockface\css\clockface.css" />
-    <Content Include="Areas\Admin\assets\plugins\clockface\js\clockface.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\jquery.countdown.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\countdownBasic.html" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\countdownGlowing.gif" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\countdownLED.png" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-ar.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-bg.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-bn.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-bs.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-ca.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-cs.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-cy.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-da.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-de.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-el.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-es.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-et.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-fa.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-fi.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-fr.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-gl.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-gu.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-he.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-hr.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-hu.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-hy.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-id.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-it.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-ja.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-kn.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-ko.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-lt.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-lv.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-ml.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-ms.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-my.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-nb.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-nl.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-pl.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-pt-BR.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-ro.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-ru.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-sk.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-sl.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-sq.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-sr-SR.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-sr.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-sv.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-th.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-tr.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-uk.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-uz.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-vi.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-zh-CN.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown-zh-TW.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown.css" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown.js" />
-    <Content Include="Areas\Admin\assets\plugins\countdown\plugin\jquery.countdown.min.js" />
     <Content Include="Areas\Admin\assets\plugins\dropzone\css\basic.css" />
     <Content Include="Areas\Admin\assets\plugins\dropzone\css\dropzone.css" />
     <Content Include="Areas\Admin\assets\plugins\dropzone\dropzone.js" />
@@ -1520,13 +1462,6 @@
       <DependentUpon>font-awesome.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\assets\plugins\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="Areas\Admin\assets\plugins\fuelux\css\tree-metronic.css" />
-    <Content Include="Areas\Admin\assets\plugins\fuelux\css\tree.css" />
-    <Content Include="Areas\Admin\assets\plugins\fuelux\img\tree-icons.png" />
-    <Content Include="Areas\Admin\assets\plugins\fuelux\js\spinner.js" />
-    <Content Include="Areas\Admin\assets\plugins\fuelux\js\spinner.min.js" />
-    <Content Include="Areas\Admin\assets\plugins\fuelux\js\tree.js" />
-    <Content Include="Areas\Admin\assets\plugins\fuelux\js\tree.min.js" />
     <Content Include="Areas\Admin\assets\plugins\fullcalendar\changelog.txt" />
     <Content Include="Areas\Admin\assets\plugins\fullcalendar\demos\agenda-views.html" />
     <Content Include="Areas\Admin\assets\plugins\fullcalendar\demos\basic-views.html" />
@@ -2180,8 +2115,6 @@
     <Content Include="Areas\Admin\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Areas\Admin\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Areas\Admin\assets\plugins\clockface\LICENSE-MIT" />
-    <Content Include="Areas\Admin\assets\plugins\clockface\README.md" />
     <Content Include="Areas\Admin\assets\plugins\dropzone\css\stylus\basic.styl" />
     <Content Include="Areas\Admin\assets\plugins\dropzone\css\stylus\dropzone.styl" />
     <Content Include="Areas\Admin\assets\plugins\fancybox\.gitattributes" />
@@ -2252,8 +2185,6 @@
     <Content Include="Areas\Admin\assets\plugins\font-awesome\scss\_spinning.scss" />
     <Content Include="Areas\Admin\assets\plugins\font-awesome\scss\_stacked.scss" />
     <Content Include="Areas\Admin\assets\plugins\font-awesome\scss\_variables.scss" />
-    <Content Include="Areas\Admin\assets\plugins\fuelux\COPYING" />
-    <Content Include="Areas\Admin\assets\plugins\fuelux\README.md" />
     <Content Include="Areas\Admin\assets\plugins\gmaps\.gitignore" />
     <Content Include="Areas\Admin\assets\plugins\gmaps\bower.json" />
     <Content Include="Areas\Admin\assets\plugins\gmaps\CONTRIBUTING.md" />
@@ -2380,12 +2311,17 @@
     <Content Include="Areas\Admin\assets\plugins\jquery-lazy\bower.json" />
     <Content Include="Areas\Admin\assets\plugins\jquery-lazy\lazy.jquery.json" />
     <Content Include="Areas\Admin\assets\plugins\jquery-lazy\README.md" />
+    <Content Include="Areas\Admin\Views\News\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsCategory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsCategory\Details.cshtml" />
     <None Include="Language\language.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\BITC CMS.pubxml" />
     <None Include="Properties\PublishProfiles\BITC.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="robots.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -3197,6 +3133,7 @@
     <Content Include="Theme\Metronic\assets\scripts\index.js" />
     <Content Include="Theme\Metronic\assets\scripts\portfolio.js" />
     <Content Include="Theme\Metronic\manifest.xml" />
+    <Content Include="Theme\Vinacic\manifest.xml" />
     <Content Include="Upload\logo.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -3428,13 +3365,13 @@
     <Content Include="Theme\Metronic\Views\Shared\_BlogDetail.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_ProjectList.cshtml" />
     <Content Include="Theme\Metronic\Views\Shared\_ProjectDetail.cshtml" />
+    <Content Include="Theme\Vinacic\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Client\" />
     <Folder Include="Areas\Admin\Views\Menu\" />
     <Folder Include="Areas\Admin\Views\Setting\" />
     <Folder Include="Content\Admin\" />
-    <Folder Include="Theme\Vinacic\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

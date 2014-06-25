@@ -9,6 +9,7 @@ using Kendo.Mvc.Extensions;
 using BITC.Web.Library.Mvc;
 using BITC.Library.Pattern;
 using BITC.Web.Library;
+using BITC.CMS.Service;
 
 namespace BITC.CMS.UI.Areas.Admin.Controllers
 {
@@ -17,16 +18,16 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
     {
         #region Declaration
 
-        private IRepositoryAsync<BlogTag> _repo;
+        private IBlogTagService _service;
         private IUnitOfWorkAsync _unitOfWork;
 
         #endregion
 
         #region Constructor
 
-        public BlogTagController(IRepositoryAsync<BlogTag> repo, IUnitOfWorkAsync uow)
+        public BlogTagController(IBlogTagService service, IUnitOfWorkAsync uow)
         {
-            _repo = repo;
+            _service = service;
             _unitOfWork = uow;
         }
 
@@ -45,7 +46,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         public ActionResult Read([DataSourceRequest]DataSourceRequest request)
         {
             var _culture = CultureHelper.GetCurrentCulture();
-            DataSourceResult _result = _repo.Queryable(i => i.Culture == _culture)
+            DataSourceResult _result = _service.FindByCulture(_culture)
                 .Where(request.Filters)
                 .Sort(request.Sorts)
                 .Page(request.Page - 1, request.PageSize)
@@ -57,7 +58,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         public ActionResult LoadAllBlogTags(string term)
         {
             var _culture = CultureHelper.GetCurrentCulture();
-            return Json(_repo.Queryable(i => i.Culture == _culture && i.TagName.StartsWith(term)).Select(i => i.TagName), JsonRequestBehavior.AllowGet);
+            return Json(_service.LoadAllTagsByTerm(_culture, term).Select(i => i.TagName), JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -67,7 +68,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
             {
                 _tag.Culture = CultureHelper.GetCurrentCulture();
                 _tag.Slug = _tag.TagName.ToSlug();
-                _repo.Insert(_tag);
+                _service.Insert(_tag);
                 _unitOfWork.SaveChanges();
             }
 
@@ -80,7 +81,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
             if (_tag != null && ModelState.IsValid)
             {
                 _tag.Slug = _tag.TagName.ToSlug();
-                _repo.Update(_tag);
+                _service.Update(_tag);
                 _unitOfWork.SaveChanges();
             }
 
@@ -90,7 +91,7 @@ namespace BITC.CMS.UI.Areas.Admin.Controllers
         [AjaxOnly]
         public ActionResult Delete([DataSourceRequest]DataSourceRequest request, BlogTag _tag)
         {
-            _repo.Delete(_tag);
+            _service.Delete(_tag);
             _unitOfWork.SaveChanges();
             return Json(new[] { _tag }.ToDataSourceResult(request, ModelState));
         }

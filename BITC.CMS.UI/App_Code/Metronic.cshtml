@@ -44,10 +44,10 @@
                 <li>
                     <em>
                         <img src="@arrImg[0]?width=800&height=600&mode=crop&anchor=topcenter" alt="" class="img-responsive" />
-                        <a href="/@(_detailPage != null ? _culture +"/"+ _detailPage.Url + "/" + item.ProjectID : "#")"><i class="fa fa-link icon-hover icon-hover-1"></i></a>
+                        <a href="/@(_detailPage != null ? _culture + "/" + _detailPage.Url + "/" + item.ProjectName.ToSlug() + "-" + item.ProjectID : "#")"><i class="fa fa-link icon-hover icon-hover-1"></i></a>
                         <a href="@arrImg[0]" class="fancybox-button" title="@item.ProjectName" data-rel="fancybox-button"><i class="fa fa-search icon-hover icon-hover-2"></i></a>
                     </em>
-                    <a class="bxslider-block" href="/@(_detailPage != null ? _culture + "/" + _detailPage.Url + "/" + item.ProjectID : "#")">
+                    <a class="bxslider-block" href="/@(_detailPage != null ? _culture + "/" + _detailPage.Url + "/" + item.ProjectName.ToSlug() + "-" + item.ProjectID : "#")">
                         <strong>@item.ProjectName</strong>
                         @if (item.ClientID.HasValue)
                         {

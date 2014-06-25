@@ -53,7 +53,7 @@
                                 <div class="mix-details">
                                     <h4>@item.ProjectName</h4>
                                     <div>@item.Description</div>
-                                    <a class="mix-link" href="/@(_detailPage != null ? _culture +"/"+ _detailPage.Url + "/" + item.ProjectID : "#")"><i class="fa fa-link"></i></a>
+                                    <a class="mix-link" href="/@(_detailPage != null ? _culture +"/"+ _detailPage.Url + "/" + item.ProjectName.ToSlug() + "-" + item.ProjectID : "#")"><i class="fa fa-link"></i></a>
                                     <a class="mix-preview fancybox-button" href="@img" title="@item.ProjectName" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>

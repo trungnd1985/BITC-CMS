@@ -20,4 +20,10 @@
   <language key="OurClient">Khách hàng</language>
   <language key="Next">Next</language>
   <language key="RecentProject">Dự án đang làm</language>
+  <language key="ListOfBlog">Danh sách blog</language>
+  <language key="AddNew">Thêm mới</language>
+  <language key="Tags">Tags</language>
+  <language key="ListOfProject">Danh sách dự án</language>
+  <language key="ProjectCategory">Loại dự án</language>
+  <language key="Project">Dự án</language>
 </languages>

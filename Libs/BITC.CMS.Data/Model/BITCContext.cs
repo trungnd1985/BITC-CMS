@@ -46,6 +46,10 @@ namespace BITC.CMS.Data.Entity
 
         public DbSet<ProjectCategory> ProjectCategories { get; set; }
 
+        public DbSet<News> News { get; set; }
+
+        public DbSet<NewsCategory> NewsCategories { get; set; }
+
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

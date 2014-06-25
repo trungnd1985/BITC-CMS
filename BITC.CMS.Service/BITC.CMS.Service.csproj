@@ -82,6 +82,8 @@
     <Compile Include="IMediaService.cs" />
     <Compile Include="IMenuService.cs" />
     <Compile Include="IModuleService.cs" />
+    <Compile Include="INewsCategoryService.cs" />
+    <Compile Include="INewsService.cs" />
     <Compile Include="IPageService.cs" />
     <Compile Include="IProjectCategoryService.cs" />
     <Compile Include="IProjectService.cs" />
@@ -90,6 +92,8 @@
     <Compile Include="MediaService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="ModuleService.cs" />
+    <Compile Include="NewsCategoryService.cs" />
+    <Compile Include="NewsService.cs" />
     <Compile Include="PageService.cs" />
     <Compile Include="ProjectCategoryService.cs" />
     <Compile Include="ProjectService.cs" />
