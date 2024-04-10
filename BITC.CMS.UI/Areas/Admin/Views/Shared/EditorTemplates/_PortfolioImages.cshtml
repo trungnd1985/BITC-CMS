@@ -1,0 +1,43 @@
+﻿@model string
+@{
+    string[] arrImage = null;
+    if (!string.IsNullOrEmpty(Model))
+    {
+        arrImage = Model.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+    }
+}
+
+@Html.HiddenFor(m => m)
+
+<ul class="image-list">
+
+    @if (arrImage != null)
+    {
+        foreach (var item in arrImage)
+        {
+            <li class="portfolio-image"><img src="@item" class='img-responsive img-thumbnail' /><a class="btn btn-default portfolio-image-remove"><span class="glyphicon glyphicon-remove"></span></a></li>
+        }
+    }
+</ul>
+
+@(Html.Kendo().Upload()
+            .Name("PortfolioImage")
+            .Async(async => async.AutoUpload(true).Save("UploadPortfolioImage", "Portfolio").Remove("RemovePortfolioImage", "Portfolio"))
+            .Events(events =>
+            {
+                events.Select("PortfolioImage_onSelect");
+                events.Success("PortfolioImage_onCSuccess");
+            })
+)
+
+<script>
+
+    function PortfolioImage_onSelect(e) {
+
+    }
+
+    function PortfolioImage_onCSuccess(e) {
+        $("#PortfolioImages").val($("#PortfolioImages").val() + ";" + e.files[0].name);
+        $(".image-list").append("<li class='portfolio-image'><img class='portfolio-image' src='/@ViewBag.Settings["PORTFOLIO_IMAGE_FOLDER"]/" + e.files[0].name + "?width=280&height=210' class='img-responsive img-thumbnail' /><a class='btn btn-default portfolio-image-remove'><span class='glyphicon glyphicon-remove'></span></a></li>");
+    }
+</script>

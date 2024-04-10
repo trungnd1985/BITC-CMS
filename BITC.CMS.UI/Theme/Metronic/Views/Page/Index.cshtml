@@ -1,0 +1,21 @@
+﻿@model BITC.CMS.Data.Entity.Page
+@{
+
+}
+@if (Model != null)
+{
+    if (String.IsNullOrEmpty(Model.Template))
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    @Html.Raw(Model.Body)
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        @Html.Partial(Model.Template, Model)
+    }
+}

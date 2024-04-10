@@ -1,0 +1,126 @@
+﻿@model BITC.CMS.Data.Entity.News
+
+@{
+    ViewBag.Title = Model.NewsID > 0 ? Model.Title : "News Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@helper RenderProjectImages(string _source)
+{
+    <div id="divProjectImages">
+        @if (!string.IsNullOrWhiteSpace(_source))
+        {
+            var arr = _source.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                <div class="project-image"><img data-src="@arr[i]?width=200&mode=crop" src="/Areas/Admin/assets/img/ajax-loading.gif" class="img-responsive lazy" /></div>
+            }
+
+        }
+    </div>
+}
+
+<div class="col-md-12">
+    <form class="form-horizontal validate-form" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-body">
+            <div class="form-group">
+                @Html.LabelFor(m => m.ProjectName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10 focus">
+                    @Html.EditorFor(m => m.ProjectName)
+                    @Html.ValidationMessageFor(m => m.ProjectName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ClientID, new { @class = "control-label col-md-2" })
+                <div class="col-md-10 focus">
+                    @Html.DropDownListFor(m => m.ClientID, (IEnumerable<SelectListItem>)ViewBag.ClientList, new { @class = "select2me input-xlarge" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ProjectImages, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.HiddenFor(m => m.ProjectImages)
+                    @RenderProjectImages(Model.ProjectImages)
+                    @{Html.RenderAction("MediaPopup", "Media", new { _target = "#divProjectImages" }); }
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ProjectCategoriesID, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @(Html.Kendo().MultiSelectFor(i => i.ProjectCategoriesID)
+                                    .DataTextField("ProjectCategoryName")
+                                    .DataValueField("ProjectCategoryID")
+                            //.AutoBind(false)
+                                    .DataSource(i => i.Read("GetProjectCategories", "ProjectCategory"))
+                    )
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.Description)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Location, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.Location)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Year, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.Year)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.SortOrder, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.SortOrder)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.IsFeatured, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.IsFeatured)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Inactive, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.Inactive)
+                </div>
+            </div>
+        </div>
+        <div class="form-actions fluid">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">@CommonResource.Save</button>
+                @Html.ActionLink(CommonResource.Cancel, "Index", "Project", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </form>
+</div>
+@section Script{
+    <script src='@Url.Content("~/Areas/Admin/assets/scripts/projectController.js")'></script>
+    <script type="text/javascript">
+        project.init();
+        media.insert(function () {
+            var current = $("#ProjectImages").val();
+            var arrSelected = media.getSelectedItems();
+
+            $.each(arrSelected, function (index, item) {
+                if (current.lastIndexOf($(item).attr("src")) < 0) {
+                    current += $(item).attr("data-src") + ";";
+                }
+            });
+
+            $("#ProjectImages").val(current);
+        });
+
+        $(document).ready(function () {
+            $(".lazy").lazy();
+        });
+    </script>
+}

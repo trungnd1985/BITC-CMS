@@ -1,0 +1,14 @@
+﻿@helper BreadCrumb(Dictionary<string, string> _data)
+{
+    // your helper can contain code and/or markup, e.g.
+    // var msg = "Hello " + name;
+    // <p>@msg</p>
+    // For more information, visit http://go.microsoft.com/fwlink/?LinkID=204658
+
+    <ul class="pull-right breadcrumb">
+        @foreach (var item in _data)
+        {
+            <li><a href="@item.Key">@item.Value</a></li>
+        }
+    </ul>
+}

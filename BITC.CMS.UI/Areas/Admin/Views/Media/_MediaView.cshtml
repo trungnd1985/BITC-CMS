@@ -1,0 +1,22 @@
+﻿
+<div class="col-md-12">
+    <ul class="nav nav-tabs" id="tabMediaView">
+        <li class="active"><a href="#upload-files" data-toggle="tab">Upload files</a></li>
+        <li><a href="#media-library" data-toggle="tab">Media library</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="upload-files">
+            @(Html.Kendo()
+                    .Upload()
+                    .Name("MediaUploadFile")
+                    .Async(async => async.Save("Upload", "Media"))
+                    .Events(events => events.Success("media.uploadSuccess"))
+            )
+        </div>
+        <div class="tab-pane" id="media-library">
+            <div class="col-md-9" id="media-container"></div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>

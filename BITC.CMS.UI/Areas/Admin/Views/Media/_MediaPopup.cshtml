@@ -1,0 +1,38 @@
+﻿<a class="btn btn-default" href="javascript:void(0);" data-toggle="modal" data-target="#media-popup"><span class="glyphicon glyphicon-picture"></span>Add media</a>
+<div class="modal fade" id="media-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-2">
+                    <div class="list-group">
+                        <a class="list-group-item active" id="lnkInsertMedia">
+                            Insert media
+                        </a>
+                        <a class="list-group-item" id="lnkInsertYoutube">
+                            Insert youtube
+                        </a>
+                        <a class="list-group-item" id="lnkInsertUrl">
+                            Insert url
+                        </a>
+                    </div>
+                </div>
+                <div id="content-container" class="col-md-10">
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn blue" id="btnInsertMedia">Insert</button>
+                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+<script type="text/javascript">
+    media.init(CULTURE,'@ViewBag.Target');
+</script>

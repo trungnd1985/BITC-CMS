@@ -1,0 +1,3 @@
+﻿@model  string
+@*@Html.Kendo().DropDownListFor(m => m).BindTo(BITC.Web.Library.Utility.GetTemplate())*@
+@Html.DropDownListFor(m => m, BITC.Web.Library.Utility.GetTemplate(Model), new { @class = "select2me input-xlarge " })

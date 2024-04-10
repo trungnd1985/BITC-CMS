@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A9E33DC5-07D1-4CAD-A931-7A3B99AA0C0D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BITC.CMS.Data</RootNamespace>
+    <AssemblyName>BITC.CMS.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=6847f3395fc61b47, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFrameworkWithHierarchyId.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=6847f3395fc61b47, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFrameworkWithHierarchyId.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.1.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entity\BlogEntry.cs" />
+    <Compile Include="Entity\BlogEntry.Generated.cs" />
+    <Compile Include="Entity\BlogEntryComment.cs" />
+    <Compile Include="Entity\BlogEntryComment.Generated.cs" />
+    <Compile Include="Entity\BlogTag.cs" />
+    <Compile Include="Entity\Client.cs" />
+    <Compile Include="Entity\Client.Generated.cs" />
+    <Compile Include="Entity\Media.cs" />
+    <Compile Include="Entity\Media.Generated.cs" />
+    <Compile Include="Entity\Menu.cs" />
+    <Compile Include="Entity\Menu.Generated.cs" />
+    <Compile Include="Entity\Module.cs" />
+    <Compile Include="Entity\Module.Generated.cs" />
+    <Compile Include="Entity\News.cs" />
+    <Compile Include="Entity\News.Generated.cs" />
+    <Compile Include="Entity\NewsCategory.cs" />
+    <Compile Include="Entity\NewsCategory.Generated.cs" />
+    <Compile Include="Entity\Page.cs" />
+    <Compile Include="Entity\Project.cs" />
+    <Compile Include="Entity\Project.Generated.cs" />
+    <Compile Include="Entity\ProjectCategory.cs" />
+    <Compile Include="Entity\ProjectCategory.Generated.cs" />
+    <Compile Include="Entity\Setting.cs" />
+    <Compile Include="Entity\Setting.Generated.cs" />
+    <Compile Include="Mapping\BlogEntryCommentMap.cs" />
+    <Compile Include="Mapping\BlogEntryCommentMap.Generated.cs" />
+    <Compile Include="Mapping\BlogEntryMap.cs" />
+    <Compile Include="Mapping\BlogEntryMap.Generated.cs" />
+    <Compile Include="Mapping\BlogTagMap.cs" />
+    <Compile Include="Mapping\BlogTagMap.Generated.cs" />
+    <Compile Include="Mapping\ClientMap.cs" />
+    <Compile Include="Mapping\ClientMap.Generated.cs" />
+    <Compile Include="Mapping\MediaMap.cs" />
+    <Compile Include="Mapping\MediaMap.Generated.cs" />
+    <Compile Include="Mapping\MenuMap.cs" />
+    <Compile Include="Mapping\MenuMap.Generated.cs" />
+    <Compile Include="Mapping\ModuleMap.cs" />
+    <Compile Include="Mapping\ModuleMap.Generated.cs" />
+    <Compile Include="Mapping\NewsCategoryMap.cs" />
+    <Compile Include="Mapping\NewsCategoryMap.Generated.cs" />
+    <Compile Include="Mapping\NewsMap.cs" />
+    <Compile Include="Mapping\NewsMap.Generated.cs" />
+    <Compile Include="Mapping\PageMap.cs" />
+    <Compile Include="Mapping\PageMap.Generated.cs" />
+    <Compile Include="Mapping\ProjectCategoryMap.cs" />
+    <Compile Include="Mapping\ProjectCategoryMap.Generated.cs" />
+    <Compile Include="Mapping\ProjectMap.cs" />
+    <Compile Include="Mapping\ProjectMap.Generated.cs" />
+    <Compile Include="Mapping\SettingMap.cs" />
+    <Compile Include="Mapping\SettingMap.Generated.cs" />
+    <Compile Include="Model\BITCContext.cs" />
+    <Compile Include="Page.cs" />
+    <Compile Include="PortfolioMetadata.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BITC.CMS.Resource\BITC.CMS.Resource.vbproj">
+      <Project>{02e7fb5c-d52d-460e-bfb8-36fd4b9577a7}</Project>
+      <Name>BITC.CMS.Resource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BITC.Library\BITC.Library.csproj">
+      <Project>{d31c8417-6ccf-48b2-8538-a97a04a5b15c}</Project>
+      <Name>BITC.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

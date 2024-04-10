@@ -1,0 +1,14 @@
+﻿@model List<BITC.CMS.Data.Model.BlogTag>
+@(Html.Kendo().MultiSelectFor(m => m)
+            .DataTextField("TagName")
+            .DataValueField("TagID")
+        //.Placeholder("Select products...")
+            .AutoBind(false)
+            .DataSource(source =>
+            {
+                source.Read(read =>
+                {
+                    read.Action("LoadBlogTags", "Blog");
+                })
+                .ServerFiltering(true);
+            }))

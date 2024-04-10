@@ -1,0 +1,79 @@
+﻿@using BITC.Web.Library
+@using BITC.CMS.Service
+
+@helper ClientView()
+{
+    var _service = Utility.GetService<IClientService>();
+    var _lst = _service.FindAvailableClient();
+
+    <ul class="bxslider1 clients-list">
+        @foreach (var item in _lst)
+        {
+            <li>
+                <a href="@item.Website" target="_blank">
+                    <img src="@item.GrayscaleLogo" alt="" />
+                    <img src="@item.Logo" class="color-img" alt="" />
+                </a>
+            </li>
+        }
+    </ul>
+}
+
+@helper RecentPortfolio()
+{
+    IProjectService _service = BITC.Web.Library.Utility.GetService<IProjectService>();
+    IModuleService _moduleService = BITC.Web.Library.Utility.GetService<IModuleService>();
+    IPageService _pageService = BITC.Web.Library.Utility.GetService<IPageService>();
+    var _module = _moduleService.FindModuleByName("Project");
+    var _culture = CultureHelper.GetCurrentCulture();
+    var lst = _service.FindRecentProject(_culture);
+    var _detailPageId = int.Parse(_module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue);
+    var _listPageId = int.Parse(_module.Settings.FirstOrDefault(i => i.SettingKey == "LIST_PAGE").SettingValue);
+    var _detailPage = _pageService.Find(_detailPageId);
+    var _listPage = _pageService.Find(_listPageId);
+
+    <div class="col-md-3">
+        <h2><a href="@_listPage.Url">@Language.Localize("RecentProject")</a></h2>
+        @*<p>Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde voluptatem. Sed unde omnis iste natus error sit voluptatem.</p>*@
+    </div>
+    <div class="col-md-9">
+        <ul class="bxslider">
+            @foreach (var item in lst)
+            {
+                var arrImg = item.ProjectImages.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                <li>
+                    <em>
+                        <img src="@arrImg[0]?width=800&height=600&mode=crop&anchor=topcenter" alt="" class="img-responsive" />
+                        <a href="/@(_detailPage != null ? _culture + "/" + _detailPage.Url + "/" + item.ProjectName.ToSlug() + "-" + item.ProjectID : "#")"><i class="fa fa-link icon-hover icon-hover-1"></i></a>
+                        <a href="@arrImg[0]" class="fancybox-button" title="@item.ProjectName" data-rel="fancybox-button"><i class="fa fa-search icon-hover icon-hover-2"></i></a>
+                    </em>
+                    <a class="bxslider-block" href="/@(_detailPage != null ? _culture + "/" + _detailPage.Url + "/" + item.ProjectName.ToSlug() + "-" + item.ProjectID : "#")">
+                        <strong>@item.ProjectName</strong>
+                        @if (item.ClientID.HasValue)
+                        {
+                            <b>@item.Client.ClientName</b>
+                        }
+                    </a>
+                </li>
+            }
+        </ul>
+
+    </div>
+}
+
+@helper Menu()
+{
+    IMenuService _service = BITC.Web.Library.Utility.GetService<IMenuService>();
+    var _culture = CultureHelper.GetCurrentCulture();
+    var lts = _service.FindMenuInactive(_culture);
+    <ul class="nav navbar-nav">
+        @foreach (var item in lts)
+        {
+            <li>
+                <a href='@item.Url'>
+                    @item.Title
+                </a>
+            </li>
+        }
+    </ul>
+}

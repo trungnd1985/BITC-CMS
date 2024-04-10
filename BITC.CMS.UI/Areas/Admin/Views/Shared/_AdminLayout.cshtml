@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.2
+Version: 1.5.4
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>BITC CMS - @ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="trungnd1985@gmail.com" name="author" />
+    <meta name="MobileOptimized" content="320">
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    @Styles.Render("~/Admin/css/global")
+    @Styles.Render("~/kendoui/css")
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    @RenderSection("PageStyleSheet", false)
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    @Styles.Render("~/Admin/css/theme")
+    <!-- END THEME STYLES -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="/Areas/Admin/assets/plugins/respond.min.js"></script>
+    <script src="/Areas/Admin/assets/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    @Scripts.Render("~/Admin/js/global")
+    <script src='@Url.Content("~/Areas/Admin/assets/plugins/ckeditor/adapters/jquery.js")'></script>
+    @Scripts.Render("~/kendoui/js")
+    <!-- END CORE PLUGINS -->
+    <script>
+        CULTURE = "@BITC.Web.Library.CultureHelper.GetCurrentCulture()"
+        UPLOADCARE_PUBLIC_KEY = '@System.Web.Configuration.WebConfigurationManager.AppSettings["UploadcareKey"]';
+    </script>
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<body class="page-header-fixed">
+    <!-- BEGIN HEADER -->
+    <div class="header navbar navbar-inverse navbar-fixed-top">
+        <!-- BEGIN TOP NAVIGATION BAR -->
+        <div class="header-inner">
+            <!-- BEGIN LOGO -->
+            <a class="navbar-brand" href="index.html">
+                <img src="/Areas/Admin/assets/img/logo.png" alt="logo" class="img-responsive" />
+            </a>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <img src="/Areas/Admin/assets/img/menu-toggler.png" alt="" />
+            </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            @Html.Partial("_TopMenu")
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END TOP NAVIGATION BAR -->
+    </div>
+    <!-- END HEADER -->
+    <div class="clearfix"></div>
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar navbar-collapse collapse">
+            <!-- BEGIN SIDEBAR MENU -->
+            @Html.Partial("_Sidebar")
+            <!-- END SIDEBAR MENU -->
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div class="page-content">
+            @if (Html.IncludeSetting())
+            {
+                Html.RenderAction("Setting");
+            }
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <h3 class="page-title">
+                        @ViewBag.Title
+                    </h3>
+                    <ul class="page-breadcrumb breadcrumb">
+                        @*<li class="btn-group">
+                                <button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                                    <span>Actions</span> <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right" role="menu">
+                                    @if (Html.IncludeSetting())
+                                    {
+                                        <li><a href="#" data-toggle="modal" data-target="#SettingDialog"><span class="fa fa-cogs"></span>Setting</a></li>
+                                    }
+                                </ul>
+                            </li>*@
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href='@Url.Action("Index","Dashboard")'>Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Extra</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li><a href="#">Inbox</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    @Html.Partial("_Footer")
+    <!-- END FOOTER -->
+    <!-- BEGIN: Page level plugins -->
+    @RenderSection("Script", false)
+    <!-- The main application script -->
+    <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+    <!--[if (gte IE 8)&(lt IE 10)]>
+    <script src="/Areas/Admin/assets/plugins/jquery-file-upload/js/cors/jquery.xdr-transport.js"></script>
+    <![endif]-->
+    <!-- END:File Upload Plugin JS files-->
+    <!-- END: Page level plugins -->
+    <script src="/Areas/Admin/assets/scripts/app.js"></script>
+    <script src='@Url.Content("~/Scripts/kendo/2014.1.318/cultures/kendo.culture." + BITC.Web.Library.CultureHelper.GetCurrentCulture() + ".min.js")'></script>
+    <script>
+        jQuery(document).ready(function () {
+            // initiate layout and plugins
+            App.init();
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+</html>

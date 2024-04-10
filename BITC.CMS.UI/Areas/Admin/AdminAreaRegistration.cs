@@ -1,0 +1,26 @@
+﻿using BITC.Web.Library;
+using System.Web.Mvc;
+
+namespace BITC.CMS.UI.Areas.Admin
+{
+    public class AdminAreaRegistration : AreaRegistration
+    {
+        public override string AreaName
+        {
+            get
+            {
+                return "Admin";
+            }
+        }
+
+        public override void RegisterArea(AreaRegistrationContext context)
+        {
+            context.MapRoute(
+                "Admin_default",
+                "Admin/{culture}/{controller}/{action}/{id}",
+                new { action = "Index", controller = "Dashboard", id = UrlParameter.Optional, culture = CultureHelper.GetDefaultCulture() }
+                , namespaces: new[] { "BITC.CMS.UI.Areas.Admin.Controllers" }
+            );
+        }
+    }
+}

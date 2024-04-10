@@ -1,0 +1,130 @@
+﻿@{    
+    var _culture = BITC.Web.Library.CultureHelper.GetCurrentCulture();
+    var _id = int.Parse(System.Text.RegularExpressions.Regex.Match(ViewContext.RouteData.Values["url"].ToString(), @"\d*$").Value);
+    var _currentDate = DateTime.Now;
+
+    IBlogTagService _tagService = DependencyResolver.Current.GetService<IBlogTagService>();
+    IBlogService _service = DependencyResolver.Current.GetService<IBlogService>();
+    IModuleService _moduleService = DependencyResolver.Current.GetService<IModuleService>();
+    IPageService _pageService = DependencyResolver.Current.GetService<IPageService>();
+    
+    var _module = _moduleService.FindModuleByName("Blog");
+    var _recentQuantity = int.Parse(_module.Settings.FirstOrDefault(i => i.SettingKey == "RECENT_ENTRY_QUANTITY").SettingValue);
+    var _recentEntries = _service.GetRecentBlogEntriesList(_culture, _id, _recentQuantity);
+    var _entry = _service.Query(i => i.BlogEntryID == _id).Include(i => i.BlogTags).Include(i => i.BlogEntryComments).Select().FirstOrDefault();
+    var _detailPageId = _module.Settings.FirstOrDefault(i => i.SettingKey == "DETAIL_PAGE").SettingValue;
+    var _listPageId = _module.Settings.FirstOrDefault(i => i.SettingKey == "LIST_PAGE").SettingValue;
+    var _listPage = _pageService.GetPage(int.Parse(_listPageId));
+    var _detailPage = _pageService.GetPage(int.Parse(_detailPageId));    
+    var lstTag = _tagService.Query(i => i.Culture == _culture);
+    var _lstArchive = _service.GetArchives();
+
+}
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- BEGIN BREADCRUMBS -->
+<div class="row breadcrumbs margin-bottom-40">
+    <div class="container">
+        <div class="col-md-4 col-sm-4">
+            <h1>@_entry.BlogTitle</h1>
+        </div>
+        <div class="col-md-8 col-sm-8">
+            @ViewHelper.BreadCrumb(ViewBag.BreadCrumb)
+        </div>
+    </div>
+</div>
+<!-- END BREADCRUMBS -->
+<!-- BEGIN CONTAINER -->
+<div class="container min-hight">
+    <!-- BEGIN BLOG -->
+    <div class="row">
+        <!-- BEGIN LEFT SIDEBAR -->
+        <div class="col-md-9 blog-item margin-bottom-40">
+            @Html.Raw(_entry.Body)
+            <ul class="blog-info">
+                <li><i class="fa fa-user"></i> By @_entry.CreatedBy</li>
+                <li><i class="fa fa-calendar"></i> @_entry.PublishDate.Value.ToString("dd/MM/yyyy")</li>
+                <li><i class="fa fa-comments"></i> @_entry.BlogEntryComments.Count</li>
+                <li>
+                    <i class="fa fa-tags"></i> @foreach (var _tags in _entry.BlogTags)
+                    {
+                        @(_tags.TagName + ", ");
+                    }
+                </li>
+                <li>
+                    <div class="fb-share-button" data-href="@HttpContext.Current.Request.Url.AbsoluteUri" data-type="button_count"></div>
+                </li>
+            </ul>
+            @if (_entry.AllowComment)
+            {
+                <hr>
+                <div class="post-comment">
+                    <h3>Leave a Comment</h3>
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Email <span class="color-red">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea class="form-control" rows="8"></textarea>
+                        </div>
+                        <p><button class="btn btn-default theme-btn" type="submit">Post a Comment</button></p>
+                    </form>
+                </div>
+            }
+        </div>
+        <!-- END LEFT SIDEBAR -->
+        <!-- BEGIN RIGHT SIDEBAR -->
+        <div class="col-md-3 blog-sidebar">
+            <!-- CATEGORIES START -->
+            <h2>Archives</h2>
+            <ul class="nav sidebar-categories margin-bottom-40">
+                @foreach (var item in _lstArchive)
+                {
+                    <li><a href="/@(_culture + "/" + _listPage.Url + "?archive=" + @item.Key)">@item.Key (@item.Value)</a></li>
+                }
+            </ul>
+            <!-- CATEGORIES END -->
+            <!-- BEGIN RECENT NEWS -->
+            <h2>Recent News</h2>
+            <div class="recent-news margin-bottom-10">
+                @foreach (var item in _recentEntries)
+                {
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-12">
+                            <h3><a href="/@(_culture + "/" + _detailPage.Url + "/" + item.BlogTitle.ToSlug() + "-" + item.BlogEntryID)">@item.BlogTitle</a></h3>
+                            <p>@HttpUtility.HtmlDecode(item.Body.Brief(52))</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- END RECENT NEWS -->
+            <!-- BEGIN BLOG TAGS -->
+            <div class="blog-tags margin-bottom-20">
+                <h2>Tags</h2>
+                <ul>
+                    @foreach (var item in lstTag.Select())
+                    {
+                        <li><a href="/@(_culture + "/" + _listPage.Url + "?tag=" + item.Slug)"><i class="fa fa-tags"></i>@item.TagName</a></li>
+                    }
+                </ul>
+            </div>
+            <!-- END BLOG TAGS -->
+        </div>
+        <!-- END RIGHT SIDEBAR -->
+    </div>
+    <!-- END BEGIN BLOG -->
+</div>
+<!-- END CONTAINER -->

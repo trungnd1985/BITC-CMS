@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-md-12">
+    @(Html.Kendo().Grid<BITC.CMS.Data.Entity.Project>()
+                    .Name("grdProject")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.ProjectName);
+                        columns.Bound(p => p.Description);
+                        columns.Bound(p => p.Year);
+                        columns.Bound(p => p.Location);
+                        columns.Template(a => a.ProjectID).ClientTemplate("<a class='k-button' href='" + BITC.Web.Library.Utility.GenerateClientTemplateUrl("Edit", "Project", "ProjectID", "Admin") + "'><span class='glyphicon glyphicon-pencil'></span></a><a class='k-button k-button-icontext k-grid-delete'><span class='glyphicon glyphicon-remove'></span></a>").Width(155);
+                        columns.Command(command => command.Destroy()).Visible(false);
+
+                    })
+                    .ToolBar(toolbar => toolbar.Template(@<text><a class="btn btn-default" href="@Url.Action("Create", "Project")">
+                            <span class="glyphicon glyphicon-plus"></span>@CommonResource.AddNew
+                        </a></text>))
+                                                                                                                    .Pageable()
+                                                                                                                    .Sortable()
+                                                                                                                    .DataSource(source => source.Ajax()
+                                                                                                                        .Model(model =>
+                                                                                                                        {
+                                                                                                                            model.Id(p => p.ProjectID);
+                                                                                                                            model.Field(p => p.ProjectID).Editable(false);
+                                                                                                                        })
+                                                                                                                        .Sort(sort => sort.Add("SortOrder"))
+                                                                                                                        .Read(read => read.Action("Read", "Project"))
+                                                                                                                        .Destroy(destroy => destroy.Action("Delete", "Project")))
+    )
+</div>

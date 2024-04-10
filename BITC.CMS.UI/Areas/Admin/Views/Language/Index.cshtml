@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-md-12">
+    @(Html.Kendo().Grid<BITC.CMS.UI.Areas.Admin.Models.LanguageModel>()
+                    .Name("grdLanguage")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.Key).Width(200);
+                        columns.Bound(p => p.Value);
+                        columns.Command(command =>
+                        {
+                            command.Destroy().Text(@CommonResource.Delete);
+                            command.Edit().CancelText(@CommonResource.Cancel).UpdateText(@CommonResource.Update).Text(@CommonResource.Edit);
+                        }).Width(200);
+
+                    })
+                    .Events(i=>i.Edit("grdLanguage_Edit"))
+                    .ToolBar(toolbar => toolbar.Create().Text(@CommonResource.AddNew))                    
+                    .DataSource(source => source.Ajax()
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Key);
+                            model.Field(p => p.Key);
+                        })
+                        .Sort(sort => sort.Add("Key"))
+                        .Create(create => create.Action("Create", "Language"))
+                        .Read(read => read.Action("Read", "Language"))
+                        .Update(update => update.Action("Update", "Language"))
+                        .Destroy(destroy => destroy.Action("Delete", "Language")))
+    )
+</div>
+
+@section Script{
+    <script>
+        function grdLanguage_Edit(e) {
+            if (!e.model.isNew()) {
+                var txt = e.container.find("input[name=Key]");
+                $(txt).attr("readonly", true);
+            }
+        }        
+    </script>
+}

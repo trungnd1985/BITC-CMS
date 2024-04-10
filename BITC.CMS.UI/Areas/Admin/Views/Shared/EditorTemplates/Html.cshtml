@@ -1,0 +1,23 @@
+﻿@model string
+@*@{Html.RenderAction("MediaPopup", "Media");}*@
+@*@(Html.Kendo().EditorFor(m => m)
+    .Tools(tools => tools
+        .Clear()
+        .Bold().Italic().Underline().Strikethrough()
+        .JustifyLeft().JustifyCenter().JustifyRight().JustifyFull()
+        .InsertUnorderedList().InsertOrderedList()
+        .Outdent().Indent()
+        .CreateLink().Unlink()
+        .InsertImage()
+        .SubScript()
+        .SuperScript()
+        .TableEditing()
+        .ViewHtml()
+        .Formatting()
+        .FontName()
+        .FontSize()
+        .FontColor().BackColor()
+        //.CustomTemplate(ct=>c))
+        ))*@
+
+@Html.TextAreaFor(m => m, new { @class = "ck-editor", rows=20 })

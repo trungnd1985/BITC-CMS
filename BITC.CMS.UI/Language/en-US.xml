@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<languages xmlns="http://bitc.com.vn/language.xsd">
+  <language key="ContactUs">Contact us</language>
+  <language key="ContactForm">Liên hệ</language>
+  <language key="About">About</language>
+  <language key="ContactInformation">Our Contacts</language>
+  <language key="Address">
+    <![CDATA[
+          BITC Vietnam. <br />
+          99/47/40 Duc Giang street <br />
+          Long Bien, Ha Noi <br />
+          M: +84 949 793 285 <br />
+          Email: <a href="mailto:trungnd1985@gmail.com">trungnd1985@gmail.com</a>
+  ]]>
+  </language>
+  <language key="GoalDefinition">Goal definition</language>
+  <language key="GoalDefinitionDescription">Nhận yêu cầu phần mềm từ khách hàng đưa ra.</language>
+  <language key="Analyse">Analyse</language>
+  <language key="AnalyseDescription">BITC sẽ dựa trên yêu cầu để đưa ra tài liệu nghiệp vụ.</language>
+  <language key="Implementation">Implementation</language>
+  <language key="ImplementationDescription">Thi công phần mềm dựa trên tài liệu nghiệp vụ đã phân tích.</language>
+  <language key="OurClient">Our clients</language>  
+  <language key="Next">Next</language>
+</languages>
